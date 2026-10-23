@@ -1,8 +1,9 @@
 "use strict";
 const DADOS = "../dados/";
-const CATEGORIAS = { todas: "Todas", governo: "Governo", chancelaria: "Chancelaria", defesa: "Defesa", parlamento: "Parlamento", agencia: "Agencia" };
+const CATEGORIAS = { todas: "Todas", governo: "Governo", chancelaria: "Chancelaria", defesa: "Defesa", parlamento: "Parlamento", agencia: "Agência" };
 const $ = (id) => document.getElementById(id);
 let estado;
+let nomesFontes = {};
 
 function novoEstado(pais) {
   return { pais, pagina: 0, totalPaginas: 1, carregando: false, vistos: new Set(), itens: [], categoria: "todas", total: 0 };
@@ -54,8 +55,8 @@ function cartao(item) {
   }
   art.append(h);
   if (item.resumo) art.append(el("p", "resumo", item.resumo));
-  if (item.titulos_anteriores) art.append(el("p", "corrigido", "Titulo atualizado pela fonte"));
-  art.append(el("p", "rodape", item.fonte_nome + " - " + formatarData(item)));
+  if (item.titulos_anteriores) art.append(el("p", "corrigido", "Título atualizado pela fonte"));
+  art.append(el("p", "rodape", (nomesFontes[item.fonte] || item.fonte_nome) + " · " + formatarData(item)));
   return art;
 }
 
@@ -68,7 +69,7 @@ function sentinelaPerto() {
 function atualizarSentinela() {
   const mostrados = $("feed").childElementCount;
   if (estado.pagina >= estado.totalPaginas) {
-    $("sentinela").textContent = mostrados ? "Fim - " + mostrados + " noticias exibidas" : "Nenhuma noticia nesta categoria";
+    $("sentinela").textContent = mostrados ? "Fim - " + mostrados + " notícias exibidas" : "Nenhuma notícia nesta categoria";
   } else {
     $("sentinela").textContent = "Carregando...";
   }
@@ -108,9 +109,10 @@ function renderizarFiltro() {
 }
 
 function renderizarPainel(indice) {
+  nomesFontes = Object.fromEntries(indice.fontes.map((f) => [f.id, f.nome]));
   const alertas = indice.fontes.filter((f) => !f.ok || f.alerta).length;
   const quando = new Date(indice.atualizado).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
-  $("resumo-status").textContent = "Atualizado " + quando + " - " + indice.total + " noticias - " +
+  $("resumo-status").textContent = "Atualizado " + quando + " · " + indice.total + " notícias · " +
     (alertas ? alertas + " alerta(s)" : "todas as fontes OK");
   const lista = $("lista-fontes");
   lista.replaceChildren();
@@ -120,7 +122,7 @@ function renderizarPainel(indice) {
     const sinal = !f.ok ? "[ERRO]" : (f.alerta ? "[ALERTA]" : "[OK]");
     li.append(el("span", classe, sinal + " "));
     let texto = f.nome;
-    if (f.mais_recente) texto += " - ultima: " + new Date(f.mais_recente).toLocaleDateString("pt-BR");
+    if (f.mais_recente) texto += " · última: " + new Date(f.mais_recente).toLocaleDateString("pt-BR");
     if (!f.ok) texto += " - " + f.erro;
     else if (f.alerta) texto += " - " + f.alerta;
     li.append(document.createTextNode(texto));
@@ -140,7 +142,7 @@ async function abrirPais(codigo) {
     estado.total = indice.total;
     renderizarPainel(indice);
   } catch (e) {
-    $("resumo-status").textContent = "Indice indisponivel: " + e.message;
+    $("resumo-status").textContent = "Índice indisponível: " + e.message;
   }
   carregarProxima();
 }
@@ -154,7 +156,7 @@ async function iniciar() {
   }
   let paises = {};
   try { paises = await obterJSON("paises.json"); } catch (e) {
-    $("resumo-status").textContent = "Lista de paises indisponivel: " + e.message;
+    $("resumo-status").textContent = "Lista de países indisponível: " + e.message;
     $("sentinela").textContent = "";
     return;
   }

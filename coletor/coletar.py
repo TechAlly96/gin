@@ -130,9 +130,9 @@ def main(codigo):
         dias = (agora - de_iso(recente)).days if recente else None
         alerta = ""
         if validos == 0:
-            alerta = "nenhum item valido"
+            alerta = "nenhum item válido"
         elif dias is not None and dias > alerta_dias:
-            alerta = f"sem publicar ha {dias} dias"
+            alerta = f"sem publicar há {dias} dias"
         st.update(ok=True, lidos=len(brutos), validos=validos, novos=novos,
                   mais_recente=recente, dias_sem_publicar=dias, alerta=alerta)
         status.append(st)

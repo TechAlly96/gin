@@ -15,7 +15,7 @@
   "fontes": [
     {
       "id": "br-planalto",
-      "nome": "Planalto - Noticias",
+      "nome": "Planalto - Notícias",
       "categoria": "governo",
       "natureza": "oficial",
       "tipo": "feed",
@@ -23,7 +23,7 @@
     },
     {
       "id": "br-planalto-lista",
-      "nome": "Planalto - Noticias (pagina)",
+      "nome": "Planalto - Notícias (página)",
       "categoria": "governo",
       "natureza": "oficial",
       "tipo": "html-govbr",
@@ -32,7 +32,7 @@
     },
     {
       "id": "br-itamaraty",
-      "nome": "Itamaraty - Notas a imprensa",
+      "nome": "Itamaraty - Notas à imprensa",
       "categoria": "chancelaria",
       "natureza": "oficial",
       "tipo": "html-plone",
@@ -41,7 +41,7 @@
     },
     {
       "id": "br-defesa",
-      "nome": "Ministerio da Defesa - Noticias",
+      "nome": "Ministério da Defesa - Notícias",
       "categoria": "defesa",
       "natureza": "oficial",
       "tipo": "feed",
@@ -49,7 +49,7 @@
     },
     {
       "id": "br-defesa-lista",
-      "nome": "Ministerio da Defesa - Noticias (pagina)",
+      "nome": "Ministério da Defesa - Notícias (página)",
       "categoria": "defesa",
       "natureza": "oficial",
       "tipo": "html-govbr",
@@ -58,7 +58,7 @@
     },
     {
       "id": "br-camara",
-      "nome": "Camara dos Deputados - Ultimas noticias",
+      "nome": "Câmara dos Deputados - Últimas notícias",
       "categoria": "parlamento",
       "natureza": "oficial",
       "tipo": "feed",
@@ -66,7 +66,7 @@
     },
     {
       "id": "br-senado",
-      "nome": "Senado Federal - Noticias",
+      "nome": "Senado Federal - Notícias",
       "categoria": "parlamento",
       "natureza": "oficial",
       "tipo": "feed",
@@ -74,7 +74,7 @@
     },
     {
       "id": "br-agencia-brasil",
-      "nome": "Agencia Brasil (EBC)",
+      "nome": "Agência Brasil (EBC)",
       "categoria": "agencia",
       "natureza": "estatal",
       "tipo": "feed",
