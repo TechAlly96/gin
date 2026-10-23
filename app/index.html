@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<title>GIN - Noticias oficiais</title>
+<link rel="stylesheet" href="estilo.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="topo">
+  <div class="marca"><strong>GIN</strong><span>fontes oficiais</span></div>
+  <nav id="paises" class="chips" aria-label="Paises"></nav>
+  <nav id="categorias" class="chips" aria-label="Categorias"></nav>
+</header>
+<main>
+  <details id="painel" class="painel">
+    <summary id="resumo-status">Carregando...</summary>
+    <ul id="lista-fontes"></ul>
+  </details>
+  <section id="feed" aria-live="polite"></section>
+  <div id="sentinela" class="sentinela">Carregando...</div>
+</main>
+</body>
+</html>
