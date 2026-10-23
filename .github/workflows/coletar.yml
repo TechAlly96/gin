@@ -1,0 +1,88 @@
+name: Coleta e publicacao GIN
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # a cada hora (UTC), minuto 17 para fugir do pico da hora cheia
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["app/**", "fontes/**", "coletor/**", ".github/workflows/coletar.yml"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: coleta-gin
+  cancel-in-progress: false
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Baixar codigo (main)
+        uses: actions/checkout@v5
+
+      - name: Recuperar historico (ramo dados)
+        run: |
+          if git ls-remote --exit-code --heads origin dados > /dev/null; then
+            git fetch --depth=1 origin dados
+            git worktree add --detach dados FETCH_HEAD
+          else
+            echo "Ramo dados ainda nao existe: criando historico novo"
+            git worktree add --detach dados
+            git -C dados checkout --orphan dados
+            git -C dados rm -rf --quiet .
+          fi
+
+      - name: Coletar todos os paises
+        run: |
+          python3 --version
+          for cfg in fontes/*.json; do
+            pais=$(basename "$cfg" .json)
+            echo "::group::Coleta $pais"
+            python3 coletor/coletar.py "$pais" || echo "::warning::Coleta de $pais falhou"
+            echo "::endgroup::"
+          done
+
+      - name: Salvar historico no ramo dados
+        run: |
+          cd dados
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nada novo para salvar"
+          else
+            git commit -q -m "coleta: $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push origin HEAD:refs/heads/dados
+          fi
+
+      - name: Montar site
+        run: |
+          mkdir -p _site/app _site/dados
+          cp -r app/. _site/app/
+          cp -r dados/* _site/dados/
+          rm -f _site/dados/*/todos.json
+          printf '%s\n' '<!doctype html><meta charset="utf-8"><title>GIN</title><meta http-equiv="refresh" content="0; url=app/"><a href="app/">Abrir o GIN</a>' > _site/index.html
+          find _site -type f | sort
+          du -sh _site
+
+      - name: Enviar site para o Pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  publicar:
+    needs: coletar
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
