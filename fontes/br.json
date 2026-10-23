@@ -1,0 +1,84 @@
+{
+  "pais": {
+    "codigo": "BR",
+    "nome": "Brasil",
+    "idioma": "pt",
+    "fuso_horas": -3
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "fontes": [
+    {
+      "id": "br-planalto",
+      "nome": "Planalto - Noticias",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/noticias/RSS"
+    },
+    {
+      "id": "br-planalto-lista",
+      "nome": "Planalto - Noticias (pagina)",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-govbr",
+      "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/noticias",
+      "padrao_link": "/noticias/"
+    },
+    {
+      "id": "br-itamaraty",
+      "nome": "Itamaraty - Notas a imprensa",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-plone",
+      "url": "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa",
+      "padrao_link": "/notas-a-imprensa/"
+    },
+    {
+      "id": "br-defesa",
+      "nome": "Ministerio da Defesa - Noticias",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.gov.br/defesa/pt-br/centrais-de-conteudo/noticias/RSS"
+    },
+    {
+      "id": "br-defesa-lista",
+      "nome": "Ministerio da Defesa - Noticias (pagina)",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "html-govbr",
+      "url": "https://www.gov.br/defesa/pt-br/centrais-de-conteudo/noticias",
+      "padrao_link": "/noticias/"
+    },
+    {
+      "id": "br-camara",
+      "nome": "Camara dos Deputados - Ultimas noticias",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.camara.leg.br/noticias/rss/ultimas-noticias"
+    },
+    {
+      "id": "br-senado",
+      "nome": "Senado Federal - Noticias",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www12.senado.leg.br/noticias/rss.xml"
+    },
+    {
+      "id": "br-agencia-brasil",
+      "nome": "Agencia Brasil (EBC)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml"
+    }
+  ]
+}
