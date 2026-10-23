@@ -112,7 +112,7 @@ function renderizarPainel(indice) {
   nomesFontes = Object.fromEntries(indice.fontes.map((f) => [f.id, f.nome]));
   const alertas = indice.fontes.filter((f) => !f.ok || f.alerta).length;
   const quando = new Date(indice.atualizado).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
-  $("resumo-status").textContent = "Atualizado " + quando + " · " + indice.total + " notícias · " +
+  $("resumo-status").textContent = (navigator.onLine ? "" : "Offline · ") + "Atualizado " + quando + " · " + indice.total + " notícias · " +
     (alertas ? alertas + " alerta(s)" : "todas as fontes OK");
   const lista = $("lista-fontes");
   lista.replaceChildren();
@@ -173,3 +173,7 @@ async function iniciar() {
 }
 
 iniciar();
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").catch((e) => console.warn("Service worker nao registrado:", e));
+}
