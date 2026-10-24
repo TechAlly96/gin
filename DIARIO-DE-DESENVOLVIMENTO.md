@@ -56,3 +56,13 @@ sprint-009: feat(argentina) - ARGENTINA, 2o pais (mesmo fuso -3; so o idioma mud
   precisao 'dia' em tudo exceto 5 destaques (estimada), PAIS COMPLETO: SIM. Regressao Brasil OK (8/8).
 - Corrigido: falha de conexao na busca de data gerava data estimada; agora adia.
 FIM-sprint-009
+
+sprint-010: fix(datas) - noticias sem data no topo do feed (visto no app: destaques da Cancilleria).
+- Regra nova: item sem data visto na 1a coleta da fonte = precisao 'desconhecida' (fim do feed,
+  rotulo "data nao informada pela fonte"); item sem data visto em coleta posterior = 'estimada' (+-1 h).
+- 1a coleta da fonte detectada pela menor data de coleta dela: corrige sozinho itens ja publicados.
+- Data estimada nunca substitui informacao ja guardada (sem essa trava o item voltaria ao topo a cada hora).
+- 'ultima' publicacao e cobertura usam so precisao hora/dia.
+- TESTE local AR: inicio do feed = noticias de 23/10 com data real; fim = 5 destaques 'desconhecida';
+  129 noticias, PAIS COMPLETO: SIM.
+FIM-sprint-010

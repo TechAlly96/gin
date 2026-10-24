@@ -18,7 +18,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 POR_PAGINA = 50
 ALERTA_DIAS_PADRAO = 7
 HORA = re.compile(r"\d{1,2}[h:]\d{2}|T\d{2}")
-RANK = {"hora": 2, "dia": 1, "estimada": 0}
+RANK = {"hora": 2, "dia": 1, "estimada": 0, "desconhecida": -1}
 
 
 def iso(dt):
@@ -89,7 +89,7 @@ def mesclar(atual, novo):
         atual.setdefault("titulos_anteriores", []).append(atual["titulo"])
         atual["titulo"] = novo["titulo"]
         atual["atualizado"] = novo["coletado"]
-    if RANK[novo["precisao"]] > RANK[atual["precisao"]]:
+    if novo["precisao"] in ("hora", "dia") and RANK[novo["precisao"]] > RANK[atual["precisao"]]:
         for campo in ("publicado", "precisao", "fonte", "fonte_nome", "ordem"):
             atual[campo] = novo[campo]
     if novo["resumo"] and not atual.get("resumo"):
@@ -144,7 +144,7 @@ def main(codigo):
             if not item:
                 continue
             validos += 1
-            if item["precisao"] != "estimada":
+            if item["precisao"] in ("hora", "dia"):
                 recente = max(recente or item["publicado"], item["publicado"])
             if item["id"] not in historico and item["id"] not in lidos:
                 novos += 1
@@ -169,7 +169,13 @@ def main(codigo):
     for id_, item in lidos.items():
         historico[id_] = mesclar(historico[id_], item) if id_ in historico else item
 
-    itens = sorted(historico.values(), key=lambda i: (i["publicado"], -i["ordem"]), reverse=True)
+    primeira = {}
+    for i in historico.values():
+        primeira[i["fonte"]] = min(primeira.get(i["fonte"], i["coletado"]), i["coletado"])
+    for i in historico.values():
+        if i["precisao"] == "estimada" and i["coletado"] == primeira[i["fonte"]]:
+            i["precisao"] = "desconhecida"
+    itens = sorted(historico.values(), key=lambda i: (i["precisao"] != "desconhecida", i["publicado"], -i["ordem"]), reverse=True)
     paginas = max(1, -(-len(itens) // POR_PAGINA))
     gravar(pasta / "todos.json", itens)
     for n in range(paginas):
@@ -182,7 +188,7 @@ def main(codigo):
     cobertura = {}
     for cat in cfg["categorias_obrigatorias"]:
         fontes_ok = [s for s in status if s["categoria"] == cat and s["ok"] and s["validos"]]
-        datas = [i["publicado"] for i in itens if i["categoria"] == cat and i["precisao"] != "estimada"]
+        datas = [i["publicado"] for i in itens if i["categoria"] == cat and i["precisao"] in ("hora", "dia")]
         cobertura[cat] = {"fontes_ok": len(fontes_ok), "ultima": max(datas) if datas else None}
         if cat in cfg.get("lacunas", {}):
             cobertura[cat]["lacuna"] = cfg["lacunas"][cat]

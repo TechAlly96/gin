@@ -34,6 +34,7 @@ function formatarData(item) {
   if (Number.isNaN(d.getTime())) return "";
   const dia = d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
   if (item.precisao === "hora") return dia + ", " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  if (item.precisao === "desconhecida") return "data não informada pela fonte (anterior ao início da coleta)";
   if (item.precisao === "estimada") return dia + " (data estimada)";
   return dia;
 }
