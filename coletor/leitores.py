@@ -22,6 +22,11 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 RSS1 = "{http://purl.org/rss/1.0/}"
 DC = "{http://purl.org/dc/elements/1.1/}"
 _ultimo_acesso = {}
+MESES_NUM = {m: i for i, m in enumerate("enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre".split(), 1)}
+MESES_NUM.update({m: i for i, m in enumerate("janeiro fevereiro março abril maio junho julho agosto setembro outubro novembro dezembro".split(), 1)})
+MESES_NUM["setiembre"] = 9
+DATA_TEXTO = re.compile(r"(?:(?:lunes|martes|mi[eé]rcoles|jueves|viernes|s[aá]bado|domingo)\s*,?\s+)?\d{1,2} de (?:"
+                        + "|".join(MESES_NUM) + r") de \d{4}", re.I)
 
 
 def limpar(texto, limite=None):
@@ -74,6 +79,12 @@ def ler_data(valor, fuso):
         return dt if dt.tzinfo else dt.replace(tzinfo=fuso)
     except ValueError:
         pass
+    m = re.search(r"(\d{1,2}) de ([a-záéíóúç]+) de (\d{4})", v.lower())
+    if m and m.group(2) in MESES_NUM:
+        try:
+            return datetime(int(m.group(3)), MESES_NUM[m.group(2)], int(m.group(1)), tzinfo=fuso)
+        except ValueError:
+            return None
     m = re.search(r"(\d{2})/(\d{2})/(\d{4})(?:\D{1,20}?(\d{1,2})[h:](\d{2}))?", v)
     if m:
         d, mo, a, h, mi = m.groups()
@@ -183,12 +194,68 @@ def ler_lista_govbr(conteudo, base, padrao):
     return itens
 
 
+DATA_NUMERICA = re.compile(r"\b\d{2}/\d{2}/\d{4}\b")
+
+
+def ler_links(conteudo, base, padrao, min_titulo=25):
+    """Leitor generico para paginas sem feed.
+    - aceita links cujo endereco JA RESOLVIDO contem PADRAO;
+    - titulo = cabecalho (h1-h6/strong) dentro do link, se houver; senao o texto do link;
+    - data: por extenso dentro do link; se nao houver, a primeira data (por extenso ou dd/mm/aaaa)
+      no trecho logo APOS o link, ate o proximo link da lista (formato titulo -> data -> resumo);
+    - resumo: restante do texto do link ou o texto que segue a data."""
+    corpo = conteudo.decode("utf-8", "replace")
+    alvo_lista = urllib.parse.urlsplit(base).path.rstrip("/")
+    candidatos = []
+    for m in ANCORA.finditer(corpo):
+        link = urllib.parse.urljoin(base, html.unescape(m.group(1).strip())).split("#")[0]
+        caminho = urllib.parse.urlsplit(link).path
+        if padrao in caminho + "/" and caminho.rstrip("/") != alvo_lista:
+            candidatos.append((m, link))
+    itens, vistos = [], set()
+    for i, (m, link) in enumerate(candidatos):
+        if link in vistos:
+            continue
+        txt = m.group(2)
+        texto = limpar(txt)
+        cab = re.search(r"<(h[1-6]|strong)[^>]*>(.*?)</\1>", txt, re.S | re.I)
+        titulo = limpar(cab.group(2)) if cab else ""
+        if len(titulo) < min_titulo:
+            cab, titulo = None, texto
+        titulo = re.sub(r"\s+", " ", DATA_TEXTO.sub(" ", titulo)).strip(" -|:>·")
+        if len(titulo) < min_titulo:
+            continue
+        md = DATA_TEXTO.search(texto)
+        data = md.group(0) if md else ""
+        resumo = limpar(DATA_TEXTO.sub(" ", texto.replace(limpar(cab.group(2)), " "))) if cab else ""
+        if not data:
+            limite = candidatos[i + 1][0].start() if i + 1 < len(candidatos) else m.end() + 800
+            depois = limpar(corpo[m.end():min(limite, m.end() + 800)])
+            md2 = DATA_TEXTO.search(depois) or DATA_NUMERICA.search(depois)
+            if md2:
+                data = md2.group(0)
+                if not resumo:
+                    resumo = depois[md2.end():]
+        vistos.add(link)
+        itens.append({"titulo": titulo, "link": link, "resumo": resumo.strip(" -|:>·"), "data": data})
+    return itens
+
+def data_do_artigo(link):
+    """Abre a noticia e devolve a primeira data encontrada no texto (por extenso ou dd/mm/aaaa), ou ''.
+    Usado so em fontes com data_no_artigo=true (testado: a 1a data da pagina e a de publicacao)."""
+    texto = limpar(baixar(link)[0].decode("utf-8", "replace"))
+    m = DATA_TEXTO.search(texto) or DATA_NUMERICA.search(texto)
+    return m.group(0) if m else ""
+
+
 def ler_fonte(fonte):
     conteudo, final = baixar(fonte["url"])
     if fonte["tipo"] == "feed":
         return ler_feed(conteudo)
     if fonte["tipo"] == "html-plone":
         return ler_plone(conteudo, final, fonte["padrao_link"])
+    if fonte["tipo"] == "html-links":
+        return ler_links(conteudo, final, fonte["padrao_link"], fonte.get("min_titulo", 25))
     if fonte["tipo"] == "html-govbr":
         return ler_lista_govbr(conteudo, final, fonte["padrao_link"])
     raise ValueError(f"tipo de fonte desconhecido: {fonte['tipo']}")

@@ -128,6 +128,13 @@ function renderizarPainel(indice) {
     li.append(document.createTextNode(texto));
     lista.append(li);
   }
+  for (const [cat, c] of Object.entries(indice.cobertura || {})) {
+    if (!c.lacuna) continue;
+    const li = el("li");
+    li.append(el("span", "lacuna", "[LACUNA] "));
+    li.append(document.createTextNode((CATEGORIAS[cat] || cat) + ": " + c.lacuna));
+    lista.append(li);
+  }
 }
 
 async function abrirPais(codigo) {

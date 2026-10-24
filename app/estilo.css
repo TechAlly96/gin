@@ -25,3 +25,4 @@ main { max-width:760px; margin:0 auto; padding:12px 16px 40px; }
 .corrigido { margin:0 0 6px; color:var(--alerta); font-size:12px; }
 .rodape { margin:0; color:var(--suave); font-size:13px; }
 .sentinela { text-align:center; color:var(--suave); padding:20px 0; font-size:14px; }
+.painel .lacuna { color:#c9a8f5; }

@@ -12,7 +12,7 @@ import urllib.parse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from leitores import ler_data, ler_fonte, limpar
+from leitores import data_do_artigo, ler_data, ler_fonte, limpar
 
 RAIZ = Path(__file__).resolve().parent.parent
 POR_PAGINA = 50
@@ -32,6 +32,10 @@ def de_iso(texto):
 def chave_link(link):
     p = urllib.parse.urlsplit(link.strip())
     return f"{p.netloc.lower()}{p.path.rstrip('/')}" + (f"?{p.query}" if p.query else "")
+
+
+def id_do_link(link):
+    return hashlib.sha1(chave_link(link).encode("utf-8")).hexdigest()[:16]
 
 
 def ler_json(caminho, padrao):
@@ -61,7 +65,7 @@ def normalizar(bruto, fonte, pais, fuso, agora, posicao):
     if estimada:
         dt = agora
     item = {
-        "id": hashlib.sha1(chave_link(link).encode("utf-8")).hexdigest()[:16],
+        "id": id_do_link(link),
         "pais": pais,
         "fonte": fonte["id"],
         "fonte_nome": fonte["nome"],
@@ -113,6 +117,26 @@ def main(codigo):
             status.append(st)
             print(f"[ERRO  ] {fonte['id']}: {st['erro']}")
             continue
+        total_lidos, buscados, adiados = len(brutos), 0, 0
+        if fonte.get("data_no_artigo"):
+            limite = fonte.get("max_artigos_por_execucao", 20)
+            filtrados = []
+            for b in brutos:
+                link = (b.get("link") or "").strip()
+                if b.get("data") or not link.startswith(("http://", "https://")) or id_do_link(link) in historico:
+                    filtrados.append(b)
+                    continue
+                if buscados >= limite:
+                    adiados += 1
+                    continue
+                try:
+                    b["data"] = data_do_artigo(link)
+                except Exception:
+                    adiados += 1
+                    continue
+                buscados += 1
+                filtrados.append(b)
+            brutos = filtrados
         validos = novos = 0
         recente = None
         for pos, b in enumerate(brutos):
@@ -133,12 +157,14 @@ def main(codigo):
             alerta = "nenhum item válido"
         elif dias is not None and dias > alerta_dias:
             alerta = f"sem publicar há {dias} dias"
-        st.update(ok=True, lidos=len(brutos), validos=validos, novos=novos,
+        st.update(ok=True, lidos=total_lidos, buscadas=buscados, adiadas=adiados, validos=validos, novos=novos,
                   mais_recente=recente, dias_sem_publicar=dias, alerta=alerta)
         status.append(st)
         marca = "ALERTA" if alerta else "OK"
         extra = f" | {alerta}" if alerta else ""
-        print(f"[{marca:<6}] {fonte['id']}: lidos {len(brutos)} | validos {validos} | novos {novos} | ultima {(recente or '-')[:10]}{extra}")
+        if buscados or adiados:
+            extra += f" | datas buscadas {buscados}, adiadas {adiados}"
+        print(f"[{marca:<6}] {fonte['id']}: lidos {total_lidos} | validos {validos} | novos {novos} | ultima {(recente or '-')[:10]}{extra}")
 
     for id_, item in lidos.items():
         historico[id_] = mesclar(historico[id_], item) if id_ in historico else item
@@ -158,7 +184,9 @@ def main(codigo):
         fontes_ok = [s for s in status if s["categoria"] == cat and s["ok"] and s["validos"]]
         datas = [i["publicado"] for i in itens if i["categoria"] == cat and i["precisao"] != "estimada"]
         cobertura[cat] = {"fontes_ok": len(fontes_ok), "ultima": max(datas) if datas else None}
-    completo = all(c["fontes_ok"] > 0 for c in cobertura.values())
+        if cat in cfg.get("lacunas", {}):
+            cobertura[cat]["lacuna"] = cfg["lacunas"][cat]
+    completo = all(c["fontes_ok"] > 0 or c.get("lacuna") for c in cobertura.values())
 
     gravar(pasta / "indice.json", {
         "pais": pais["codigo"], "nome": pais["nome"], "idioma": pais.get("idioma"),
@@ -172,7 +200,8 @@ def main(codigo):
 
     print(f"\nHistorico: {total_antes} -> {len(itens)} (novos nesta coleta: {len(itens) - total_antes}) | paginas: {paginas}")
     for cat, c in cobertura.items():
-        print(f"  {cat:<12} fontes ok: {c['fontes_ok']} | ultima: {(c['ultima'] or '-')[:10]}")
+        lacuna = f" | LACUNA: {c['lacuna'][:70]}" if c.get("lacuna") else ""
+        print(f"  {cat:<12} fontes ok: {c['fontes_ok']} | ultima: {(c['ultima'] or '-')[:10]}{lacuna}")
     print(f"PAIS COMPLETO: {'SIM' if completo else 'NAO'}")
     return 0 if any(s["ok"] for s in status) else 1
 

@@ -1,0 +1,85 @@
+{
+  "pais": {
+    "codigo": "AR",
+    "nome": "Argentina",
+    "idioma": "es",
+    "fuso_horas": -3
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "fontes": [
+    {
+      "id": "ar-casarosada",
+      "nome": "Casa Rosada - Noticias",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.casarosada.gob.ar/informacion/actividad-oficial/9-noticias",
+      "padrao_link": "/informacion/actividad-oficial/9-noticias/"
+    },
+    {
+      "id": "ar-cancilleria",
+      "nome": "Cancillería - Noticias",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.cancilleria.gob.ar/es/actualidad/noticias",
+      "padrao_link": "/es/actualidad/noticias/"
+    },
+    {
+      "id": "ar-cancilleria-destacados",
+      "nome": "Cancillería - Destacados",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.cancilleria.gob.ar/es",
+      "padrao_link": "/es/destacados/"
+    },
+    {
+      "id": "ar-defensa",
+      "nome": "Ministerio de Defensa - Noticias",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.argentina.gob.ar/defensa",
+      "padrao_link": "/noticias/"
+    },
+    {
+      "id": "ar-diputados",
+      "nome": "Cámara de Diputados - Prensa",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.hcdn.gob.ar/prensa/",
+      "padrao_link": "/prensa/noticia/",
+      "data_no_artigo": true
+    },
+    {
+      "id": "ar-diputados-inicio",
+      "nome": "Cámara de Diputados - Inicio",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.hcdn.gob.ar",
+      "padrao_link": "/prensa/noticia/",
+      "data_no_artigo": true
+    },
+    {
+      "id": "ar-senado",
+      "nome": "Senado de la Nación - Prensa",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.senado.gob.ar/prensa/eventos",
+      "padrao_link": "/noticias"
+    }
+  ],
+  "lacunas": {
+    "agencia": "Sem agência pública de notícias: a Télam foi convertida em 2024 em agência de publicidade estatal, sem serviço jornalístico; a página da Rádio Nacional lista só emissoras, sem notícias (verificado em 23/10/2026)."
+  }
+}
