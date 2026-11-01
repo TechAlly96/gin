@@ -80,5 +80,6 @@
       "tipo": "feed",
       "url": "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml"
     }
-  ]
+  ],
+  "voz": "pt_BR-faber-medium"
 }

@@ -89,3 +89,14 @@ sprint-012: fix(robustez) - Itamaraty mudou o layout (sem article.tileItem): 0 n
   403 do Department of War).
 - Planalto voltou a publicar apos o 2o turno (27/10): confirma a restricao do periodo eleitoral.
 FIM-sprint-012
+
+sprint-013: feat(audio) - BOLETIM EM AUDIO (ouvir com a tela apagada).
+- Leitura do navegador (speechSynthesis) para em 2o plano no Chrome Android -> audio gerado no servidor.
+- Vozes escolhidas: pt_BR-faber-medium (usuario), es_AR-daniela-high e en_US-lessac-medium (padrao).
+- coletor/fala.py: texto falado limpo (rodapes, frases cortadas, caixa alta, moedas, transcricoes,
+  resumo sem letras); coletor/boletim.py: 30 noticias por pais, Piper como programa separado (GPL),
+  Opus 32 kbps, capitulos com inicio/fim de cada noticia, assinatura: reaproveita o audio publicado
+  quando nada mudou. Audio NAO entra no Git (.gitignore no ramo dados); fica so no site.
+- Workflow: preparar voz + cache dos modelos + gerar boletins, todos podem falhar sem afetar a coleta.
+- Amostras (workflow manual amostra-voz.yml): 8 vozes OK, 5x a 27x tempo real.
+FIM-sprint-013

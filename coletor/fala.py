@@ -55,6 +55,8 @@ def texto_item(item, nome_da_fonte):
     resumo = ate_frase_completa(limpar_fala(item.get("resumo", "")))
     if resumo.lower().startswith(titulo.lower()[:40]):
         resumo = ate_frase_completa(resumo[len(titulo):].lstrip(" .:-"))
+    if not re.search(r"[^\W\d_]", resumo):
+        resumo = ""  # resumo sem nenhuma letra (ex.: "-")
     if re.search(r"\b[A-Z]{3,}(?: [A-Z]{3,})*:", resumo):
         resumo = ""  # transcricao (MODERATOR:, SECRETARY X:): le so o titulo
     partes = [f"{nome_fonte(nome_da_fonte)}.", f"{titulo}."]

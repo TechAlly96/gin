@@ -3,7 +3,8 @@
     "codigo": "US",
     "nome": "Estados Unidos",
     "idioma": "en",
-    "fuso_horas": -5
+    "fuso_horas": -5,
+    "nome_falado": "United States"
   },
   "categorias_obrigatorias": [
     "governo",
