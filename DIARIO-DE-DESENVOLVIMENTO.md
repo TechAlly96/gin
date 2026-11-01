@@ -66,3 +66,16 @@ sprint-010: fix(datas) - noticias sem data no topo do feed (visto no app: destaq
 - TESTE local AR: inicio do feed = noticias de 23/10 com data real; fim = 5 destaques 'desconhecida';
   129 noticias, PAIS COMPLETO: SIM.
 FIM-sprint-010
+
+sprint-011: feat(eua) - ESTADOS UNIDOS, 3o pais (ingles; feeds com fuso explicito).
+- Identificacao do coletor por fonte, sempre HONESTA (declara ser o robo do GIN, nunca se passa
+  por navegador): 'padrao' = Mozilla/5.0 (compatible; GIN-Coletor/0.3; +repo), 'simples' = GIN-Coletor/0.2.
+- Evidencia: State Dept so aceita 'padrao' (celular); Department of War so aceita 'simples' e so a
+  partir dos servidores do GitHub (celular: bloqueado em tudo). Workflow manual testar-acesso.yml criado.
+- fontes/us.json (9): governo = White House /news/feed; chancelaria = State Dept press releases;
+  defesa = war.gov releases + news ('simples'); parlamento = congress.gov (presented-to-president,
+  house/senate floor, most-viewed); agencia = VOA (estatal; ativa apos ordem judicial de 03/2026).
+- Congresso em recesso ate a eleicao de 03/11: pautas vazias; reavaliar depois da eleicao.
+- Regressao local: AR 7/7; BR 7/8 (Senado: timeout no TLS, antes da identificacao; passageiro,
+  confirmado OK a partir do GitHub).
+FIM-sprint-011

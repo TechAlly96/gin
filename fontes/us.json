@@ -1,0 +1,91 @@
+{
+  "pais": {
+    "codigo": "US",
+    "nome": "Estados Unidos",
+    "idioma": "en",
+    "fuso_horas": -5
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "fontes": [
+    {
+      "id": "us-whitehouse",
+      "nome": "The White House - News",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.whitehouse.gov/news/feed/"
+    },
+    {
+      "id": "us-state",
+      "nome": "Department of State - Press Releases",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.state.gov/rss-feed/press-releases/feed/"
+    },
+    {
+      "id": "us-war-releases",
+      "nome": "Department of War - Releases",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.war.gov/news/rss_releases2.xml",
+      "identificacao": "simples"
+    },
+    {
+      "id": "us-war-news",
+      "nome": "Department of War - News",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.war.gov/news/afps2.xml",
+      "identificacao": "simples"
+    },
+    {
+      "id": "us-congress-president",
+      "nome": "Congress - Bills Presented to the President",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.congress.gov/rss/presented-to-president.xml"
+    },
+    {
+      "id": "us-house-floor",
+      "nome": "Congress - House Floor Today",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.congress.gov/rss/house-floor-today.xml"
+    },
+    {
+      "id": "us-senate-floor",
+      "nome": "Congress - Senate Floor Today",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.congress.gov/rss/senate-floor-today.xml"
+    },
+    {
+      "id": "us-congress-mostviewed",
+      "nome": "Congress - Most-Viewed Bills",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.congress.gov/rss/most-viewed-bills.xml"
+    },
+    {
+      "id": "us-voa",
+      "nome": "Voice of America (VOA)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.voanews.com/api/"
+    }
+  ]
+}

@@ -15,7 +15,9 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-UA = "GIN-Coletor/0.2 (leitor pessoal de fontes oficiais)"
+UA = "Mozilla/5.0 (compatible; GIN-Coletor/0.3; +https://github.com/TechAlly96/gin)"
+UA_SIMPLES = "GIN-Coletor/0.2 (leitor pessoal de fontes oficiais)"
+IDENTIDADES = {"padrao": UA, "simples": UA_SIMPLES}  # ambas honestas: declaram que e o robo do GIN
 PAUSA_MESMO_SITE = 3
 LIMITE_BYTES = 8_000_000
 ATOM = "{http://www.w3.org/2005/Atom}"
@@ -40,12 +42,12 @@ def limpar(texto, limite=None):
     return t
 
 
-def baixar(url, tentativas=3):
+def baixar(url, tentativas=3, ua=None):
     host = urllib.parse.urlsplit(url).netloc
     espera = PAUSA_MESMO_SITE - (time.monotonic() - _ultimo_acesso.get(host, -1e9))
     if espera > 0:
         time.sleep(espera)
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    req = urllib.request.Request(url, headers={"User-Agent": ua or UA})
     erro = ""
     for n in range(1, tentativas + 1):
         try:
@@ -249,7 +251,7 @@ def data_do_artigo(link):
 
 
 def ler_fonte(fonte):
-    conteudo, final = baixar(fonte["url"])
+    conteudo, final = baixar(fonte["url"], ua=IDENTIDADES[fonte.get("identificacao", "padrao")])
     if fonte["tipo"] == "feed":
         return ler_feed(conteudo)
     if fonte["tipo"] == "html-plone":
