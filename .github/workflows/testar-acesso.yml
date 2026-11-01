@@ -1,0 +1,23 @@
+name: Teste de acesso (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: "Enderecos para testar, separados por espaco"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v5
+      - name: Testar acesso a partir dos servidores do GitHub
+        env:
+          URLS: ${{ inputs.urls }}
+        run: python3 -u ferramentas/testar_acesso.py $URLS
