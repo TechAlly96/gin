@@ -1,0 +1,33 @@
+name: Amostra de voz (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  amostra:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v5
+
+      - name: Instalar Piper em ambiente isolado e ffmpeg
+        run: |
+          python3 -m venv /tmp/piper
+          /tmp/piper/bin/pip install --quiet piper-tts
+          command -v ffmpeg || (sudo apt-get update -q && sudo apt-get install -y -q ffmpeg)
+
+      - name: Gerar amostras com noticias reais
+        env:
+          PIPER_PY: /tmp/piper/bin/python
+        run: python3 -u ferramentas/amostra_voz.py amostras
+
+      - name: Publicar amostras para ouvir no celular
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete amostras-voz --yes --cleanup-tag || true
+          gh release create amostras-voz amostras/*.ogg --prerelease --title "Amostras de voz do GIN" --notes "Amostras geradas automaticamente para escolher as vozes do boletim em audio."
