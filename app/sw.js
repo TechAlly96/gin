@@ -1,7 +1,7 @@
 "use strict";
 // GIN - service worker: rede primeiro (nunca mostra versao velha quando ha internet),
 // copia guardada de tudo o que foi aberto (funciona offline com as ultimas noticias baixadas).
-const CACHE_APP = "gin-app-v1";
+const CACHE_APP = "gin-app-v2";
 const CACHE_DADOS = "gin-dados-v1";
 const CASCA = ["./", "./index.html", "./app.js", "./estilo.css", "./manifest.json",
   "./icone-192.png", "./icone-512.png", "./icone-maskable-512.png"];
@@ -21,6 +21,7 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  if (url.pathname.endsWith(".ogg")) return; // audio: requisicoes parciais (206) vao direto a rede
   e.respondWith(redePrimeiro(req, url.pathname.includes("/dados/") ? CACHE_DADOS : CACHE_APP));
 });
 

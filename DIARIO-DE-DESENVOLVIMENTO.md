@@ -100,3 +100,15 @@ sprint-013: feat(audio) - BOLETIM EM AUDIO (ouvir com a tela apagada).
 - Workflow: preparar voz + cache dos modelos + gerar boletins, todos podem falhar sem afetar a coleta.
 - Amostras (workflow manual amostra-voz.yml): 8 vozes OK, 5x a 27x tempo real.
 FIM-sprint-013
+
+sprint-014: feat(app) - PLAYER DO BOLETIM EM AUDIO no app.
+- Botoes "Ouvir boletim" (pais aberto) e "Ouvir tudo" (todos em sequencia a partir do aberto),
+  com noticias, duracao e horario do boletim; barra fixa: titulo, progresso, anterior/tocar/proxima,
+  velocidade 1x-2x, fechar.
+- Capitulos (boletim.json): notícia atual pelo tempo; anterior volta ao inicio ou a noticia anterior.
+- Media Session: titulo/fonte/pais/icone na tela de bloqueio e fones; play/pause/anterior/proxima/
+  avancar/voltar 10 s; posicao atualizada. Audio continua com a tela apagada.
+- Cartao da noticia atual destacado e centralizado com a tela ligada.
+- Service worker v2: arquivos .ogg vao direto a rede (requisicoes parciais 206 nao cabem no cache).
+- Correcao: resumo so aparece se tiver letras (o "-" solto do Planalto).
+FIM-sprint-014
