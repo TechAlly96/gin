@@ -35,7 +35,7 @@
       "nome": "Itamaraty - Notas à imprensa",
       "categoria": "chancelaria",
       "natureza": "oficial",
-      "tipo": "html-plone",
+      "tipo": "html-govbr",
       "url": "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa",
       "padrao_link": "/notas-a-imprensa/"
     },

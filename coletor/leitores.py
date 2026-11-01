@@ -17,7 +17,8 @@ from pathlib import Path
 
 UA = "Mozilla/5.0 (compatible; GIN-Coletor/0.3; +https://github.com/TechAlly96/gin)"
 UA_SIMPLES = "GIN-Coletor/0.2 (leitor pessoal de fontes oficiais)"
-IDENTIDADES = {"padrao": UA, "simples": UA_SIMPLES}  # ambas honestas: declaram que e o robo do GIN
+IDENTIDADES = {"padrao": UA, "simples": UA_SIMPLES}
+ACEITAR = "application/rss+xml, application/atom+xml, application/xml;q=0.9, text/html;q=0.8, */*;q=0.5"  # ambas honestas: declaram que e o robo do GIN
 PAUSA_MESMO_SITE = 3
 LIMITE_BYTES = 8_000_000
 ATOM = "{http://www.w3.org/2005/Atom}"
@@ -47,7 +48,7 @@ def baixar(url, tentativas=3, ua=None):
     espera = PAUSA_MESMO_SITE - (time.monotonic() - _ultimo_acesso.get(host, -1e9))
     if espera > 0:
         time.sleep(espera)
-    req = urllib.request.Request(url, headers={"User-Agent": ua or UA})
+    req = urllib.request.Request(url, headers={"User-Agent": ua or UA, "Accept": ACEITAR})
     erro = ""
     for n in range(1, tentativas + 1):
         try:
@@ -250,17 +251,34 @@ def data_do_artigo(link):
     return m.group(0) if m else ""
 
 
+LEITORES_HTML = {
+    "html-plone": lambda c, f, fonte: ler_plone(c, f, fonte["padrao_link"]),
+    "html-govbr": lambda c, f, fonte: ler_lista_govbr(c, f, fonte["padrao_link"]),
+    "html-links": lambda c, f, fonte: ler_links(c, f, fonte["padrao_link"], fonte.get("min_titulo", 25)),
+}
+
+
 def ler_fonte(fonte):
+    """Le a fonte com o leitor configurado. Em paginas HTML, se o leitor configurado nao achar
+    nada (o site mudou de layout), tenta os outros leitores HTML e registra o que funcionou em
+    fonte["_leitor_usado"], para o coletor emitir alerta."""
     conteudo, final = baixar(fonte["url"], ua=IDENTIDADES[fonte.get("identificacao", "padrao")])
-    if fonte["tipo"] == "feed":
+    tipo = fonte["tipo"]
+    fonte["_leitor_usado"] = tipo
+    if tipo == "feed":
         return ler_feed(conteudo)
-    if fonte["tipo"] == "html-plone":
-        return ler_plone(conteudo, final, fonte["padrao_link"])
-    if fonte["tipo"] == "html-links":
-        return ler_links(conteudo, final, fonte["padrao_link"], fonte.get("min_titulo", 25))
-    if fonte["tipo"] == "html-govbr":
-        return ler_lista_govbr(conteudo, final, fonte["padrao_link"])
-    raise ValueError(f"tipo de fonte desconhecido: {fonte['tipo']}")
+    if tipo not in LEITORES_HTML:
+        raise ValueError(f"tipo de fonte desconhecido: {tipo}")
+    itens = LEITORES_HTML[tipo](conteudo, final, fonte)
+    if itens:
+        return itens
+    for reserva, leitor in LEITORES_HTML.items():
+        if reserva != tipo:
+            itens = leitor(conteudo, final, fonte)
+            if itens:
+                fonte["_leitor_usado"] = reserva
+                return itens
+    return []
 
 
 if __name__ == "__main__":

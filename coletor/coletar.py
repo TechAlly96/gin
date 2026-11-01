@@ -157,6 +157,9 @@ def main(codigo):
             alerta = "nenhum item válido"
         elif dias is not None and dias > alerta_dias:
             alerta = f"sem publicar há {dias} dias"
+        if fonte.get("_leitor_usado", fonte["tipo"]) != fonte["tipo"]:
+            aviso = f"leitor de reserva {fonte['_leitor_usado']} em uso (layout mudou?)"
+            alerta = f"{alerta}; {aviso}" if alerta else aviso
         st.update(ok=True, lidos=total_lidos, buscadas=buscados, adiadas=adiados, validos=validos, novos=novos,
                   mais_recente=recente, dias_sem_publicar=dias, alerta=alerta)
         status.append(st)

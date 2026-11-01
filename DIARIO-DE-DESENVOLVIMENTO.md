@@ -79,3 +79,13 @@ sprint-011: feat(eua) - ESTADOS UNIDOS, 3o pais (ingles; feeds com fuso explicit
 - Regressao local: AR 7/7; BR 7/8 (Senado: timeout no TLS, antes da identificacao; passageiro,
   confirmado OK a partir do GitHub).
 FIM-sprint-011
+
+sprint-012: fix(robustez) - Itamaraty mudou o layout (sem article.tileItem): 0 notas, BR caiu para incompleto.
+- Diagnostico: mesma pagina para as duas identificacoes (nao era bloqueio); nova pagina usa o modelo
+  listagem-noticias do gov.br -> br-itamaraty passa a html-govbr (30/30 com data e numero da nota).
+- LEITOR DE RESERVA: se o leitor HTML configurado achar 0 itens, tenta os outros e registra o usado;
+  o coletor emite alerta "leitor de reserva X em uso (layout mudou?)". Evita fonte zerada em silencio.
+- Cabecalho Accept (rss/atom/xml/html) em todas as requisicoes (diferenca entre o teste OK e a coleta
+  403 do Department of War).
+- Planalto voltou a publicar apos o 2o turno (27/10): confirma a restricao do periodo eleitoral.
+FIM-sprint-012
