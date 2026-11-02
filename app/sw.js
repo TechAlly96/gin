@@ -1,7 +1,8 @@
 "use strict";
 // GIN - service worker: rede primeiro (nunca mostra versao velha quando ha internet),
 // copia guardada de tudo o que foi aberto (funciona offline com as ultimas noticias baixadas).
-const CACHE_APP = "gin-app-v2";
+const CACHE_APP = "gin-app-v3";
+const CACHE_AUDIO = "gin-audio-v1";
 const CACHE_DADOS = "gin-dados-v1";
 const CASCA = ["./", "./index.html", "./app.js", "./estilo.css", "./manifest.json",
   "./icone-192.png", "./icone-512.png", "./icone-maskable-512.png"];
@@ -12,7 +13,7 @@ self.addEventListener("install", (e) => {
 
 self.addEventListener("activate", (e) => {
   e.waitUntil(caches.keys()
-    .then((chaves) => Promise.all(chaves.filter((k) => k !== CACHE_APP && k !== CACHE_DADOS).map((k) => caches.delete(k))))
+    .then((chaves) => Promise.all(chaves.filter((k) => k !== CACHE_APP && k !== CACHE_DADOS && k !== CACHE_AUDIO).map((k) => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
 
@@ -21,9 +22,36 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
-  if (url.pathname.endsWith(".ogg")) return; // audio: requisicoes parciais (206) vao direto a rede
+  if (url.pathname.endsWith(".ogg")) {
+    e.respondWith(audioComReserva(req));
+    return;
+  }
   e.respondWith(redePrimeiro(req, url.pathname.includes("/dados/") ? CACHE_DADOS : CACHE_APP));
 });
+
+// Audio: rede primeiro; sem internet, entrega a copia guardada (inclusive em pedacos, para pular noticias)
+async function audioComReserva(req) {
+  try {
+    return await fetch(req);
+  } catch (erro) {
+    const salvo = await (await caches.open(CACHE_AUDIO)).match(req.url);
+    if (!salvo) throw erro;
+    const faixa = req.headers.get("range");
+    if (!faixa) return salvo;
+    const buf = await salvo.arrayBuffer();
+    const m = /bytes=(\d*)-(\d*)/.exec(faixa) || [];
+    const ini = m[1] ? parseInt(m[1], 10) : 0;
+    const fim = Math.min(m[2] ? parseInt(m[2], 10) : buf.byteLength - 1, buf.byteLength - 1);
+    return new Response(buf.slice(ini, fim + 1), {
+      status: 206,
+      headers: {
+        "Content-Type": "audio/ogg", "Accept-Ranges": "bytes",
+        "Content-Range": "bytes " + ini + "-" + fim + "/" + buf.byteLength,
+        "Content-Length": String(fim - ini + 1),
+      },
+    });
+  }
+}
 
 async function redePrimeiro(req, nomeCache) {
   const cache = await caches.open(nomeCache);

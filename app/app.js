@@ -193,12 +193,32 @@ async function infoBoletim(codigo) {
   try {
     const b = await obterJSON(codigo + "/boletim.json");
     const quando = new Date(b.gerado).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-    $("info-boletim").textContent = b.noticias + " notícias · " + Math.round(b.duracao / 60) + " min · " + quando;
+    const off = await estaOffline(new URL(DADOS + codigo + "/" + b.arquivo, location.href).href);
+    $("info-boletim").textContent = b.noticias + " notícias · " + Math.round(b.duracao / 60) + " min · " + quando + (off ? " · offline ✓" : "");
     $("btn-ouvir").disabled = false;
   } catch {
     $("info-boletim").textContent = "boletim em áudio indisponível";
     $("btn-ouvir").disabled = true;
   }
+}
+
+async function guardarOffline(codigo, url) {
+  if (!("caches" in window)) return;
+  try {
+    const cache = await caches.open("gin-audio-v1");
+    if (await cache.match(url)) return;
+    const r = await fetch(url);
+    if (r.status !== 200) return;
+    for (const req of await cache.keys()) {
+      if (req.url.includes("/" + codigo + "/boletim-")) await cache.delete(req);
+    }
+    await cache.put(url, r);
+    if (estado && estado.pais === codigo) infoBoletim(codigo);
+  } catch {}
+}
+
+async function estaOffline(url) {
+  try { return "caches" in window && !!(await (await caches.open("gin-audio-v1")).match(url)); } catch { return false; }
 }
 
 async function tocarPais(codigo, fila) {
@@ -213,6 +233,7 @@ async function tocarPais(codigo, fila) {
     $("player-pais").textContent = "GIN · " + player.nome;
     $("player-titulo").textContent = "Carregando...";
     await a.play();
+    guardarOffline(codigo, new URL(a.src, location.href).href);
   } catch (e) {
     $("player").hidden = false;
     $("player-titulo").textContent = "Não foi possível tocar: " + e.message;

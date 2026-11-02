@@ -119,3 +119,11 @@ sprint-015: perf(audio) - AUDIO POR NOTICIA: so as noticias novas sao narradas.
 - Ambiente do Piper em cache (/tmp/piper); reinstala sozinho se deixar de funcionar (ex.: Ubuntu 26).
 - Assinatura v2 forca uma regeneracao completa para encher o cache.
 FIM-sprint-015
+
+sprint-016: feat(app) - BOLETIM OFFLINE.
+- Ao tocar, o app guarda uma copia completa do boletim (cache gin-audio-v1; so a versao mais recente
+  de cada pais). Service worker v3: audio pela rede; sem internet, entrega a copia guardada e
+  atende requisicoes parciais (206, Content-Range) para pular noticias offline.
+- Info do boletim mostra "offline ✓" quando a versao atual esta guardada.
+- Pendente de verificacao: cache por noticia com "N novas, M do cache" (aguarda noticia nova).
+FIM-sprint-016
