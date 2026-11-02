@@ -21,6 +21,12 @@ SITE = "https://techally96.github.io/gin/dados/"
 INDICE = "https://raw.githubusercontent.com/argosopentech/argospm-index/main/index.json"
 MODELOS = Path(os.environ.get("ARGOS_MODELOS", "argos-modelos"))
 MAX_POR_EXECUCAO = 80
+PT_BR = [  # variante: modelos treinados com muito portugues de Portugal
+    ("Negócios Estrangeiros", "Relações Exteriores"), ("negócios estrangeiros", "relações exteriores"),
+    ("Ministério dos Negócios", "Ministério das Relações"), (" equipa", " equipe"), ("facto", "fato"),
+    ("autocarro", "ônibus"), ("comboio", "trem"), ("telemóvel", "celular"), ("ecrã", "tela"),
+    ("registo", "registro"), ("contacto", "contato"), ("acção", "ação"), ("direcção", "direção"),
+]
 FRASES = re.compile(r"(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÑÜ¿¡\"“(0-9])")
 _tradutores = {}
 
@@ -73,7 +79,14 @@ def traduzir_par(texto, origem, destino):
     frases = [f for f in FRASES.split(texto.strip()) if f]
     resultado = tradutor.translate_batch([sp.encode(f, out_type=str) for f in frases],
                                          beam_size=2, max_decoding_length=256)
-    return " ".join(sp.decode(r.hypotheses[0]) for r in resultado).strip()
+    textos = ["".join(r.hypotheses[0]).replace("\u2581", " ").strip() for r in resultado]
+    return re.sub(r"\s+", " ", " ".join(textos)).strip()
+
+
+def para_pt_br(texto):
+    for antigo, novo in PT_BR:
+        texto = texto.replace(antigo, novo)
+    return texto
 
 
 def traduzir(texto, origem):
@@ -81,9 +94,9 @@ def traduzir(texto, origem):
     if not texto:
         return ""
     try:
-        return traduzir_par(texto, origem, "pt")
+        return para_pt_br(traduzir_par(texto, origem, "pt"))
     except LookupError:
-        return traduzir_par(traduzir_par(texto, origem, "en"), "en", "pt")
+        return para_pt_br(traduzir_par(traduzir_par(texto, origem, "en"), "en", "pt"))
 
 
 def idioma_do_pais(codigo):
