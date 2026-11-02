@@ -148,3 +148,8 @@ sprint-018: feat(traducao) - TRADUCAO AUTOMATICA para portugues + boletins AR/US
 - boletim.py: idioma_audio por pais (AR/US = pt): voz faber, so noticias traduzidas, abertura avisa
   "Noticias traduzidas automaticamente". Workflow: passo de traducao com cache de chave fixa.
 FIM-sprint-018
+
+sprint-019: feat(app) - TRADUCAO NA TELA: cartoes de paises traduzidos mostram titulo/resumo em
+portugues, selo "traducao automatica" e botao "Ver original"/"Ver traducao"; link leva a fonte
+original. Publicado (sprint-018): AR e US com boletim na voz faber, 30 noticias, titulo_pt gravado.
+FIM-sprint-019

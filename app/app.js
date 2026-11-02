@@ -49,18 +49,35 @@ function cartao(item) {
   const meta = el("div", "meta");
   meta.append(el("span", "selo", CATEGORIAS[item.categoria] || item.categoria));
   if (item.rotulo) meta.append(el("span", "rotulo", item.rotulo));
+  if (item.titulo_pt) meta.append(el("span", "traducao", "tradução automática"));
   art.append(meta);
+  const traduzido = !!item.titulo_pt;
+  const titulo = traduzido ? item.titulo_pt : item.titulo;
+  const resumo = traduzido ? (item.resumo_pt || item.resumo || "") : (item.resumo || "");
   const h = el("h2", "titulo");
   const href = linkSeguro(item.link);
   if (href) {
-    const a = el("a", null, item.titulo);
+    const a = el("a", null, titulo);
     a.href = href; a.target = "_blank"; a.rel = "noopener noreferrer";
     h.append(a);
   } else {
-    h.textContent = item.titulo;
+    h.textContent = titulo;
   }
   art.append(h);
-  if (item.resumo && /\p{L}/u.test(item.resumo)) art.append(el("p", "resumo", item.resumo));
+  const pResumo = resumo && /\p{L}/u.test(resumo) ? el("p", "resumo", resumo) : null;
+  if (pResumo) art.append(pResumo);
+  if (traduzido) {
+    const botao = el("button", "ver-original", "Ver original");
+    botao.type = "button";
+    let original = false;
+    botao.addEventListener("click", () => {
+      original = !original;
+      (h.querySelector("a") || h).textContent = original ? item.titulo : titulo;
+      if (pResumo) pResumo.textContent = original ? (item.resumo || "") : resumo;
+      botao.textContent = original ? "Ver tradução" : "Ver original";
+    });
+    art.append(botao);
+  }
   if (item.titulos_anteriores) art.append(el("p", "corrigido", "Título atualizado pela fonte"));
   art.append(el("p", "rodape", (nomesFontes[item.fonte] || item.fonte_nome) + " · " + formatarData(item)));
   return art;
