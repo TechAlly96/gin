@@ -112,3 +112,10 @@ sprint-014: feat(app) - PLAYER DO BOLETIM EM AUDIO no app.
 - Service worker v2: arquivos .ogg vao direto a rede (requisicoes parciais 206 nao cabem no cache).
 - Correcao: resumo so aparece se tiver letras (o "-" solto do Planalto).
 FIM-sprint-014
+
+sprint-015: perf(audio) - AUDIO POR NOTICIA: so as noticias novas sao narradas.
+- Cache por noticia (audio-cache/<pais>/<sha1(voz+texto)>.ogg, Opus 48 kbps): reaproveitado e
+  emendado; itens fora do boletim sao apagados (~10 MB). actions/cache com chave por execucao.
+- Ambiente do Piper em cache (/tmp/piper); reinstala sozinho se deixar de funcionar (ex.: Ubuntu 26).
+- Assinatura v2 forca uma regeneracao completa para encher o cache.
+FIM-sprint-015

@@ -48,12 +48,21 @@ jobs:
             echo "::endgroup::"
           done
 
+      - name: Cache do ambiente do Piper
+        uses: actions/cache@v4
+        with:
+          path: /tmp/piper
+          key: piper-venv-v1-${{ runner.os }}-${{ runner.arch }}
+
       - name: Preparar voz (Piper em ambiente isolado + ffmpeg)
         id: voz
         continue-on-error: true
         run: |
-          python3 -m venv /tmp/piper
-          /tmp/piper/bin/pip install --quiet piper-tts
+          if ! /tmp/piper/bin/python -c "import piper" 2>/dev/null; then
+            rm -rf /tmp/piper
+            python3 -m venv /tmp/piper
+            /tmp/piper/bin/pip install --quiet piper-tts
+          fi
           command -v ffmpeg || (sudo apt-get update -q && sudo apt-get install -y -q ffmpeg)
 
       - name: Cache dos modelos de voz
@@ -63,12 +72,20 @@ jobs:
           key: vozes-v1-${{ hashFiles('fontes/*.json') }}
           restore-keys: vozes-v1-
 
+      - name: Cache do audio por noticia
+        uses: actions/cache@v4
+        with:
+          path: audio-cache
+          key: audio-v1-${{ github.run_id }}
+          restore-keys: audio-v1-
+
       - name: Gerar boletins em audio
         if: steps.voz.outcome == 'success'
         continue-on-error: true
         env:
           PIPER_PY: /tmp/piper/bin/python
           VOZES_DIR: ${{ github.workspace }}/vozes
+          AUDIO_CACHE: ${{ github.workspace }}/audio-cache
         run: |
           for cfg in fontes/*.json; do
             pais=$(basename "$cfg" .json)
