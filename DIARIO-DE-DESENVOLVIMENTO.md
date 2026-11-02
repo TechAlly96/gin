@@ -190,3 +190,8 @@ sprint-023: feat(franca) - FRANCA, 6o pais (frances; Europe/Paris).
   com hora); meses por extenso em es/pt/fr/en/de; fuso sem dois-pontos (+0100). 8/8 testes (4 novos e
   4 antigos). Defesa francesa: 13/13 com precisao hora.
 FIM-sprint-023
+
+sprint-023 (cont.): LACUNA chancelaria FR. diplomatie.gouv.fr recusa acesso automatizado: HTTP 403 com
+identificacao padrao e simples, do celular e do GitHub (4 combinacoes). Decisao do site respeitada (sem
+disfarcar o coletor). Fonte removida; politica externa coberta por Elysee e France 24. Reavaliar no futuro.
+FIM-sprint-023

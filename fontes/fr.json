@@ -24,15 +24,6 @@
       "url": "https://www.elysee.fr/feed"
     },
     {
-      "id": "fr-diplomatie",
-      "nome": "Ministère de l'Europe et des Affaires étrangères",
-      "categoria": "chancelaria",
-      "natureza": "oficial",
-      "tipo": "feed",
-      "url": "https://www.diplomatie.gouv.fr/spip.php?page=backend&lang=fr",
-      "identificacao": "simples"
-    },
-    {
       "id": "fr-defense",
       "nome": "Ministère des Armées",
       "categoria": "defesa",
@@ -68,5 +59,8 @@
       "tipo": "feed",
       "url": "https://www.france24.com/fr/rss"
     }
-  ]
+  ],
+  "lacunas": {
+    "chancelaria": "O Ministério da Europa e das Relações Exteriores bloqueia acesso automatizado (HTTP 403 com as duas identificações do coletor, a partir do celular e do GitHub). A política externa segue coberta pelo Élysée e pela France 24."
+  }
 }
