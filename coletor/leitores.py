@@ -26,7 +26,15 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 RSS1 = "{http://purl.org/rss/1.0/}"
 DC = "{http://purl.org/dc/elements/1.1/}"
 _ultimo_acesso = {}
-MESES_NUM = {m: i for i, m in enumerate("enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre".split(), 1)}
+MESES_NUM = {}
+for _lista in ("enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre",
+               "janeiro fevereiro março abril maio junho julho agosto setembro outubro novembro dezembro",
+               "janvier février mars avril mai juin juillet août septembre octobre novembre décembre",
+               "january february march april may june july august september october november december",
+               "januar februar märz april mai juni juli august september oktober november dezember"):
+    for _i, _m in enumerate(_lista.split(), 1):
+        MESES_NUM[_m] = _i
+MESES_NUM.update({"setiembre": 9, "marco": 3, "fevrier": 2, "aout": 8, "decembre": 12, "marz": 3})
 MESES_NUM.update({m: i for i, m in enumerate("janeiro fevereiro março abril maio junho julho agosto setembro outubro novembro dezembro".split(), 1)})
 MESES_NUM["setiembre"] = 9
 DATA_TEXTO = re.compile(r"(?:(?:lunes|martes|mi[eé]rcoles|jueves|viernes|s[aá]bado|domingo)\s*,?\s+)?\d{1,2} de (?:"
@@ -81,14 +89,22 @@ def ler_data(valor, fuso):
     except (TypeError, ValueError, IndexError):
         pass
     try:
-        dt = datetime.fromisoformat(v.replace("Z", "+00:00"))
+        dt = datetime.fromisoformat(re.sub(r"([+-]\d{2})(\d{2})$", r"\1:\2", v.replace("Z", "+00:00")))
         return dt if dt.tzinfo else dt.replace(tzinfo=fuso)
     except ValueError:
         pass
-    m = re.search(r"(\d{1,2}) de ([a-záéíóúç]+) de (\d{4})", v.lower())
+    baixo = v.lower()
+    dia = mes = ano = None
+    m = re.search(r"(\d{1,2})(?:er|º|\.)?\s+(?:de\s+)?([a-zà-ÿß]+)\.?\s+(?:de\s+)?(\d{4})", baixo)
     if m and m.group(2) in MESES_NUM:
+        dia, mes, ano = m.group(1), m.group(2), m.group(3)
+    else:
+        m = re.search(r"\b([a-z]+)\.?\s+(\d{1,2}),?\s+(\d{4})", baixo)
+        if m and m.group(1) in MESES_NUM:
+            dia, mes, ano = m.group(2), m.group(1), m.group(3)
+    if dia:
         try:
-            return datetime(int(m.group(3)), MESES_NUM[m.group(2)], int(m.group(1)), tzinfo=fuso)
+            return datetime(int(ano), MESES_NUM[mes], int(dia), tzinfo=fuso)
         except ValueError:
             return None
     m = re.search(r"(\d{2})/(\d{2})/(\d{4})(?:\D{1,20}?(\d{1,2})[h:](\d{2}))?", v)
@@ -246,13 +262,27 @@ def ler_links(conteudo, base, padrao, min_titulo=25):
         itens.append({"titulo": titulo, "link": link, "resumo": resumo.strip(" -|:>·"), "data": data})
     return itens
 
-def data_do_artigo(link):
-    """Abre a noticia e devolve a primeira data encontrada no texto (por extenso ou dd/mm/aaaa), ou ''.
-    Usado so em fontes com data_no_artigo=true (testado: a 1a data da pagina e a de publicacao)."""
-    texto = limpar(baixar(link)[0].decode("utf-8", "replace"))
-    m = DATA_TEXTO.search(texto) or DATA_NUMERICA.search(texto)
-    return m.group(0) if m else ""
+META_DATA = [re.compile(p, re.I) for p in (
+    r'published_time["\']\s+content=["\']([^"\']{10,40})',
+    r'content=["\']([^"\']{10,40})["\']\s+(?:property|name)=["\'][^"\']*published_time',
+    r'"datePublished"\s*:\s*"([^"]{10,40})"',
+    r'<time[^>]+datetime=["\']([^"\']{10,40})')]
+DATA_EXTENSO = re.compile(r"\b\d{1,2}(?:er|º|\.)?\s+(?:de\s+)?(?:" + "|".join(sorted(MESES_NUM, key=len, reverse=True))
+                          + r")\.?\s+(?:de\s+)?\d{4}", re.I)
 
+
+def data_do_artigo(link):
+    """Abre a noticia e devolve a data de publicacao: primeiro os metadados padronizados
+    (article:published_time, datePublished, <time datetime>, com hora); senao a 1a data do texto
+    (por extenso em es/pt/fr/en/de ou dd/mm/aaaa), ou ''. Usado em fontes com data_no_artigo=true."""
+    html = baixar(link)[0].decode("utf-8", "replace")
+    for rx in META_DATA:
+        m = rx.search(html)
+        if m:
+            return m.group(1)
+    texto = limpar(html)
+    m = DATA_TEXTO.search(texto) or DATA_EXTENSO.search(texto) or DATA_NUMERICA.search(texto)
+    return m.group(0) if m else ""
 
 LEITORES_HTML = {
     "html-plone": lambda c, f, fonte: ler_plone(c, f, fonte["padrao_link"]),

@@ -181,3 +181,12 @@ sprint-022: feat(alemanha) - ALEMANHA, 5o pais (alemao; Europe/Berlin).
 - leitores.py: descompactacao GZIP automatica (cabecalho ou assinatura \x1f\x8b): o BMVg compacta sem
   ser pedido e o XML falhava na 1a posicao. Vale para todas as fontes.
 FIM-sprint-022
+
+sprint-023: feat(franca) - FRANCA, 6o pais (frances; Europe/Paris).
+- governo: Elysee (feed); chancelaria: diplomatie.gouv.fr (feed SPIP; 403 a partir do celular, teste
+  no GitHub); defesa: defense.gouv.fr/actualites (pagina + data na noticia); parlamento: Assemblee
+  nationale e Senat (comunicados); agencia: France 24.
+- leitores.py: data_do_artigo prefere metadados (article:published_time, datePublished, time datetime,
+  com hora); meses por extenso em es/pt/fr/en/de; fuso sem dois-pontos (+0100). 8/8 testes (4 novos e
+  4 antigos). Defesa francesa: 13/13 com precisao hora.
+FIM-sprint-023
