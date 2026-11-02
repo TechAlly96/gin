@@ -202,3 +202,13 @@ sprint-024: fix(coletor) - "ultima publicacao" por fonte usa o HISTORICO quando 
   historico. Teste: fr-defense "ultima 2026-11-02" sem nenhuma busca.
 - fr-senat: "Network is unreachable" numa execucao do GitHub foi passageiro (OK no celular em seguida).
 FIM-sprint-024
+
+sprint-025: feat(coletor) - TOLERANCIA DE 48 H para falhas passageiras de fonte.
+- Motivo: hoje 3 falhas passageiras derrubaram paises inteiros (Cancilleria AR timeout, Senado FR
+  "network unreachable", BMVg DE "HTTP 444" = nginx descarta pedidos apos 5 coletas em 1h30).
+- Cada fonte guarda ultimo_ok; se falhar mas funcionou ha menos de 48 h, a categoria fica coberta com
+  "falha_temporaria" e o pais segue completo. A fonte continua como ERRO no painel (transparencia).
+  Mais de 48 h: o pais vira incompleto.
+- Teste com falha simulada do BMVg: defesa fontes_ok 0, falha_temporaria 1, completo True.
+- Bundeswehr avaliada como 2a fonte de defesa: pagina montada por JavaScript, sem feed (descartada).
+FIM-sprint-025

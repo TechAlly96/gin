@@ -113,6 +113,9 @@ def mesclar(atual, novo):
     return atual
 
 
+TOLERANCIA_HORAS = 48  # falha de uma fonte que funcionou ha menos disso nao torna o pais incompleto
+
+
 def gravar_paginas(pasta, itens):
     """Grava todos.json e as paginas da rolagem infinita (usado pelo coletor e pelo tradutor)."""
     paginas = max(1, -(-len(itens) // POR_PAGINA))
@@ -137,13 +140,18 @@ def main(codigo):
     historico = {i["id"]: i for i in ler_json(pasta / "todos.json", [])}
     total_antes = len(historico)
 
+    try:  # ultimo sucesso de cada fonte, para tolerar falhas passageiras
+        anterior = {f["id"]: f for f in json.loads((pasta / "indice.json").read_text(encoding="utf-8")).get("fontes", [])}
+    except Exception:
+        anterior = {}
     lidos, status = {}, []
     for fonte in cfg["fontes"]:
         st = {k: fonte[k] for k in ("id", "nome", "categoria", "tipo", "url")}
         try:
             brutos = ler_fonte(fonte)
         except Exception as e:
-            st.update(ok=False, erro=str(e)[:200], lidos=0, validos=0, novos=0)
+            st.update(ok=False, erro=str(e)[:200], lidos=0, validos=0, novos=0,
+                      ultimo_ok=anterior.get(fonte["id"], {}).get("ultimo_ok"))
             status.append(st)
             print(f"[ERRO  ] {fonte['id']}: {st['erro']}")
             continue
@@ -192,7 +200,8 @@ def main(codigo):
         if fonte.get("_leitor_usado", fonte["tipo"]) != fonte["tipo"]:
             aviso = f"leitor de reserva {fonte['_leitor_usado']} em uso (layout mudou?)"
             alerta = f"{alerta}; {aviso}" if alerta else aviso
-        st.update(ok=True, lidos=total_lidos, buscadas=buscados, adiadas=adiados, validos=validos, novos=novos,
+        st.update(ok=True, ultimo_ok=agora.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                  lidos=total_lidos, buscadas=buscados, adiadas=adiados, validos=validos, novos=novos,
                   mais_recente=recente, dias_sem_publicar=dias, alerta=alerta)
         status.append(st)
         marca = "ALERTA" if alerta else "OK"
@@ -220,10 +229,14 @@ def main(codigo):
     for cat in cfg["categorias_obrigatorias"]:
         fontes_ok = [s for s in status if s["categoria"] == cat and s["ok"] and s["validos"]]
         datas = [i["publicado"] for i in itens if i["categoria"] == cat and i["precisao"] in ("hora", "dia")]
+        temporarias = [st for st in status if st["categoria"] == cat and not st["ok"] and st.get("ultimo_ok")
+                       and (agora - de_iso(st["ultimo_ok"])).total_seconds() < TOLERANCIA_HORAS * 3600]
         cobertura[cat] = {"fontes_ok": len(fontes_ok), "ultima": max(datas) if datas else None}
+        if temporarias and not fontes_ok:
+            cobertura[cat]["falha_temporaria"] = len(temporarias)
         if cat in cfg.get("lacunas", {}):
             cobertura[cat]["lacuna"] = cfg["lacunas"][cat]
-    completo = all(c["fontes_ok"] > 0 or c.get("lacuna") for c in cobertura.values())
+    completo = all(c["fontes_ok"] > 0 or c.get("lacuna") or c.get("falha_temporaria") for c in cobertura.values())
 
     gravar(pasta / "indice.json", {
         "pais": pais["codigo"], "nome": pais["nome"], "idioma": pais.get("idioma"),
