@@ -1,0 +1,37 @@
+name: Explorar fontes (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ferramenta:
+        description: "mapear (manchetes por pasta) ou descobrir (feeds)"
+        required: true
+        default: mapear
+        type: choice
+        options: [mapear, descobrir]
+      urls:
+        description: "Enderecos separados por espaco"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  explorar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v5
+      - name: Explorar a partir dos servidores do GitHub
+        env:
+          FERRAMENTA: ${{ inputs.ferramenta }}
+          URLS: ${{ inputs.urls }}
+        run: |
+          for u in $URLS; do
+            if [ "$FERRAMENTA" = "mapear" ]; then
+              python3 -u ferramentas/mapear_links.py "$u"
+            else
+              python3 -u ferramentas/descobrir_feed.py "$u"
+            fi
+          done
