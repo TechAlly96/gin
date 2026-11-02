@@ -164,3 +164,12 @@ sprint-020: fix(audio) - noticias traduzidas lidas "so com o titulo" (relato do 
 - Interrupcao no meio da escuta (defeito latente): boletim anterior fica publicado por mais uma
   execucao; service worker toca a copia guardada se o site responder 404.
 FIM-sprint-020
+
+sprint-021: feat(reino-unido) - REINO UNIDO, 4o pais (ingles; 1o pais a leste do Brasil: Europe/London).
+- governo/chancelaria/defesa: feeds Atom de "news and communications" do gov.uk filtrados por orgao
+  (10 Downing Street, FCDO, Ministry of Defence); agencia: BBC News (Politics e UK), uso em sites
+  incentivado com atribuicao "BBC News" e sem logotipo.
+- parlamento: House of Commons Library e House of Lords Library (feeds oficiais). parliament.uk/news
+  recusa acesso automatizado (403) e bills.parliament.uk nao tem feed: nao contornado.
+- Traducao para portugues e boletim narrado em portugues (idioma_audio pt).
+FIM-sprint-021
