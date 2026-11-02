@@ -1,20 +1,72 @@
 {
-  "pais": {"codigo": "FR", "nome": "França", "idioma": "fr", "idioma_audio": "pt",
-           "fuso": "Europe/Paris", "fuso_horas": 1},
-  "categorias_obrigatorias": ["governo", "chancelaria", "defesa", "parlamento", "agencia"],
+  "pais": {
+    "codigo": "FR",
+    "nome": "França",
+    "idioma": "fr",
+    "idioma_audio": "pt",
+    "fuso": "Europe/Paris",
+    "fuso_horas": 1
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
   "fontes": [
-    {"id": "fr-elysee", "nome": "Élysée - Présidence de la République", "categoria": "governo",
-     "natureza": "oficial", "tipo": "feed", "url": "https://www.elysee.fr/feed"},
-    {"id": "fr-diplomatie", "nome": "Ministère de l'Europe et des Affaires étrangères", "categoria": "chancelaria",
-     "natureza": "oficial", "tipo": "feed", "url": "https://www.diplomatie.gouv.fr/spip.php?page=backend&lang=fr"},
-    {"id": "fr-defense", "nome": "Ministère des Armées", "categoria": "defesa",
-     "natureza": "oficial", "tipo": "html-links", "url": "https://www.defense.gouv.fr/actualites",
-     "padrao_link": "/actualites/", "data_no_artigo": true, "max_artigos_por_execucao": 15, "min_titulo": 25},
-    {"id": "fr-assemblee", "nome": "Assemblée nationale - Communiqués de presse", "categoria": "parlamento",
-     "natureza": "oficial", "tipo": "feed", "url": "https://www.assemblee-nationale.fr/dyn/rss/communiques-de-presse.xml"},
-    {"id": "fr-senat", "nome": "Sénat - Communiqués de presse", "categoria": "parlamento",
-     "natureza": "oficial", "tipo": "feed", "url": "https://www.senat.fr/rss/presse.xml"},
-    {"id": "fr-france24", "nome": "France 24", "categoria": "agencia",
-     "natureza": "estatal", "tipo": "feed", "url": "https://www.france24.com/fr/rss"}
+    {
+      "id": "fr-elysee",
+      "nome": "Élysée - Présidence de la République",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.elysee.fr/feed"
+    },
+    {
+      "id": "fr-diplomatie",
+      "nome": "Ministère de l'Europe et des Affaires étrangères",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.diplomatie.gouv.fr/spip.php?page=backend&lang=fr",
+      "identificacao": "simples"
+    },
+    {
+      "id": "fr-defense",
+      "nome": "Ministère des Armées",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.defense.gouv.fr/actualites",
+      "padrao_link": "/actualites/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "fr-assemblee",
+      "nome": "Assemblée nationale - Communiqués de presse",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.assemblee-nationale.fr/dyn/rss/communiques-de-presse.xml"
+    },
+    {
+      "id": "fr-senat",
+      "nome": "Sénat - Communiqués de presse",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.senat.fr/rss/presse.xml"
+    },
+    {
+      "id": "fr-france24",
+      "nome": "France 24",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.france24.com/fr/rss"
+    }
   ]
 }
