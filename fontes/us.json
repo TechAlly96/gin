@@ -5,7 +5,8 @@
     "idioma": "en",
     "fuso_horas": -5,
     "nome_falado": "United States",
-    "fuso": "America/New_York"
+    "fuso": "America/New_York",
+    "idioma_audio": "pt"
   },
   "categorias_obrigatorias": [
     "governo",

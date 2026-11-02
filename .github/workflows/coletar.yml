@@ -48,6 +48,29 @@ jobs:
             echo "::endgroup::"
           done
 
+      - name: Cache da traducao (ambiente e modelos)
+        uses: actions/cache@v4
+        with:
+          path: |
+            /tmp/argos
+            argos-modelos
+          key: argos-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('fontes/*.json') }}
+
+      - name: Traduzir noticias para portugues
+        continue-on-error: true
+        env:
+          ARGOS_MODELOS: ${{ github.workspace }}/argos-modelos
+        run: |
+          if ! /tmp/argos/bin/python -c "import ctranslate2, sentencepiece" 2>/dev/null; then
+            rm -rf /tmp/argos
+            python3 -m venv /tmp/argos
+            /tmp/argos/bin/pip install --quiet ctranslate2 sentencepiece
+          fi
+          for cfg in fontes/*.json; do
+            pais=$(basename "$cfg" .json)
+            /tmp/argos/bin/python -u coletor/traduzir.py "$pais" || echo "::warning::Traducao de $pais falhou"
+          done
+
       - name: Cache do ambiente do Piper
         uses: actions/cache@v4
         with:

@@ -4,7 +4,8 @@
     "nome": "Argentina",
     "idioma": "es",
     "fuso_horas": -3,
-    "fuso": "America/Argentina/Buenos_Aires"
+    "fuso": "America/Argentina/Buenos_Aires",
+    "idioma_audio": "pt"
   },
   "categorias_obrigatorias": [
     "governo",

@@ -138,3 +138,13 @@ sprint-017: fix(datas) - FUSO HORARIO para paises a leste do Brasil.
   2026-11-01. (1o teste usou data futura e caiu, corretamente, na protecao de data suspeita.)
 - Pendente: validar no celular o boletim offline (sprint-016) e o "N novas, M do cache" (sprint-015).
 FIM-sprint-017
+
+sprint-018: feat(traducao) - TRADUCAO AUTOMATICA para portugues + boletins AR/US em portugues.
+- Modelos do Argos Translate via CTranslate2 + SentencePiece (sem PyTorch); es->pt direto, en->pt;
+  remontagem padrao do SentencePiece ("▁" -> espaco); trocas pt-PT -> pt-BR (ex.: "dos Negocios
+  Estrangeiros" -> "das Relacoes Exteriores"). Teste real: traducao legivel e util.
+- coletor/traduzir.py grava titulo_pt/resumo_pt (ate 80 por execucao, mais recentes primeiro);
+  coletar.py: gravar_paginas compartilhada; traducao descartada se a fonte mudar o titulo.
+- boletim.py: idioma_audio por pais (AR/US = pt): voz faber, so noticias traduzidas, abertura avisa
+  "Noticias traduzidas automaticamente". Workflow: passo de traducao com cache de chave fixa.
+FIM-sprint-018

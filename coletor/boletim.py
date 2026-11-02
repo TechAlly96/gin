@@ -44,16 +44,22 @@ def segmentos_do_pais(codigo):
     cfg = ler(RAIZ / "fontes" / f"{codigo}.json")
     pais, pasta = cfg["pais"], RAIZ / "dados" / codigo
     idioma = pais.get("idioma", "pt")
+    audio = pais.get("idioma_audio", idioma)
+    traduzido = audio != idioma
     nomes = {f["id"]: f["nome"] for f in ler(pasta / "indice.json", {"fontes": []})["fontes"]}
-    itens = [i for i in ler(pasta / "todos.json", []) if i["precisao"] != "desconhecida"][:MAX_NOTICIAS]
-    segs = [{"id": "abertura", "texto": ABERTURA[idioma].format(nome=pais.get("nome_falado", pais["nome"])),
-             "titulo": "Abertura", "fonte": ""}]
-    for i in itens:
+    candidatos = [i for i in ler(pasta / "todos.json", []) if i["precisao"] != "desconhecida"]
+    if traduzido:
+        candidatos = [dict(i, titulo=i["titulo_pt"], resumo=i.get("resumo_pt", ""))
+                      for i in candidatos if i.get("titulo_pt")]
+    abertura = ABERTURA[audio].format(nome=pais.get("nome_falado", pais["nome"]) if not traduzido else pais["nome"])
+    if traduzido:
+        abertura += " Notícias traduzidas automaticamente."
+    segs = [{"id": "abertura", "texto": abertura, "titulo": "Abertura", "fonte": ""}]
+    for i in candidatos[:MAX_NOTICIAS]:
         fonte = nomes.get(i["fonte"], i["fonte_nome"])
         segs.append({"id": i["id"], "texto": texto_item(i, fonte), "titulo": i["titulo"], "fonte": fonte})
-    segs.append({"id": "fim", "texto": FECHO[idioma], "titulo": "Fim", "fonte": ""})
-    return cfg.get("voz") or VOZ_PADRAO[idioma], segs, pasta
-
+    segs.append({"id": "fim", "texto": FECHO[audio], "titulo": "Fim", "fonte": ""})
+    return cfg.get("voz") or VOZ_PADRAO[audio], segs, pasta
 
 def main(codigo):
     voz, segs, pasta = segmentos_do_pais(codigo)

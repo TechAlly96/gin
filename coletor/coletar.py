@@ -103,12 +103,27 @@ def mesclar(atual, novo):
         atual.setdefault("titulos_anteriores", []).append(atual["titulo"])
         atual["titulo"] = novo["titulo"]
         atual["atualizado"] = novo["coletado"]
+        atual.pop("titulo_pt", None)
+        atual.pop("resumo_pt", None)
     if novo["precisao"] in ("hora", "dia") and RANK[novo["precisao"]] > RANK[atual["precisao"]]:
         for campo in ("publicado", "precisao", "fonte", "fonte_nome", "ordem"):
             atual[campo] = novo[campo]
     if novo["resumo"] and not atual.get("resumo"):
         atual["resumo"] = novo["resumo"]
     return atual
+
+
+def gravar_paginas(pasta, itens):
+    """Grava todos.json e as paginas da rolagem infinita (usado pelo coletor e pelo tradutor)."""
+    paginas = max(1, -(-len(itens) // POR_PAGINA))
+    gravar(pasta / "todos.json", itens)
+    for n in range(paginas):
+        gravar(pasta / f"pagina-{n + 1}.json",
+               {"pagina": n + 1, "total_paginas": paginas, "itens": itens[n * POR_PAGINA:(n + 1) * POR_PAGINA]})
+    for velha in pasta.glob("pagina-*.json"):
+        if int(velha.stem.split("-")[1]) > paginas:
+            velha.unlink()
+    return paginas
 
 
 def main(codigo):
@@ -197,14 +212,7 @@ def main(codigo):
         if i["precisao"] == "dia" and "data_local" not in i:
             i["data_local"] = de_iso(i["publicado"]).astimezone(fuso).date().isoformat()
     itens = sorted(historico.values(), key=lambda i: (i["precisao"] != "desconhecida", i["publicado"], -i["ordem"]), reverse=True)
-    paginas = max(1, -(-len(itens) // POR_PAGINA))
-    gravar(pasta / "todos.json", itens)
-    for n in range(paginas):
-        gravar(pasta / f"pagina-{n + 1}.json",
-               {"pagina": n + 1, "total_paginas": paginas, "itens": itens[n * POR_PAGINA:(n + 1) * POR_PAGINA]})
-    for velha in pasta.glob("pagina-*.json"):
-        if int(velha.stem.split("-")[1]) > paginas:
-            velha.unlink()
+    paginas = gravar_paginas(pasta, itens)
 
     cobertura = {}
     for cat in cfg["categorias_obrigatorias"]:

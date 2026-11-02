@@ -22,7 +22,7 @@ INDICE = "https://raw.githubusercontent.com/argosopentech/argospm-index/main/ind
 MODELOS = Path(os.environ.get("ARGOS_MODELOS", "argos-modelos"))
 MAX_POR_EXECUCAO = 80
 PT_BR = [  # variante: modelos treinados com muito portugues de Portugal
-    ("Negócios Estrangeiros", "Relações Exteriores"), ("negócios estrangeiros", "relações exteriores"),
+    ("dos Negócios Estrangeiros", "das Relações Exteriores"), ("Negócios Estrangeiros", "Relações Exteriores"), ("negócios estrangeiros", "relações exteriores"),
     ("Ministério dos Negócios", "Ministério das Relações"), (" equipa", " equipe"), ("facto", "fato"),
     ("autocarro", "ônibus"), ("comboio", "trem"), ("telemóvel", "celular"), ("ecrã", "tela"),
     ("registo", "registro"), ("contacto", "contato"), ("acção", "ação"), ("direcção", "direção"),
@@ -120,9 +120,43 @@ def teste(paises):
                 print(f"           -> {pt[:120]}")
 
 
+def traduzir_pais(codigo):
+    """Traduz titulo e resumo das noticias ainda sem traducao (mais recentes primeiro) e regrava as paginas."""
+    origem = idioma_do_pais(codigo)
+    if origem == "pt":
+        print(f"{codigo}: ja em portugues")
+        return 0
+    from coletar import gravar_paginas
+    pasta = RAIZ / "dados" / codigo
+    if not (pasta / "todos.json").exists():
+        print(f"{codigo}: sem historico local")
+        return 0
+    itens = json.loads((pasta / "todos.json").read_text(encoding="utf-8"))
+    pendentes = [i for i in itens if "titulo_pt" not in i][:MAX_POR_EXECUCAO]
+    if not pendentes:
+        print(f"{codigo}: nada novo a traduzir")
+        return 0
+    t0, falhas = time.monotonic(), 0
+    for i in pendentes:
+        try:
+            i["titulo_pt"] = traduzir(suavizar_maiusculas(i["titulo"]), origem)
+            if i.get("resumo"):
+                i["resumo_pt"] = traduzir(i["resumo"], origem)
+        except Exception as erro:
+            falhas += 1
+            i.pop("titulo_pt", None)
+            i.pop("resumo_pt", None)
+            print(f"  falha: {type(erro).__name__}: {erro}"[:150])
+    gravar_paginas(pasta, itens)
+    faltam = sum(1 for i in itens if "titulo_pt" not in i)
+    print(f"{codigo}: {len(pendentes) - falhas} traduzidas em {time.monotonic() - t0:.0f} s | falhas {falhas} | faltam {faltam}")
+    return 0
+
+
 if __name__ == "__main__":
     paises = [a for a in sys.argv[1:] if not a.startswith("--")]
     if "--teste" in sys.argv:
         teste(paises)
     else:
-        raise SystemExit("modo de gravacao ainda nao ativado (sera ligado apos aprovacao do teste)")
+        for codigo in paises:
+            traduzir_pais(codigo)
