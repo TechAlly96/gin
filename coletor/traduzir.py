@@ -14,7 +14,8 @@ import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from fala import suavizar_maiusculas  # noqa: E402
+from fala import TRANSCRICAO, ate_frase_completa, limpar_fala, suavizar_maiusculas  # noqa: E402
+VERSAO_TRADUCAO = 2
 
 RAIZ = Path(__file__).resolve().parent.parent
 SITE = "https://techally96.github.io/gin/dados/"
@@ -132,7 +133,7 @@ def traduzir_pais(codigo):
         print(f"{codigo}: sem historico local")
         return 0
     itens = json.loads((pasta / "todos.json").read_text(encoding="utf-8"))
-    pendentes = [i for i in itens if "titulo_pt" not in i][:MAX_POR_EXECUCAO]
+    pendentes = [i for i in itens if i.get("traducao_v") != VERSAO_TRADUCAO][:MAX_POR_EXECUCAO]
     if not pendentes:
         print(f"{codigo}: nada novo a traduzir")
         return 0
@@ -140,15 +141,21 @@ def traduzir_pais(codigo):
     for i in pendentes:
         try:
             i["titulo_pt"] = traduzir(suavizar_maiusculas(i["titulo"]), origem)
-            if i.get("resumo"):
-                i["resumo_pt"] = traduzir(i["resumo"], origem)
+            resumo = ate_frase_completa(limpar_fala(i.get("resumo") or ""))
+            if TRANSCRICAO.search(resumo):
+                i["resumo_pt"] = "Transcrição completa disponível na fonte oficial."
+            elif resumo:
+                i["resumo_pt"] = traduzir(resumo, origem)
+            else:
+                i.pop("resumo_pt", None)
+            i["traducao_v"] = VERSAO_TRADUCAO
         except Exception as erro:
             falhas += 1
             i.pop("titulo_pt", None)
             i.pop("resumo_pt", None)
             print(f"  falha: {type(erro).__name__}: {erro}"[:150])
     gravar_paginas(pasta, itens)
-    faltam = sum(1 for i in itens if "titulo_pt" not in i)
+    faltam = sum(1 for i in itens if i.get("traducao_v") != VERSAO_TRADUCAO)
     print(f"{codigo}: {len(pendentes) - falhas} traduzidas em {time.monotonic() - t0:.0f} s | falhas {falhas} | faltam {faltam}")
     return 0
 

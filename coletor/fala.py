@@ -34,14 +34,30 @@ def limpar_fala(texto):
     return texto
 
 
+CONECTORES = set("a o e de do da dos das em no na nos nas que com para por um uma os as ao "
+                 "and or the of to in for with an by on at "
+                 "y el la los las del en con un una al".split())
+TRANSCRICAO = re.compile(r"\b[A-Z]{3,}(?: [A-Z]{3,})*:")
+
+
 def ate_frase_completa(texto):
-    """Se o texto foi cortado (termina em ... ou sem pontuacao final), corta na ultima frase completa."""
+    """Texto cortado: termina na ultima frase completa; se nao houver nenhuma, aproveita o trecho
+    ate a ultima virgula (ou palavra inteira), sem conectores soltos no fim, e fecha com ponto."""
     texto = texto.strip()
-    if texto and (texto.endswith(("...", "…")) or texto[-1] not in ".!?"):
-        texto = texto.rstrip(".… ")
-        corte = max(texto.rfind(". "), texto.rfind("! "), texto.rfind("? "))
-        texto = texto[:corte + 1] if corte > 40 else ""
-    return texto
+    if not texto or (not texto.endswith(("...", "…")) and texto[-1] in ".!?"):
+        return texto
+    texto = texto.rstrip(".… ")
+    corte = max(texto.rfind(". "), texto.rfind("! "), texto.rfind("? "))
+    if corte > 15:
+        return texto[:corte + 1]
+    if len(texto) < 25:
+        return ""
+    virgula = max(texto.rfind(", "), texto.rfind("; "))
+    palavras = (texto[:virgula] if virgula > len(texto) * 0.6 else texto).split()
+    while palavras and palavras[-1].lower().strip(",;:-") in CONECTORES:
+        palavras.pop()
+    trecho = " ".join(palavras).rstrip(",;:- ")
+    return trecho + "." if trecho else ""
 
 
 def texto_item(item, nome_da_fonte):
@@ -57,7 +73,7 @@ def texto_item(item, nome_da_fonte):
         resumo = ate_frase_completa(resumo[len(titulo):].lstrip(" .:-"))
     if not re.search(r"[^\W\d_]", resumo):
         resumo = ""  # resumo sem nenhuma letra (ex.: "-")
-    if re.search(r"\b[A-Z]{3,}(?: [A-Z]{3,})*:", resumo):
+    if TRANSCRICAO.search(resumo):
         resumo = ""  # transcricao (MODERATOR:, SECRETARY X:): le so o titulo
     partes = [f"{nome_fonte(nome_da_fonte)}.", f"{titulo}."]
     if resumo:

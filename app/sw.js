@@ -31,26 +31,33 @@ self.addEventListener("fetch", (e) => {
 
 // Audio: rede primeiro; sem internet, entrega a copia guardada (inclusive em pedacos, para pular noticias)
 async function audioComReserva(req) {
+  const guardado = async () => (await caches.open(CACHE_AUDIO)).match(req.url);
+  let resp;
   try {
-    return await fetch(req);
+    resp = await fetch(req);
+    if (resp.status !== 404) return resp;
   } catch (erro) {
-    const salvo = await (await caches.open(CACHE_AUDIO)).match(req.url);
-    if (!salvo) throw erro;
-    const faixa = req.headers.get("range");
-    if (!faixa) return salvo;
-    const buf = await salvo.arrayBuffer();
-    const m = /bytes=(\d*)-(\d*)/.exec(faixa) || [];
-    const ini = m[1] ? parseInt(m[1], 10) : 0;
-    const fim = Math.min(m[2] ? parseInt(m[2], 10) : buf.byteLength - 1, buf.byteLength - 1);
-    return new Response(buf.slice(ini, fim + 1), {
-      status: 206,
-      headers: {
-        "Content-Type": "audio/ogg", "Accept-Ranges": "bytes",
-        "Content-Range": "bytes " + ini + "-" + fim + "/" + buf.byteLength,
-        "Content-Length": String(fim - ini + 1),
-      },
-    });
+    resp = null;
   }
+  const salvo = await guardado();
+  if (!salvo) {
+    if (resp) return resp;
+    throw new Error("audio indisponivel offline");
+  }
+  const faixa = req.headers.get("range");
+  if (!faixa) return salvo;
+  const buf = await salvo.arrayBuffer();
+  const m = /bytes=(\d*)-(\d*)/.exec(faixa) || [];
+  const ini = m[1] ? parseInt(m[1], 10) : 0;
+  const fim = Math.min(m[2] ? parseInt(m[2], 10) : buf.byteLength - 1, buf.byteLength - 1);
+  return new Response(buf.slice(ini, fim + 1), {
+    status: 206,
+    headers: {
+      "Content-Type": "audio/ogg", "Accept-Ranges": "bytes",
+      "Content-Range": "bytes " + ini + "-" + fim + "/" + buf.byteLength,
+      "Content-Length": String(fim - ini + 1),
+    },
+  });
 }
 
 async function redePrimeiro(req, nomeCache) {

@@ -153,3 +153,14 @@ sprint-019: feat(app) - TRADUCAO NA TELA: cartoes de paises traduzidos mostram t
 portugues, selo "traducao automatica" e botao "Ver original"/"Ver traducao"; link leva a fonte
 original. Publicado (sprint-018): AR e US com boletim na voz faber, 30 noticias, titulo_pt gravado.
 FIM-sprint-019
+
+sprint-020: fix(audio) - noticias traduzidas lidas "so com o titulo" (relato do usuario: EUA).
+- Diagnostico no boletim publicado: 5/30 so titulo. Causas: resumo cortado numa frase unica
+  (descartado inteiro), rodape traduzido junto ("[...] O Memorando pos-"), transcricoes.
+- fala.py: sem frase completa, aproveita o trecho ate a ultima virgula/palavra, sem conectores
+  soltos, e fecha com ponto (frase >= 15 caracteres, trecho >= 25). 4 casos reais testados.
+- traduzir.py: limpa ANTES de traduzir; transcricao vira "Transcricao completa disponivel na
+  fonte oficial."; versao de traducao 2 refaz as traducoes antigas (ate 80 por execucao).
+- Interrupcao no meio da escuta (defeito latente): boletim anterior fica publicado por mais uma
+  execucao; service worker toca a copia guardada se o site responder 404.
+FIM-sprint-020

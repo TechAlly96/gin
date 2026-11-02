@@ -123,8 +123,13 @@ def main(codigo):
     for velho in cache.glob("*.ogg"):
         if velho.name not in usados:
             velho.unlink()
+    manter = {arquivo}
+    if anterior.get("arquivo") and anterior["arquivo"] != arquivo:
+        antigo = pasta / anterior["arquivo"]
+        if antigo.exists() or baixar_publicado(codigo, anterior["arquivo"], antigo):
+            manter.add(anterior["arquivo"])  # quem ainda estiver ouvindo nao e interrompido
     for velho in pasta.glob("boletim-*.ogg"):
-        if velho.name != arquivo:
+        if velho.name not in manter:
             velho.unlink()
     (pasta / "boletim.json").write_text(json.dumps({
         "pais": codigo.upper(), "gerado": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
