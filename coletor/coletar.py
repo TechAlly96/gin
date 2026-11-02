@@ -29,6 +29,18 @@ def de_iso(texto):
     return datetime.fromisoformat(texto.replace("Z", "+00:00"))
 
 
+def obter_fuso(pais):
+    """Fuso pelo nome IANA (horario de verao automatico); reserva: fuso_horas fixo."""
+    nome = pais.get("fuso")
+    if nome:
+        try:
+            from zoneinfo import ZoneInfo
+            return ZoneInfo(nome)
+        except Exception:
+            pass
+    return timezone(timedelta(hours=pais.get("fuso_horas", 0)))
+
+
 def chave_link(link):
     p = urllib.parse.urlsplit(link.strip())
     return f"{p.netloc.lower()}{p.path.rstrip('/')}" + (f"?{p.query}" if p.query else "")
@@ -81,6 +93,8 @@ def normalizar(bruto, fonte, pais, fuso, agora, posicao):
     }
     if bruto.get("rotulo"):
         item["rotulo"] = bruto["rotulo"]
+    if item["precisao"] == "dia":
+        item["data_local"] = dt.astimezone(fuso).date().isoformat()
     return item
 
 
@@ -100,7 +114,8 @@ def mesclar(atual, novo):
 def main(codigo):
     cfg = json.loads((RAIZ / "fontes" / f"{codigo}.json").read_text(encoding="utf-8"))
     pais = cfg["pais"]
-    fuso = timezone(timedelta(hours=pais.get("fuso_horas", 0)))
+    fuso = obter_fuso(pais)
+    print(f"fuso: {fuso}")
     alerta_dias = cfg.get("alerta_dias_sem_publicar", ALERTA_DIAS_PADRAO)
     agora = datetime.now(timezone.utc).replace(microsecond=0)
     pasta = RAIZ / "dados" / codigo
@@ -178,6 +193,9 @@ def main(codigo):
     for i in historico.values():
         if i["precisao"] == "estimada" and i["coletado"] == primeira[i["fonte"]]:
             i["precisao"] = "desconhecida"
+    for i in historico.values():
+        if i["precisao"] == "dia" and "data_local" not in i:
+            i["data_local"] = de_iso(i["publicado"]).astimezone(fuso).date().isoformat()
     itens = sorted(historico.values(), key=lambda i: (i["precisao"] != "desconhecida", i["publicado"], -i["ordem"]), reverse=True)
     paginas = max(1, -(-len(itens) // POR_PAGINA))
     gravar(pasta / "todos.json", itens)

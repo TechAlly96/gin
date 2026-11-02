@@ -32,6 +32,10 @@ function linkSeguro(url) {
 function formatarData(item) {
   const d = new Date(item.publicado);
   if (Number.isNaN(d.getTime())) return "";
+  if (item.precisao === "dia" && item.data_local) {
+    const [ano, mes, dia] = item.data_local.split("-").map(Number);
+    return new Date(ano, mes - 1, dia).toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
+  }
   const dia = d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
   if (item.precisao === "hora") return dia + ", " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
   if (item.precisao === "desconhecida") return "data não informada pela fonte (anterior ao início da coleta)";

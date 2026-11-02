@@ -4,7 +4,8 @@
     "nome": "Estados Unidos",
     "idioma": "en",
     "fuso_horas": -5,
-    "nome_falado": "United States"
+    "nome_falado": "United States",
+    "fuso": "America/New_York"
   },
   "categorias_obrigatorias": [
     "governo",

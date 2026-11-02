@@ -3,7 +3,8 @@
     "codigo": "AR",
     "nome": "Argentina",
     "idioma": "es",
-    "fuso_horas": -3
+    "fuso_horas": -3,
+    "fuso": "America/Argentina/Buenos_Aires"
   },
   "categorias_obrigatorias": [
     "governo",

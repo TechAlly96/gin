@@ -3,7 +3,8 @@
     "codigo": "BR",
     "nome": "Brasil",
     "idioma": "pt",
-    "fuso_horas": -3
+    "fuso_horas": -3,
+    "fuso": "America/Sao_Paulo"
   },
   "categorias_obrigatorias": [
     "governo",

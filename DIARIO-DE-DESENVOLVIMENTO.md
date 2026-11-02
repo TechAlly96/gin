@@ -127,3 +127,14 @@ sprint-016: feat(app) - BOLETIM OFFLINE.
 - Info do boletim mostra "offline ✓" quando a versao atual esta guardada.
 - Pendente de verificacao: cache por noticia com "N novas, M do cache" (aguarda noticia nova).
 FIM-sprint-016
+
+sprint-017: fix(datas) - FUSO HORARIO para paises a leste do Brasil.
+- Fuso por nome IANA em fontes/<pais>.json ("fuso"), com horario de verao (zoneinfo); reserva:
+  fuso_horas fixo (Termux nao tem a base de fusos; o GitHub tem).
+- Noticias so com o dia ganham data_local (dia no fuso de origem); o app mostra esse dia sem
+  converter (antes: nota de Israel "05/11" apareceria "04/11" em Brasilia). Historico antigo
+  recebe data_local automaticamente.
+- TESTE local: data 01/11/2026 em Asia/Jerusalem -> publicado 2026-10-31T22:00:00Z, data_local
+  2026-11-01. (1o teste usou data futura e caiu, corretamente, na protecao de data suspeita.)
+- Pendente: validar no celular o boletim offline (sprint-016) e o "N novas, M do cache" (sprint-015).
+FIM-sprint-017
