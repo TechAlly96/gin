@@ -3,6 +3,7 @@
 Somente biblioteca padrao. Conteudo coletado e NAO confiavel: so texto e extraido, nada e executado.
 Teste: python3 coletor/leitores.py br"""
 import email.utils
+import gzip
 import html
 import json
 import re
@@ -54,6 +55,8 @@ def baixar(url, tentativas=3, ua=None):
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
                 dados = r.read(LIMITE_BYTES)
+                if dados[:2] == b"\x1f\x8b" or (r.headers.get("Content-Encoding") or "").lower() == "gzip":
+                    dados = gzip.decompress(dados)  # servidores que compactam sem ser pedido (ex.: BMVg)
                 _ultimo_acesso[host] = time.monotonic()
                 return dados, r.geturl()
         except urllib.error.HTTPError as e:

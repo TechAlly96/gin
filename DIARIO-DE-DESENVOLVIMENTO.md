@@ -173,3 +173,11 @@ sprint-021: feat(reino-unido) - REINO UNIDO, 4o pais (ingles; 1o pais a leste do
   recusa acesso automatizado (403) e bills.parliament.uk nao tem feed: nao contornado.
 - Traducao para portugues e boletim narrado em portugues (idioma_audio pt).
 FIM-sprint-021
+
+sprint-022: feat(alemanha) - ALEMANHA, 5o pais (alemao; Europe/Berlin).
+- governo: Bundesregierung Pressemitteilungen; chancelaria: Auswaertiges Amt "Pressemitteilungen und
+  Reden" (/static/includes/rss/Presse-RSS-Feed.xml, achado na pagina oficial de RSS); defesa: BMVg;
+  parlamento: Bundestag hib + Pressemitteilungen; agencia: tagesschau (ARD).
+- leitores.py: descompactacao GZIP automatica (cabecalho ou assinatura \x1f\x8b): o BMVg compacta sem
+  ser pedido e o XML falhava na 1a posicao. Vale para todas as fontes.
+FIM-sprint-022

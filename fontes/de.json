@@ -1,0 +1,67 @@
+{
+  "pais": {
+    "codigo": "DE",
+    "nome": "Alemanha",
+    "idioma": "de",
+    "idioma_audio": "pt",
+    "fuso": "Europe/Berlin",
+    "fuso_horas": 1
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "fontes": [
+    {
+      "id": "de-bundesregierung",
+      "nome": "Bundesregierung - Pressemitteilungen",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.bundesregierung.de/service/rss/breg-de/1151244/feed.xml"
+    },
+    {
+      "id": "de-bmvg",
+      "nome": "Bundesministerium der Verteidigung",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.bmvg.de/service/rss/de/17680/feed"
+    },
+    {
+      "id": "de-auswaertiges-amt",
+      "nome": "Auswärtiges Amt - Pressemitteilungen und Reden",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.auswaertiges-amt.de/static/includes/rss/Presse-RSS-Feed.xml"
+    },
+    {
+      "id": "de-bundestag-hib",
+      "nome": "Bundestag - heute im bundestag",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.bundestag.de/static/appdata/includes/rss/hib.rss"
+    },
+    {
+      "id": "de-bundestag-presse",
+      "nome": "Bundestag - Pressemitteilungen",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.bundestag.de/static/appdata/includes/rss/pressemitteilungen.rss"
+    },
+    {
+      "id": "de-tagesschau",
+      "nome": "tagesschau (ARD)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.tagesschau.de/index~rss2.xml"
+    }
+  ]
+}
