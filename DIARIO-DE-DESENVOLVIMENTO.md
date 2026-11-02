@@ -212,3 +212,13 @@ sprint-025: feat(coletor) - TOLERANCIA DE 48 H para falhas passageiras de fonte.
 - Teste com falha simulada do BMVg: defesa fontes_ok 0, falha_temporaria 1, completo True.
 - Bundeswehr avaliada como 2a fonte de defesa: pagina montada por JavaScript, sem feed (descartada).
 FIM-sprint-025
+
+sprint-026: feat(israel) - ISRAEL, 7o pais (fontes em ingles; Asia/Jerusalem) + LEITOR DE TELEGRAM.
+- Sites oficiais bloqueiam coletores: gov.il (PMO e MFA) com Cloudflare 403; Knesset e IDF com desafio
+  anti-robo (o IDF e a Kan abrem so a partir do GitHub). Nada foi contornado.
+- Novo tipo de fonte "telegram": previa publica t.me/s/<canal> (sem conta), so canais oficiais
+  verificados; titulo = 1a linha, data exata, sem emojis, anexos e links soltos. Aprovado pelo usuario.
+- governo: canal verificado do Estado de Israel; defesa: canal oficial do IDF; agencia: Kan Reka
+  (ingles, pagina + data na noticia). Lacunas documentadas: chancelaria e parlamento.
+- Ferramenta: workflow explorar.yml (mapear/descobrir/coletar pela rede do GitHub).
+FIM-sprint-026

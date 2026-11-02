@@ -1,0 +1,18 @@
+{
+  "pais": {"codigo": "IL", "nome": "Israel", "idioma": "en", "idioma_audio": "pt",
+           "fuso": "Asia/Jerusalem", "fuso_horas": 2},
+  "categorias_obrigatorias": ["governo", "chancelaria", "defesa", "parlamento", "agencia"],
+  "lacunas": {
+    "chancelaria": "O portal gov.il (Ministério das Relações Exteriores) bloqueia acesso automatizado com desafio anti-robô (Cloudflare, HTTP 403), a partir do celular e do GitHub. As declarações do chanceler aparecem no canal oficial verificado do Estado de Israel.",
+    "parlamento": "O site do Knesset bloqueia acesso automatizado com desafio anti-robô, a partir do celular e do GitHub, e não há canal oficial verificado do Knesset em inglês."
+  },
+  "fontes": [
+    {"id": "il-estado-telegram", "nome": "Israel - canal oficial verificado do Estado (Telegram)", "categoria": "governo",
+     "natureza": "oficial", "tipo": "telegram", "url": "https://t.me/s/StateofIsraelOfficial"},
+    {"id": "il-idf-telegram", "nome": "Israel Defense Forces - canal oficial (Telegram)", "categoria": "defesa",
+     "natureza": "oficial", "tipo": "telegram", "url": "https://t.me/s/idfofficial"},
+    {"id": "il-kan-reka", "nome": "KAN Reka - emissora pública de Israel (inglês)", "categoria": "agencia",
+     "natureza": "estatal", "tipo": "html-links", "url": "https://www.kan.org.il/content/kan/kan-reka/p-10865/",
+     "padrao_link": "/content/kan/kan-reka/p-10865/", "data_no_artigo": true, "max_artigos_por_execucao": 15, "min_titulo": 25}
+  ]
+}

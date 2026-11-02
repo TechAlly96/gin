@@ -284,6 +284,42 @@ def data_do_artigo(link):
     m = DATA_TEXTO.search(texto) or DATA_EXTENSO.search(texto) or DATA_NUMERICA.search(texto)
     return m.group(0) if m else ""
 
+EMOJIS = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F\u200D]")
+
+
+def _tg_texto(trecho):
+    t = re.sub(r"<br\s*/?>", "\n", trecho, flags=re.I)
+    t = html.unescape(re.sub(r"<[^>]+>", "", t))
+    t = re.sub(r"https?://\S+", "", re.sub("[\u2060\ufffc]", "", t))  # anexos e links soltos
+    return "\n".join(l.strip() for l in EMOJIS.sub("", t).splitlines() if l.strip())
+
+
+def ler_telegram(conteudo):
+    """Previa publica de um canal oficial do Telegram (t.me/s/<canal>): uma noticia por publicacao
+    com texto; titulo = 1a linha (junta a 2a se a 1a for curta ou terminar em ':'); data exata."""
+    pagina = conteudo.decode("utf-8", "replace") if isinstance(conteudo, bytes) else conteudo
+    itens = []
+    for bloco in pagina.split('class="tgme_widget_message_wrap')[1:]:
+        post = re.search(r'data-post="([^"]+)"', bloco)
+        corpo = re.search(r'<div class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>', bloco, re.S)
+        quando = re.search(r'<time[^>]+datetime="([^"]+)"', bloco)
+        if not (post and corpo):
+            continue
+        linhas = _tg_texto(corpo.group(1)).splitlines()
+        if not linhas:
+            continue
+        titulo, resto = linhas[0], linhas[1:]
+        if resto and (len(titulo) < 40 or titulo.endswith(":")):
+            titulo, resto = f"{titulo} {resto[0]}", resto[1:]
+        if len(re.findall(r"[^\W\d_]", titulo)) < 20:
+            continue  # so anexo/link, sem texto de noticia
+        if len(titulo) > 160:
+            titulo = titulo[:160].rsplit(" ", 1)[0] + "…"
+        itens.append({"titulo": titulo, "link": "https://t.me/" + post.group(1),
+                      "resumo": " ".join(resto), "data": quando.group(1) if quando else ""})
+    return itens
+
+
 LEITORES_HTML = {
     "html-plone": lambda c, f, fonte: ler_plone(c, f, fonte["padrao_link"]),
     "html-govbr": lambda c, f, fonte: ler_lista_govbr(c, f, fonte["padrao_link"]),
@@ -300,6 +336,8 @@ def ler_fonte(fonte):
     fonte["_leitor_usado"] = tipo
     if tipo == "feed":
         return ler_feed(conteudo)
+    if tipo == "telegram":
+        return ler_telegram(conteudo)
     if tipo not in LEITORES_HTML:
         raise ValueError(f"tipo de fonte desconhecido: {tipo}")
     itens = LEITORES_HTML[tipo](conteudo, final, fonte)
