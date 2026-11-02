@@ -1,0 +1,23 @@
+name: Teste de traducao (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v5
+      - name: Instalar CTranslate2 e SentencePiece em ambiente isolado
+        run: |
+          python3 -m venv /tmp/argos
+          /tmp/argos/bin/pip install --quiet ctranslate2 sentencepiece
+      - name: Traduzir exemplos reais (Argentina e EUA)
+        env:
+          ARGOS_MODELOS: ${{ github.workspace }}/argos-modelos
+        run: /tmp/argos/bin/python -u coletor/traduzir.py --teste ar us
