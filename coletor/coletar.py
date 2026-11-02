@@ -174,8 +174,10 @@ def main(codigo):
             if not item:
                 continue
             validos += 1
-            if item["precisao"] in ("hora", "dia"):
-                recente = max(recente or item["publicado"], item["publicado"])
+            base = historico.get(item["id"])  # sem data nesta leitura, mas ja datado no historico
+            ref = item if item["precisao"] in ("hora", "dia") else (base if base and base["precisao"] in ("hora", "dia") else None)
+            if ref:
+                recente = max(recente or ref["publicado"], ref["publicado"])
             if item["id"] not in historico and item["id"] not in lidos:
                 novos += 1
             ja = lidos.get(item["id"])

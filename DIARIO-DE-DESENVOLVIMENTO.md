@@ -195,3 +195,10 @@ sprint-023 (cont.): LACUNA chancelaria FR. diplomatie.gouv.fr recusa acesso auto
 identificacao padrao e simples, do celular e do GitHub (4 combinacoes). Decisao do site respeitada (sem
 disfarcar o coletor). Fonte removida; politica externa coberta por Elysee e France 24. Reavaliar no futuro.
 FIM-sprint-023
+
+sprint-024: fix(coletor) - "ultima publicacao" por fonte usa o HISTORICO quando a leitura nao traz data.
+- Fontes com data_no_artigo (ex.: Defesa FR) nao reabrem noticias ja conhecidas; sem data na leitura,
+  "ultima" virava "-" e, apos 7 dias, geraria falso alerta de fonte quieta. Agora usa a data do item no
+  historico. Teste: fr-defense "ultima 2026-11-02" sem nenhuma busca.
+- fr-senat: "Network is unreachable" numa execucao do GitHub foi passageiro (OK no celular em seguida).
+FIM-sprint-024
