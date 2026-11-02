@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       ferramenta:
-        description: "mapear (manchetes por pasta) ou descobrir (feeds)"
+        description: "mapear (manchetes por pasta), descobrir (feeds) ou coletar (coletor completo de um pais, sem publicar)"
         required: true
         default: mapear
         type: choice
-        options: [mapear, descobrir]
+        options: [mapear, descobrir, coletar]
       urls:
         description: "Enderecos separados por espaco"
         required: true
@@ -29,7 +29,9 @@ jobs:
           URLS: ${{ inputs.urls }}
         run: |
           for u in $URLS; do
-            if [ "$FERRAMENTA" = "mapear" ]; then
+            if [ "$FERRAMENTA" = "coletar" ]; then
+              python3 -u coletor/coletar.py "$u"
+            elif [ "$FERRAMENTA" = "mapear" ]; then
               python3 -u ferramentas/mapear_links.py "$u"
             else
               python3 -u ferramentas/descobrir_feed.py "$u"
