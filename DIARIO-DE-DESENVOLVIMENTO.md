@@ -368,3 +368,9 @@ sprint-042: feat(europa-leste) - TCHEQUIA, ESLOVAQUIA, GRECIA, BULGARIA e ROMENI
 - ADIADOS: Polonia (gov.pl redireciona, Sejm 403, PAP sem feed, Polskie Radio so podcasts) e Hungria
   (kormany.hu por JavaScript, feed da Defesa sem data legivel, hirado.hu responde HTTP 606).
 FIM-sprint-042
+
+sprint-042 (cont.): gr-pm deu 403 na coleta: o primeiroministro.gr so aceita a identificacao "simples"
+(a sondagem mostrava "identificacao simples", mas a configuracao ficou com a padrao). Corrigido.
+Regra: quando a sondagem indicar "identificacao simples", registrar "identificacao": "simples" na fonte.
+Pendente: bg-mfa sem data encontrada nas noticias (15 buscadas).
+FIM-sprint-042

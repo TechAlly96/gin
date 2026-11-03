@@ -26,7 +26,8 @@
       "categoria": "governo",
       "natureza": "oficial",
       "tipo": "feed",
-      "url": "https://www.primeminister.gr/feed"
+      "url": "https://www.primeminister.gr/feed",
+      "identificacao": "simples"
     },
     {
       "id": "gr-ert",
