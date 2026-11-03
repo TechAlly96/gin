@@ -270,6 +270,12 @@ META_DATA = [re.compile(p, re.I) for p in (
 DATA_EXTENSO = re.compile(r"\b\d{1,2}(?:er|º|\.)?\s+(?:de\s+)?(?:" + "|".join(sorted(MESES_NUM, key=len, reverse=True))
                           + r")\.?\s+(?:de\s+)?\d{4}", re.I)
 
+MESES_ALT = "|".join(sorted(MESES_NUM, key=len, reverse=True))
+DATA_EUA = re.compile(r"\b(?:" + MESES_ALT + r")\.?\s+\d{1,2},?\s+\d{4}", re.I)
+# linha de data de agencia: "CAIRO, November 3, 2026 (WAFA)" -> so a data de publicacao, nunca uma data citada
+DATELINE = re.compile(r"\b[A-Z][A-Z .\-]{2,40},\s+((?:" + MESES_ALT + r")\.?\s+\d{1,2},?\s+\d{4}|\d{1,2}\s+(?:"
+                      + MESES_ALT + r")\.?\s+\d{4})\s*\(", re.I)
+
 
 def data_do_artigo(link):
     """Abre a noticia e devolve a data de publicacao: primeiro os metadados padronizados
@@ -281,7 +287,10 @@ def data_do_artigo(link):
         if m:
             return m.group(1)
     texto = limpar(html)
-    m = DATA_TEXTO.search(texto) or DATA_EXTENSO.search(texto) or DATA_NUMERICA.search(texto)
+    m = DATELINE.search(texto)
+    if m:
+        return m.group(1)
+    m = DATA_TEXTO.search(texto) or DATA_EXTENSO.search(texto) or DATA_EUA.search(texto) or DATA_NUMERICA.search(texto)
     return m.group(0) if m else ""
 
 EMOJIS = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F\u200D]")

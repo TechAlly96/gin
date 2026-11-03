@@ -222,3 +222,13 @@ sprint-026: feat(israel) - ISRAEL, 7o pais (fontes em ingles; Asia/Jerusalem) + 
   (ingles, pagina + data na noticia). Lacunas documentadas: chancelaria e parlamento.
 - Ferramenta: workflow explorar.yml (mapear/descobrir/coletar pela rede do GitHub).
 FIM-sprint-026
+
+sprint-027: feat(palestina) - PALESTINA, 8o pais (fontes em ingles; Asia/Hebron) + LINHA DE DATA DE AGENCIA.
+- agencia: WAFA (english.wafa.ps, pagina + data na noticia; ate 25 por coleta). 42 lidas, 25 datadas.
+- leitores.py: data_do_artigo reconhece a linha de data de agencia "CIDADE, November 3, 2026 (WAFA)"
+  (so a data de publicacao, nunca uma data citada no texto) e o formato americano "Mes dia, ano".
+  Testes: WAFA 3/11 local; Defesa FR e Camara AR inalteradas.
+- Lacunas: governo (president.ps 403; palestinecabinet.gov.ps sem resposta), chancelaria (mofa.pna.ps e
+  mfae.gov.ps sem resposta/DNS), defesa (AP sem forcas armadas), parlamento (CLP dissolvido em 2018).
+  Testado do celular e do GitHub. A WAFA publica na integra as declaracoes oficiais.
+FIM-sprint-027
