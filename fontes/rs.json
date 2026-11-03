@@ -1,0 +1,44 @@
+{
+  "pais": {
+    "codigo": "RS",
+    "nome": "Sérvia",
+    "idioma": "sr",
+    "fuso": "Europe/Belgrade",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O feed do Governo (srbija.gov.rs) não traz datas legíveis.",
+    "defesa": "O site do Ministério da Defesa (mod.gov.rs) não expõe notícias recentes com data legível por coletor.",
+    "parlamento": "O site da Assembleia Nacional (parlament.gov.rs) não expõe notícias recentes com data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "rs-mfa",
+      "nome": "Ministarstvo spoljnih poslova",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.mfa.gov.rs/rss.xml"
+    },
+    {
+      "id": "rs-rts",
+      "nome": "RTS - Radio-televizija Srbije (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://www.rts.rs/sr/index.html",
+      "padrao_link": "/vesti/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "pais": {
+    "codigo": "SI",
+    "nome": "Eslovênia",
+    "idioma": "sl",
+    "fuso": "Europe/Ljubljana",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "As notícias do Ministério das Relações Exteriores saem no portal gov.si (fonte de governo).",
+    "defesa": "As notícias do Ministério da Defesa saem no portal gov.si (fonte de governo).",
+    "parlamento": "O site da Assembleia Nacional (dz-rs.si) recusa a conexão (connection reset)."
+  },
+  "fontes": [
+    {
+      "id": "si-gov",
+      "nome": "Vlada Republike Slovenije - novice",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.gov.si/novice/rss"
+    },
+    {
+      "id": "si-rtvslo",
+      "nome": "RTV Slovenija (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://www.rtvslo.si/",
+      "padrao_link": "/slovenija/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

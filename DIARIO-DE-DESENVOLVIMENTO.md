@@ -380,3 +380,9 @@ sprint-043: feat(europa) - BALTICOS, ISLANDIA, LUXEMBURGO e CHIPRE (fontes incer
 - LV: Saeima + LSM English (+ governo/MFA se recentes). LT: LRT English. EE: Riigikogu. IS: government.is
   (defesa: sem forcas armadas, OTAN). LU: Camara (sessoes). CY: CNA se tiver data. Malta ADIADO (nada utilizavel).
 FIM-sprint-043
+
+sprint-044: feat(balcas) - CROACIA, ESLOVENIA, SERVIA, BOSNIA, MONTENEGRO, KOSOVO (+ Macedonia se houver fonte).
+- Emissoras publicas: HRT (feed), RTS, RTCG ("03. 11. 2026", gracas as datas com pontos). gov.si (100/dia).
+- Fontes incertas testadas na hora (data dos ultimos 60 dias). Albania ADIADA (ATA 403; governo e
+  parlamento sem noticias legiveis). Kosovo incluido (governo proprio; reconhecimento internacional parcial).
+FIM-sprint-044

@@ -1,0 +1,37 @@
+{
+  "pais": {
+    "codigo": "ME",
+    "nome": "Montenegro",
+    "idioma": "sr",
+    "fuso": "Europe/Podgorica",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site do Governo (gov.me) recusa a conexão.",
+    "chancelaria": "As notícias do Ministério das Relações Exteriores saem no site do Governo (gov.me), que recusa a conexão.",
+    "defesa": "As notícias do Ministério da Defesa saem no site do Governo (gov.me), que recusa a conexão.",
+    "parlamento": "O site da Assembleia (skupstina.me) não expõe notícias recentes com data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "me-rtcg",
+      "nome": "RTCG - Radio i televizija Crne Gore (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://rtcg.me/",
+      "padrao_link": "/vijesti/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

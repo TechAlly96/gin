@@ -1,0 +1,40 @@
+{
+  "pais": {
+    "codigo": "HR",
+    "nome": "Croácia",
+    "idioma": "hr",
+    "fuso": "Europe/Zagreb",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site do Governo (vlada.gov.hr) não expõe notícias recentes com data legível por coletor.",
+    "chancelaria": "O site do Ministério dos Negócios Estrangeiros e Europeus (mvep.gov.hr) não expõe notícias recentes com data legível por coletor.",
+    "parlamento": "O site do Sabor (sabor.hr) não expõe notícias recentes com data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "hr-morh",
+      "nome": "Ministarstvo obrane",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.morh.hr/feed/"
+    },
+    {
+      "id": "hr-hrt",
+      "nome": "HRT Vijesti (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://feed.hrt.hr/vijesti/page.xml"
+    }
+  ]
+}
