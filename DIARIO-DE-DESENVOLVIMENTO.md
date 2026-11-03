@@ -286,3 +286,13 @@ sprint-033: pesquisa(haiti) - HAITI ADIADO: sem fonte oficial ATUAL acessivel (c
 - Parlamento: sem eleicoes desde 2016; 1o turno das gerais marcado para 13/12/2026 (2o turno 21/02/2027).
 - Decisao: nao publicar com conteudo de 2024-2025; reavaliar apos as eleicoes de dezembro.
 FIM-sprint-033
+
+sprint-034: perf(coleta) - COLETA EM PARALELO para escalar a ~195 paises.
+- Medido: coleta ~10 s/pais em sequencia -> 195 paises = ~32 min so na coleta (limite era 30 min).
+- Workflow: coleta 10 paises em paralelo (espera de rede; sites diferentes, pausa educada por site
+  mantida), traducao 2 e boletins 3 em paralelo (CPU de 4 nucleos); logs por pais exibidos em ordem;
+  limite do trabalho 50 min.
+- Condicoes de corrida eliminadas: cada pais grava so dados/<pais>/resumo.json e juntar_paises.py
+  monta paises.json no final (mantem a ordem dos botoes; preserva pais cuja coleta falhar);
+  download de modelo de traducao com trava de arquivo (flock).
+FIM-sprint-034

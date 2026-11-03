@@ -20,7 +20,7 @@ concurrency:
 jobs:
   coletar:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     steps:
       - name: Baixar codigo (main)
         uses: actions/checkout@v5
@@ -41,12 +41,10 @@ jobs:
       - name: Coletar todos os paises
         run: |
           python3 --version
-          for cfg in fontes/*.json; do
-            pais=$(basename "$cfg" .json)
-            echo "::group::Coleta $pais"
-            python3 coletor/coletar.py "$pais" || echo "::warning::Coleta de $pais falhou"
-            echo "::endgroup::"
-          done
+          mkdir -p logs
+          ls fontes/*.json | xargs -n1 basename | sed 's/[.]json$//' | xargs -P 10 -I{} sh -c 'python3 coletor/coletar.py {} > logs/coleta-{}.log 2>&1 || echo "::warning::Coleta de {} falhou"'
+          for f in logs/coleta-*.log; do echo "::group::$(basename "$f" .log)"; cat "$f"; echo "::endgroup::"; done
+          python3 coletor/juntar_paises.py
 
       - name: Restaurar cache da traducao (ambiente e modelos)
         uses: actions/cache/restore@v4
@@ -69,10 +67,7 @@ jobs:
             python3 -m venv /tmp/argos
             /tmp/argos/bin/pip install --quiet ctranslate2 sentencepiece
           fi
-          for cfg in fontes/*.json; do
-            pais=$(basename "$cfg" .json)
-            /tmp/argos/bin/python -u coletor/traduzir.py "$pais" || echo "::warning::Traducao de $pais falhou"
-          done
+          ls fontes/*.json | xargs -n1 basename | sed 's/[.]json$//' | xargs -P 2 -I{} sh -c '/tmp/argos/bin/python -u coletor/traduzir.py {} || echo "::warning::Traducao de {} falhou"'
 
       - name: Salvar cache da traducao (so se baixou modelo novo ou reinstalou)
         if: always() && hashFiles('argos-modelos/NOVO') != ''
@@ -122,10 +117,7 @@ jobs:
           VOZES_DIR: ${{ github.workspace }}/vozes
           AUDIO_CACHE: ${{ github.workspace }}/audio-cache
         run: |
-          for cfg in fontes/*.json; do
-            pais=$(basename "$cfg" .json)
-            python3 -u coletor/boletim.py "$pais" || echo "::warning::Boletim de $pais falhou"
-          done
+          ls fontes/*.json | xargs -n1 basename | sed 's/[.]json$//' | xargs -P 3 -I{} sh -c 'python3 -u coletor/boletim.py {} || echo "::warning::Boletim de {} falhou"'
 
       - name: Salvar historico no ramo dados
         run: |

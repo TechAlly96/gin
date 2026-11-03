@@ -243,10 +243,10 @@ def main(codigo):
         "atualizado": iso(agora), "total": len(itens), "por_pagina": POR_PAGINA,
         "paginas": paginas, "completo": completo, "cobertura": cobertura, "fontes": status,
     })
-    paises = ler_json(RAIZ / "dados" / "paises.json", {})
+    paises = {}  # so o proprio resumo: juntar_paises.py monta a lista (seguro em paralelo)
     paises[pais["codigo"]] = {"nome": pais["nome"], "atualizado": iso(agora),
                               "total": len(itens), "completo": completo}
-    gravar(RAIZ / "dados" / "paises.json", paises)
+    gravar(pasta / "resumo.json", paises[pais["codigo"]])
 
     print(f"\nHistorico: {total_antes} -> {len(itens)} (novos nesta coleta: {len(itens) - total_antes}) | paginas: {paginas}")
     for cat, c in cobertura.items():

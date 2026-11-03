@@ -4,6 +4,7 @@
 Uso: python coletor/traduzir.py ar            (traduz o historico do pais)
      python coletor/traduzir.py --teste ar us (mostra exemplos reais, nao grava nada)
 Variavel ARGOS_MODELOS: pasta dos modelos (cache)."""
+import fcntl
 import json
 import os
 import re
@@ -56,22 +57,29 @@ def baixar(url, destino=None, tentativas=4):
 
 
 def pasta_do_par(origem, destino):
+    """Modelo do par origem->destino; baixa uma vez. Trava de arquivo: se dois paises em paralelo
+    precisarem do mesmo modelo, um espera o outro terminar e reaproveita."""
     alvo = MODELOS / f"{origem}_{destino}"
     if (alvo / "pronto").exists():
         return alvo
-    indice = json.loads(baixar(INDICE))
-    pacote = next((p for p in indice if p.get("from_code") == origem and p.get("to_code") == destino), None)
-    if not pacote:
-        return None
-    alvo.mkdir(parents=True, exist_ok=True)
-    arquivo = alvo / "pacote.zip"
-    baixar(pacote["links"][0], arquivo)
-    with zipfile.ZipFile(arquivo) as z:
-        z.extractall(alvo)
-    arquivo.unlink()
-    (alvo / "pronto").write_text(str(pacote.get("package_version", "?")), encoding="utf-8")
-    (MODELOS / "NOVO").write_text(f"{origem}_{destino}", encoding="utf-8")  # pede para salvar o cache
-    return alvo
+    MODELOS.mkdir(parents=True, exist_ok=True)
+    with open(MODELOS / ".trava", "w") as trava:
+        fcntl.flock(trava, fcntl.LOCK_EX)
+        if (alvo / "pronto").exists():
+            return alvo
+        indice = json.loads(baixar(INDICE))
+        pacote = next((p for p in indice if p.get("from_code") == origem and p.get("to_code") == destino), None)
+        if not pacote:
+            return None
+        alvo.mkdir(parents=True, exist_ok=True)
+        arquivo = alvo / "pacote.zip"
+        baixar(pacote["links"][0], arquivo)
+        with zipfile.ZipFile(arquivo) as z:
+            z.extractall(alvo)
+        arquivo.unlink()
+        (alvo / "pronto").write_text(str(pacote.get("package_version", "?")), encoding="utf-8")
+        (MODELOS / "NOVO").write_text(f"{origem}_{destino}", encoding="utf-8")  # pede para salvar o cache
+        return alvo
 
 
 def carregar(origem, destino):
