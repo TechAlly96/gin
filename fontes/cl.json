@@ -1,0 +1,15 @@
+{
+  "pais": {"codigo": "CL", "nome": "Chile", "idioma": "es", "idioma_audio": "pt", "fuso": "America/Santiago", "fuso_horas": -3},
+  "categorias_obrigatorias": ["governo", "chancelaria", "defesa", "parlamento", "agencia"],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (minrel.gob.cl) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "parlamento": "Os sites do Senado (senado.cl) e da Câmara (camara.cl) recusam acesso automatizado (HTTP 403), a partir do celular e do GitHub."
+  },
+  "fontes": [
+    {"id": "cl-presidencia", "nome": "Presidencia de la República de Chile - Prensa", "categoria": "governo", "natureza": "oficial",
+     "tipo": "html-links", "url": "https://prensa.presidencia.cl/", "padrao_link": "/comunicado.aspx", "data_no_artigo": true, "max_artigos_por_execucao": 15, "min_titulo": 25},
+    {"id": "cl-defensa", "nome": "Ministerio de Defensa Nacional", "categoria": "defesa", "natureza": "oficial", "tipo": "feed", "url": "https://www.defensa.cl/feed/"},
+    {"id": "cl-24horas", "nome": "24horas.cl - TVN (televisão pública)", "categoria": "agencia", "natureza": "estatal",
+     "tipo": "html-links", "url": "https://www.24horas.cl/", "padrao_link": "/actualidad/nacional/", "data_no_artigo": true, "max_artigos_por_execucao": 15, "min_titulo": 25}
+  ]
+}

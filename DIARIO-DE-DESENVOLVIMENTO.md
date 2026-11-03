@@ -296,3 +296,13 @@ sprint-034: perf(coleta) - COLETA EM PARALELO para escalar a ~195 paises.
   monta paises.json no final (mantem a ordem dos botoes; preserva pais cuja coleta falhar);
   download de modelo de traducao com trava de arquivo (flock).
 FIM-sprint-034
+
+sprint-035: feat(america-do-sul) - CHILE, URUGUAI e PARAGUAI (1a leva com sondar_pais.py) + datas.
+- Ferramenta sondar_pais.py (feeds, pastas e datas num relatorio, pelo coletor; opcao sondar no
+  explorar.yml). Bloqueios conferidos no celular E no GitHub: 403 geral (gob.cl, minrel, senado.cl,
+  camara.cl, mre.gov.py) -> lacunas; senado.gov.py so barra a nuvem -> Camara dos Deputados.
+- leitores.py: busca no texto escolhe a 1a data PLAUSIVEL (posicao no texto, ano 2000..ano atual,
+  nunca futura): corrigiu "Av. 8 de Octubre 2628" e data de evento futuro (gub.uy). Rotulos em
+  espanhol ("Publicado el: 2026-11-02", Camara PY). Regressao WAFA/FR/AR/CN inalterada.
+- Radio Uruguay: certificado de outro dominio (*.tnu.com.uy) -> recusado com razao -> lacuna.
+FIM-sprint-035

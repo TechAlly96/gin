@@ -4,6 +4,7 @@ Somente biblioteca padrao. Conteudo coletado e NAO confiavel: so texto e extraid
 Teste: python3 coletor/leitores.py br"""
 import email.utils
 import gzip
+from datetime import timedelta as _td, timezone as _tz
 import html
 import json
 import re
@@ -316,8 +317,22 @@ DATELINE = re.compile(r"\b[A-Z][A-Z .\-]{2,40},\s+((?:" + MESES_ALT + r")\.?\s+\
                       + MESES_ALT + r")\.?\s+\d{4})\s*\(", re.I)
 
 # data pelo rotulo de creditos: "Time： 2026-11-02 20:06:20" (dois-pontos comum ou de largura total)
-DATA_ROTULO = re.compile(r"(?:Release Time|Publish(?:ed)?(?: Date| Time)?|Time|Date|发布时间|时间)\s*[:：]\s*"
+DATA_ROTULO = re.compile(r"(?:Release Time|Publish(?:ed)?(?: Date| Time)?|Publicad[oa](?: el)?|Fecha de publicaci[oó]n|Time|Date|发布时间|时间)\s*[:：]\s*"
                          r"(20\d{2}-\d{2}-\d{2}(?:[ T]\d{2}:\d{2}(?::\d{2})?)?)", re.I)
+
+
+def primeira_data_valida(texto):
+    """A data plausivel que aparece PRIMEIRO no texto (nao a do primeiro formato testado). Ignora
+    numeros de rua ("Av. 8 de Octubre 2628"), anos implausiveis e datas futuras (eventos citados)."""
+    limite = datetime.now(_tz.utc) + _td(days=1)
+    achados = []
+    for rx in (DATA_TEXTO, DATA_EXTENSO, DATA_EUA, DATA_NUMERICA):
+        for m in rx.finditer(texto):
+            d = ler_data(m.group(0), _tz.utc)
+            if d and 2000 <= d.year <= limite.year and d <= limite:
+                achados.append((m.start(), m.group(0)))
+                break
+    return min(achados)[1] if achados else ""
 
 
 def data_do_artigo(link):
@@ -333,8 +348,7 @@ def data_do_artigo(link):
     m = DATA_ROTULO.search(texto) or DATELINE.search(texto)
     if m:
         return m.group(1)
-    m = DATA_TEXTO.search(texto) or DATA_EXTENSO.search(texto) or DATA_EUA.search(texto) or DATA_NUMERICA.search(texto)
-    return m.group(0) if m else ""
+    return primeira_data_valida(texto)
 
 EMOJIS = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F\u200D]")
 

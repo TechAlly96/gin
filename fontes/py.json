@@ -1,0 +1,15 @@
+{
+  "pais": {"codigo": "PY", "nome": "Paraguai", "idioma": "es", "idioma_audio": "pt", "fuso": "America/Asuncion", "fuso_horas": -3},
+  "categorias_obrigatorias": ["governo", "chancelaria", "defesa", "parlamento", "agencia"],
+  "lacunas": {
+    "governo": "O site da Presidência (presidencia.gov.py) não responde (tempo esgotado), a partir do celular e do GitHub. As notícias do governo chegam pela IP Paraguay, agência estatal.",
+    "chancelaria": "O site do Ministério das Relações Exteriores (mre.gov.py) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub."
+  },
+  "fontes": [
+    {"id": "py-mdn", "nome": "Ministerio de Defensa Nacional", "categoria": "defesa", "natureza": "oficial", "tipo": "feed", "url": "https://mdn.gov.py/feed/"},
+    {"id": "py-diputados", "nome": "Cámara de Diputados", "categoria": "parlamento", "natureza": "oficial", "tipo": "html-links",
+     "url": "https://diputados.gov.py/", "padrao_link": "/noticias/noticias/", "data_no_artigo": true, "max_artigos_por_execucao": 15, "min_titulo": 25},
+    {"id": "py-ip", "nome": "IP Paraguay - Agencia de Información Paraguaya", "categoria": "agencia", "natureza": "estatal", "tipo": "html-links",
+     "url": "https://www.ip.gov.py/ip/", "padrao_link": "/ip/20", "min_titulo": 25}
+  ]
+}

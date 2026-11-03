@@ -1,0 +1,16 @@
+{
+  "pais": {"codigo": "UY", "nome": "Uruguai", "idioma": "es", "idioma_audio": "pt", "fuso": "America/Montevideo", "fuso_horas": -3},
+  "categorias_obrigatorias": ["governo", "chancelaria", "defesa", "parlamento", "agencia"],
+  "lacunas": {
+    "agencia": "O Uruguai não tem agência estatal de notícias; o site da Radio Uruguay (emissora pública) apresenta certificado de outro domínio (*.tnu.com.uy), recusado pela verificação de segurança."
+  },
+  "fontes": [
+    {"id": "uy-presidencia", "nome": "Presidencia de la República", "categoria": "governo", "natureza": "oficial", "tipo": "html-links",
+     "url": "https://www.gub.uy/presidencia/comunicacion/noticias", "padrao_link": "/presidencia/comunicacion/noticias/", "data_no_artigo": true, "max_artigos_por_execucao": 15, "min_titulo": 25},
+    {"id": "uy-mrree", "nome": "Ministerio de Relaciones Exteriores", "categoria": "chancelaria", "natureza": "oficial", "tipo": "html-links",
+     "url": "https://www.gub.uy/ministerio-relaciones-exteriores/comunicacion/noticias", "padrao_link": "/ministerio-relaciones-exteriores/comunicacion/noticias/", "data_no_artigo": true, "max_artigos_por_execucao": 15, "min_titulo": 25},
+    {"id": "uy-mdn", "nome": "Ministerio de Defensa Nacional", "categoria": "defesa", "natureza": "oficial", "tipo": "html-links",
+     "url": "https://www.gub.uy/ministerio-defensa-nacional/comunicacion/noticias", "padrao_link": "/ministerio-defensa-nacional/comunicacion/noticias/", "data_no_artigo": true, "max_artigos_por_execucao": 15, "min_titulo": 25},
+    {"id": "uy-parlamento", "nome": "Parlamento del Uruguay", "categoria": "parlamento", "natureza": "oficial", "tipo": "feed", "url": "https://parlamento.gub.uy/rss.xml"}
+  ]
+}
