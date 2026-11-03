@@ -91,8 +91,13 @@ def carregar(origem, destino):
         if base is None:
             _tradutores[chave] = None
         else:
-            modelo = next(base.rglob("model.bin")).parent
-            sp = next(base.rglob("sentencepiece.model"))
+            modelos = list(base.rglob("model.bin"))
+            tokenizadores = (list(base.rglob("sentencepiece.model")) + list(base.rglob("source.spm"))
+                             + list(base.rglob("*.spm")) + list(base.rglob("*.model")))
+            if not modelos or not tokenizadores:
+                arquivos = sorted(x.relative_to(base).as_posix() for x in base.rglob("*") if x.is_file())[:20]
+                raise LookupError(f"pacote {origem}->{destino} sem modelo/tokenizador reconhecido: {arquivos}")
+            modelo, sp = modelos[0].parent, tokenizadores[0]
             _tradutores[chave] = (ctranslate2.Translator(str(modelo), device="cpu"),
                                   sentencepiece.SentencePieceProcessor(model_file=str(sp)))
     return _tradutores[chave]
