@@ -1,0 +1,40 @@
+{
+  "pais": {
+    "codigo": "VE",
+    "nome": "Venezuela",
+    "fuso": "America/Caracas",
+    "fuso_horas": -4,
+    "idioma": "es",
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "Não foi encontrado site oficial da Presidência acessível a coletores.",
+    "parlamento": "O site da Assembleia Nacional (asambleanacional.gob.ve) não expõe notícias legíveis por coletor.",
+    "agencia": "O site da emissora estatal VTV (vtv.gob.ve) não existe no DNS, a partir do celular e do GitHub."
+  },
+  "fontes": [
+    {
+      "id": "ve-mppre",
+      "nome": "Ministerio del Poder Popular para Relaciones Exteriores",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://mppre.gob.ve/?feed=rss2"
+    },
+    {
+      "id": "ve-mindefensa",
+      "nome": "Ministerio del Poder Popular para la Defensa",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.mindefensa.gob.ve/?feed=rss2"
+    }
+  ]
+}

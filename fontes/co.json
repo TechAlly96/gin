@@ -1,0 +1,52 @@
+{
+  "pais": {
+    "codigo": "CO",
+    "nome": "Colômbia",
+    "fuso": "America/Bogota",
+    "fuso_horas": -5,
+    "idioma": "es",
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site da Presidência (presidencia.gov.co) entrega páginas vazias a coletores (conteúdo montado por JavaScript), a partir do celular e do GitHub.",
+    "chancelaria": "O site do Ministério das Relações Exteriores (cancilleria.gov.co) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "defesa": "O site do Ministério da Defesa (mindefensa.gov.co) não publica notícias legíveis por coletor (sala de imprensa inexistente, HTTP 404)."
+  },
+  "fontes": [
+    {
+      "id": "co-camara",
+      "nome": "Cámara de Representantes",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.camara.gov.co/feed/"
+    },
+    {
+      "id": "co-senado",
+      "nome": "Senado de la República",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.senado.gov.co/",
+      "padrao_link": "/index.php/component/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "co-radionacional",
+      "nome": "Radio Nacional de Colombia (RTVC, pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.radionacional.co/rss.xml"
+    }
+  ]
+}

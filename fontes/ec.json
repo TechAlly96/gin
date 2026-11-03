@@ -1,0 +1,54 @@
+{
+  "pais": {
+    "codigo": "EC",
+    "nome": "Equador",
+    "fuso": "America/Guayaquil",
+    "fuso_horas": -5,
+    "idioma": "es",
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "agencia": "O Equador não tem agência estatal de notícias ativa; o portal governamental de notícias (elciudadano.gob.ec) não existe mais no DNS."
+  },
+  "fontes": [
+    {
+      "id": "ec-presidencia",
+      "nome": "Presidencia de la República del Ecuador",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.presidencia.gob.ec/feed/"
+    },
+    {
+      "id": "ec-cancilleria",
+      "nome": "Ministerio de Relaciones Exteriores y Movilidad Humana",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.cancilleria.gob.ec/feed/"
+    },
+    {
+      "id": "ec-defensa",
+      "nome": "Ministerio de Defensa Nacional",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.defensa.gob.ec/feed/"
+    },
+    {
+      "id": "ec-asamblea",
+      "nome": "Asamblea Nacional del Ecuador",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.asambleanacional.gob.ec/es/rss.xml"
+    }
+  ]
+}

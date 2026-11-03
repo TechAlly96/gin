@@ -306,3 +306,12 @@ sprint-035: feat(america-do-sul) - CHILE, URUGUAI e PARAGUAI (1a leva com sondar
   espanhol ("Publicado el: 2026-11-02", Camara PY). Regressao WAFA/FR/AR/CN inalterada.
 - Radio Uruguay: certificado de outro dominio (*.tnu.com.uy) -> recusado com razao -> lacuna.
 FIM-sprint-035
+
+sprint-036: feat(america-do-sul) - PERU, EQUADOR, COLOMBIA, BOLIVIA e VENEZUELA (2 sondagens).
+- PE: gob.pe (Presidencia, RREE, MINDEF; data com hora na noticia) + Andina; lacuna parlamento.
+- EC: 4 feeds (Presidencia, Cancilleria, Defensa, Asamblea); lacuna agencia (elciudadano.gob.ec fora do DNS).
+- CO: Camara (feed) + Senado + Radio Nacional (RTVC); lacunas governo (pagina vazia/JS), chancelaria (403),
+  defesa (404). BO: Presidencia + Cancilleria. VE: MPPRE + MINDEFENSA. Lacunas com motivo verificado.
+- sondar_pais.py: agrupa enderecos planos (/agencia/noticia-titulo-123.aspx). Comandos resistentes as quedas
+  da rede movel: disparo com novas tentativas e so aceita execucao criada DEPOIS do disparo.
+FIM-sprint-036

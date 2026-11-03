@@ -1,0 +1,70 @@
+{
+  "pais": {
+    "codigo": "PE",
+    "nome": "Peru",
+    "fuso": "America/Lima",
+    "fuso_horas": -5,
+    "idioma": "es",
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "parlamento": "O site do Congresso (congreso.gob.pe) não publica notícias legíveis por coletor: o feed parou em 2025 e a sala de imprensa é montada por JavaScript."
+  },
+  "fontes": [
+    {
+      "id": "pe-presidencia",
+      "nome": "Presidencia de la República del Perú",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.gob.pe/institucion/presidencia/noticias",
+      "padrao_link": "/institucion/presidencia/noticias/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "pe-rree",
+      "nome": "Ministerio de Relaciones Exteriores",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.gob.pe/institucion/rree/noticias",
+      "padrao_link": "/institucion/rree/noticias/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "pe-mindef",
+      "nome": "Ministerio de Defensa",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.gob.pe/institucion/mindef/noticias",
+      "padrao_link": "/institucion/mindef/noticias/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "pe-andina",
+      "nome": "Agencia Andina (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://andina.pe/agencia/",
+      "padrao_link": "/agencia/noticia-",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

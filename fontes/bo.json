@@ -1,0 +1,42 @@
+{
+  "pais": {
+    "codigo": "BO",
+    "nome": "Bolívia",
+    "fuso": "America/La_Paz",
+    "fuso_horas": -4,
+    "idioma": "es",
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "defesa": "O site do Ministério da Defesa (mindef.gob.bo) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "parlamento": "O site da Câmara (diputados.gob.bo) não expõe notícias legíveis por coletor e o do Senado (senado.gob.bo) não existe no DNS.",
+    "agencia": "A agência estatal ABI (abi.bo) não responde (tempo esgotado), a partir do celular e do GitHub."
+  },
+  "fontes": [
+    {
+      "id": "bo-presidencia",
+      "nome": "Presidencia del Estado Plurinacional de Bolivia",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://presidencia.gob.bo/",
+      "padrao_link": "/index.php/20",
+      "min_titulo": 25
+    },
+    {
+      "id": "bo-cancilleria",
+      "nome": "Ministerio de Relaciones Exteriores",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://cancilleria.gob.bo/mre/feed/"
+    }
+  ]
+}
