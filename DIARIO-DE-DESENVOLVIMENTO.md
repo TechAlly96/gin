@@ -268,3 +268,12 @@ sprint-031: fix(traducao) - modelos BAIXADOS DE NOVO a cada pais novo + download
 - coletar.yml: cache restaurado pela versao mais recente (restore-keys) e salvo SO quando um modelo
   novo foi baixado ou o ambiente foi reinstalado (actions/cache/restore + save condicional).
 FIM-sprint-031
+
+sprint-032: pesquisa(kuwait) - KUWAIT ADIADO: fontes oficiais inacessiveis (celular e GitHub, 02/11/2026).
+- KUNA (kuna.net.kw, agencia oficial): tempo esgotado nas duas redes; sem canal oficial verificado no
+  Telegram. MOFA (mofa.gov.kw) e Diwan Amiri (da.gov.kw): HTTP 403. MOD (mod.gov.kw): conexao encerrada
+  sem resposta. Conselho de Ministros (cmgs.gov.kw): abre pelo GitHub, mas em arabe e com pouco conteudo.
+- Parlamento: Assembleia Nacional suspensa desde 10/05/2024 por ate 4 anos (Emir e Conselho de Ministros
+  assumiram o legislativo; IPU: sem parlamento em funcionamento) -> lacuna estrutural quando o pais entrar.
+- Decisao: nao publicar com 1 fonte e 4 lacunas; reavaliar a KUNA mais tarde.
+FIM-sprint-032
