@@ -277,3 +277,12 @@ sprint-032: pesquisa(kuwait) - KUWAIT ADIADO: fontes oficiais inacessiveis (celu
   assumiram o legislativo; IPU: sem parlamento em funcionamento) -> lacuna estrutural quando o pais entrar.
 - Decisao: nao publicar com 1 fonte e 4 lacunas; reavaliar a KUNA mais tarde.
 FIM-sprint-032
+
+sprint-033: pesquisa(haiti) - HAITI ADIADO: sem fonte oficial ATUAL acessivel (celular e GitHub, 02/11/2026).
+- Governo: Conselho Presidencial de Transicao dissolvido em 07/02/2026; PM Alix Didier Fils-Aime exerce o
+  Executivo. Primature: feed parado em 10/02/2025 e "eventos" de dez/2024 (site abandonado).
+- MAE (mae.gouv.ht): erro de conexao segura (servidor encerra) nas duas redes. Defesa (defense.gouv.ht)
+  e RTNH (rtnh.ht): nomes inexistentes no DNS.
+- Parlamento: sem eleicoes desde 2016; 1o turno das gerais marcado para 13/12/2026 (2o turno 21/02/2027).
+- Decisao: nao publicar com conteudo de 2024-2025; reavaliar apos as eleicoes de dezembro.
+FIM-sprint-033
