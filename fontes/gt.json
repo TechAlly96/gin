@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "GT",
+    "nome": "Guatemala",
+    "fuso": "America/Guatemala",
+    "fuso_horas": -6,
+    "idioma": "es",
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site da Secretaria de Comunicação da Presidência (prensa.gob.gt) recusa acesso automatizado (HTTP 403). As notícias do governo chegam pela AGN, agência estatal.",
+    "chancelaria": "O site do Ministério das Relações Exteriores (minex.gob.gt) recusa acesso automatizado (HTTP 403).",
+    "defesa": "O site do Ministério da Defesa (mindef.mil.gt) não responde (tempo esgotado).",
+    "parlamento": "O site do Congresso (congreso.gob.gt) não expõe notícias legíveis por coletor."
+  },
+  "fontes": [
+    {
+      "id": "gt-agn",
+      "nome": "Agencia Guatemalteca de Noticias (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://agn.gt/sitemap.rss"
+    }
+  ]
+}

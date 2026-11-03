@@ -324,3 +324,13 @@ sprint-037: feat(americas) - GUIANA, SURINAME e CANADA + TRADUCAO POR IDIOMA DA 
 - sondar_pais.py testa o proprio endereco como feed. Mexico adiado para leva propria (gob.mx por
   JavaScript, Senado 403, Camara com certificado invalido, IMER parado em 2023).
 FIM-sprint-037
+
+sprint-038: feat(america-central) - GUATEMALA (AGN) e PANAMA; 5 paises ADIADOS.
+- GT: AGN (agencia estatal, 50 itens/dia); 4 lacunas (403, sem resposta, congresso sem noticias legiveis).
+- PA: Presidencia (pagina + data) e MIRE (feed); defesa = lacuna estrutural (forcas armadas abolidas em
+  1990, proibidas pela Constituicao desde 1994); Assembleia com certificado nao verificavel; SERTV sem resposta.
+- ADIADOS (sondados pelo GitHub em 03/11/2026): Honduras (so Defesa acessivel), Costa Rica (Presidencia e
+  SINART abrem mas sem noticias legiveis; RREE 403; Assembleia sem resposta; defesa estrutural: exercito
+  abolido em 1948), Nicaragua (403/DNS), Belize (sem resposta), Mexico (gob.mx por JavaScript; Senado 403).
+- Estrategia: seguir para a EUROPA (feeds oficiais mais regulares); casos dificeis em fase posterior.
+FIM-sprint-038

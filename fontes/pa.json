@@ -1,0 +1,44 @@
+{
+  "pais": {
+    "codigo": "PA",
+    "nome": "Panamá",
+    "fuso": "America/Panama",
+    "fuso_horas": -5,
+    "idioma": "es",
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "defesa": "O Panamá aboliu as forças armadas em 1990, e a Constituição as proíbe desde 1994; a segurança é civil (Ministério de Segurança Pública).",
+    "parlamento": "O site da Assembleia Nacional (asamblea.gob.pa) apresenta certificado de segurança não verificável.",
+    "agencia": "O site da emissora estatal SERTV (sertv.gob.pa) não responde (tempo esgotado)."
+  },
+  "fontes": [
+    {
+      "id": "pa-presidencia",
+      "nome": "Presidencia de la República de Panamá",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.presidencia.gob.pa/",
+      "padrao_link": "/publicacion/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "pa-mire",
+      "nome": "Ministerio de Relaciones Exteriores",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://mire.gob.pa/feed/"
+    }
+  ]
+}
