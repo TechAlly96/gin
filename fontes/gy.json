@@ -1,0 +1,47 @@
+{
+  "pais": {
+    "codigo": "GY",
+    "nome": "Guiana",
+    "idioma": "en",
+    "fuso": "America/Guyana",
+    "fuso_horas": -4,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (minfor.gov.gy) não publica desde junho de 2025 (feed parado).",
+    "parlamento": "O site do Parlamento (parliament.gov.gy) publica pautas e documentos sem data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "gy-op",
+      "nome": "Office of the President",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://op.gov.gy/feed/"
+    },
+    {
+      "id": "gy-gdf",
+      "nome": "Guyana Defence Force",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://gdf.mil.gy/feed/"
+    },
+    {
+      "id": "gy-dpi",
+      "nome": "Department of Public Information (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://dpi.gov.gy/feed/"
+    }
+  ]
+}

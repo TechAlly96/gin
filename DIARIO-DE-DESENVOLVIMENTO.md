@@ -315,3 +315,12 @@ sprint-036: feat(america-do-sul) - PERU, EQUADOR, COLOMBIA, BOLIVIA e VENEZUELA 
 - sondar_pais.py: agrupa enderecos planos (/agencia/noticia-titulo-123.aspx). Comandos resistentes as quedas
   da rede movel: disparo com novas tentativas e so aceita execucao criada DEPOIS do disparo.
 FIM-sprint-036
+
+sprint-037: feat(americas) - GUIANA, SURINAME e CANADA + TRADUCAO POR IDIOMA DA FONTE.
+- GY: Office of the President, GDF, DPI (feeds). SR: portal gov.sr (holandes; reune os ministerios).
+  CA: PM (feed), servico oficial de noticias api.io.canada.ca (dept=departmentofforeignaffairstradeand
+  development; parametro publishedDate), Camara dos Comuns, Radio-Canada (frances).
+- traduzir.py: cada fonte pode declarar "idioma" (paises multilingues; "pt" nao traduz).
+- sondar_pais.py testa o proprio endereco como feed. Mexico adiado para leva propria (gob.mx por
+  JavaScript, Senado 403, Camara com certificado invalido, IMER parado em 2023).
+FIM-sprint-037

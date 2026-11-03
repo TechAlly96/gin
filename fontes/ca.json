@@ -1,0 +1,59 @@
+{
+  "pais": {
+    "codigo": "CA",
+    "nome": "Canadá",
+    "idioma": "en",
+    "fuso": "America/Toronto",
+    "fuso_horas": -5,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "defesa": "O serviço oficial de notícias do governo (api.io.canada.ca) não retornou itens para a Defesa Nacional, e as páginas de canada.ca dependem de JavaScript."
+  },
+  "fontes": [
+    {
+      "id": "ca-pm",
+      "nome": "Prime Minister of Canada",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.pm.gc.ca/en/rss.xml"
+    },
+    {
+      "id": "ca-gac",
+      "nome": "Global Affairs Canada",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://api.io.canada.ca/io-server/gc/news/en/v2?dept=departmentofforeignaffairstradeanddevelopment&sort=publishedDate&orderBy=desc&publishedDate%3E=2021-07-23&pick=50&format=atom"
+    },
+    {
+      "id": "ca-commons",
+      "nome": "House of Commons",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.ourcommons.ca/en",
+      "padrao_link": "/en/parliamentary-business/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "ca-radiocanada",
+      "nome": "Radio-Canada (pública, em francês)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://ici.radio-canada.ca/info/rss/info/a-la-une",
+      "idioma": "fr"
+    }
+  ]
+}

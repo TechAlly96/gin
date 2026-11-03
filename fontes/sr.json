@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "SR",
+    "nome": "Suriname",
+    "idioma": "nl",
+    "fuso": "America/Paramaribo",
+    "fuso_horas": -3,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "Não há site próprio acessível do Ministério das Relações Exteriores; o portal gov.sr reúne as notícias dos ministérios.",
+    "defesa": "Não há site próprio acessível do Ministério da Defesa; o portal gov.sr reúne as notícias dos ministérios.",
+    "parlamento": "O site da Assembleia Nacional (dna.sr) publica agenda e projetos sem data legível por coletor.",
+    "agencia": "Não foi encontrada agência estatal de notícias acessível no Suriname."
+  },
+  "fontes": [
+    {
+      "id": "sr-gov",
+      "nome": "Overheid van Suriname (gov.sr)",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.gov.sr/feed/"
+    }
+  ]
+}
