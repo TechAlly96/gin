@@ -260,3 +260,11 @@ sprint-030: feat(el-salvador) - EL SALVADOR, 10o pais (espanhol; America/El_Salv
   com openssl contra a raiz Sectigo R46 (OK). Termux nao tem /tmp: usar $TMPDIR.
 - Ferramentas descobrir/mapear fazem downloads proprios (sem o contexto SSL); testar pelo coletor.
 FIM-sprint-030
+
+sprint-031: fix(traducao) - modelos BAIXADOS DE NOVO a cada pais novo + download cortado no meio.
+- Causa: chave do cache = hash de fontes/*.json -> todo pais novo invalidava o cache e rebaixava
+  centenas de MB; numa dessas, IncompleteRead (82 de 150 MB) deixou 1 noticia sem traducao (DE e SV).
+- traduzir.py: download em arquivo, em blocos, confere o tamanho, ate 4 tentativas; marca NOVO.
+- coletar.yml: cache restaurado pela versao mais recente (restore-keys) e salvo SO quando um modelo
+  novo foi baixado ou o ambiente foi reinstalado (actions/cache/restore + save condicional).
+FIM-sprint-031

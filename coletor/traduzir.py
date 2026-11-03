@@ -7,6 +7,7 @@ Variavel ARGOS_MODELOS: pasta dos modelos (cache)."""
 import json
 import os
 import re
+import shutil
 import sys
 import time
 import urllib.request
@@ -32,10 +33,26 @@ FRASES = re.compile(r"(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÑÜ¿¡\"“(0-9])")
 _tradutores = {}
 
 
-def baixar(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "GIN-traducao"})
-    with urllib.request.urlopen(req, timeout=180) as r:
-        return r.read()
+def baixar(url, destino=None, tentativas=4):
+    """Baixa com ate 4 tentativas. Com destino, grava em blocos e confere o tamanho (nunca aceita
+    modelo pela metade: o GitHub chegou a cortar um download de 150 MB no meio)."""
+    for n in range(1, tentativas + 1):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "GIN-traducao"})
+            with urllib.request.urlopen(req, timeout=180) as r:
+                if destino is None:
+                    return r.read()
+                esperado = int(r.headers.get("Content-Length") or 0)
+                with open(destino, "wb") as f:
+                    shutil.copyfileobj(r, f, 1 << 20)
+            if esperado and destino.stat().st_size != esperado:
+                raise IOError(f"download incompleto: {destino.stat().st_size} de {esperado} bytes")
+            return destino
+        except Exception as erro:
+            if n == tentativas:
+                raise
+            print(f"  download falhou ({type(erro).__name__}), tentativa {n + 1} de {tentativas}...")
+            time.sleep(5 * n)
 
 
 def pasta_do_par(origem, destino):
@@ -48,11 +65,12 @@ def pasta_do_par(origem, destino):
         return None
     alvo.mkdir(parents=True, exist_ok=True)
     arquivo = alvo / "pacote.zip"
-    arquivo.write_bytes(baixar(pacote["links"][0]))
+    baixar(pacote["links"][0], arquivo)
     with zipfile.ZipFile(arquivo) as z:
         z.extractall(alvo)
     arquivo.unlink()
     (alvo / "pronto").write_text(str(pacote.get("package_version", "?")), encoding="utf-8")
+    (MODELOS / "NOVO").write_text(f"{origem}_{destino}", encoding="utf-8")  # pede para salvar o cache
     return alvo
 
 

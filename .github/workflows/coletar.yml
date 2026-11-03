@@ -48,20 +48,23 @@ jobs:
             echo "::endgroup::"
           done
 
-      - name: Cache da traducao (ambiente e modelos)
-        uses: actions/cache@v4
+      - name: Restaurar cache da traducao (ambiente e modelos)
+        uses: actions/cache/restore@v4
         with:
           path: |
             /tmp/argos
             argos-modelos
-          key: argos-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('fontes/*.json') }}
+          key: argos-v2-${{ runner.os }}-${{ runner.arch }}-${{ github.run_id }}
+          restore-keys: argos-v2-${{ runner.os }}-${{ runner.arch }}-
 
       - name: Traduzir noticias para portugues
         continue-on-error: true
         env:
           ARGOS_MODELOS: ${{ github.workspace }}/argos-modelos
         run: |
+          mkdir -p argos-modelos && rm -f argos-modelos/NOVO
           if ! /tmp/argos/bin/python -c "import ctranslate2, sentencepiece" 2>/dev/null; then
+            touch argos-modelos/NOVO
             rm -rf /tmp/argos
             python3 -m venv /tmp/argos
             /tmp/argos/bin/pip install --quiet ctranslate2 sentencepiece
@@ -70,6 +73,15 @@ jobs:
             pais=$(basename "$cfg" .json)
             /tmp/argos/bin/python -u coletor/traduzir.py "$pais" || echo "::warning::Traducao de $pais falhou"
           done
+
+      - name: Salvar cache da traducao (so se baixou modelo novo ou reinstalou)
+        if: always() && hashFiles('argos-modelos/NOVO') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            /tmp/argos
+            argos-modelos
+          key: argos-v2-${{ runner.os }}-${{ runner.arch }}-${{ github.run_id }}
 
       - name: Cache do ambiente do Piper
         uses: actions/cache@v4
