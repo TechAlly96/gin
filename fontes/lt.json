@@ -1,0 +1,34 @@
+{
+  "pais": {
+    "codigo": "LT",
+    "nome": "Lituânia",
+    "idioma": "lt",
+    "fuso": "Europe/Vilnius",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site do Governo (lrv.lt) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "chancelaria": "O site do Ministério das Relações Exteriores (urm.lt) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "defesa": "O site do Ministério da Defesa (kam.lt) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "parlamento": "O site do Seimas (lrs.lt) lista atos, mas as notícias não abrem para coletores."
+  },
+  "fontes": [
+    {
+      "id": "lt-lrt",
+      "nome": "LRT English (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.lrt.lt/en/news-in-english?rss",
+      "idioma": "en"
+    }
+  ]
+}

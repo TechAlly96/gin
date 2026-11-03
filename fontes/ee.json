@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "EE",
+    "nome": "Estônia",
+    "idioma": "et",
+    "fuso": "Europe/Tallinn",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "As seções de notícias em inglês do governo (valitsus.ee) não foram encontradas (HTTP 404).",
+    "chancelaria": "A seção de notícias em inglês do Ministério das Relações Exteriores (vm.ee) não foi encontrada (HTTP 404).",
+    "defesa": "A seção de notícias em inglês do Ministério da Defesa (kaitseministeerium.ee) não foi encontrada (HTTP 404).",
+    "agencia": "O site da ERR News (pública) não expõe feed nem notícias legíveis por coletor."
+  },
+  "fontes": [
+    {
+      "id": "ee-riigikogu",
+      "nome": "Riigikogu",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.riigikogu.ee/feed/"
+    }
+  ]
+}

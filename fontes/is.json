@@ -1,0 +1,37 @@
+{
+  "pais": {
+    "codigo": "IS",
+    "nome": "Islândia",
+    "idioma": "en",
+    "fuso": "Atlantic/Reykjavik",
+    "fuso_horas": 0,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "Não há site próprio acessível do Ministério das Relações Exteriores; as notícias saem no portal government.is.",
+    "defesa": "A Islândia não tem forças armadas; a defesa é garantida pela OTAN e há apenas guarda costeira e defesa civil.",
+    "parlamento": "O site do Althingi (althingi.is) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "agencia": "O site da RÚV English (pública) não expõe feed nem notícias legíveis por coletor."
+  },
+  "fontes": [
+    {
+      "id": "is-gov",
+      "nome": "Government of Iceland - news",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.government.is/news/",
+      "padrao_link": "/news/article/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "pais": {
+    "codigo": "LU",
+    "nome": "Luxemburgo",
+    "idioma": "fr",
+    "fuso": "Europe/Luxembourg",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "As notícias do Ministério das Relações Exteriores saem no portal do governo (gouvernement.lu).",
+    "defesa": "Luxemburgo não tem ministério da defesa próprio com site de notícias; a Direção de Defesa integra o Ministério das Relações Exteriores.",
+    "agencia": "Luxemburgo não tem emissora pública nem agência estatal de notícias."
+  },
+  "fontes": [
+    {
+      "id": "lu-chd",
+      "nome": "Chambre des Députés - séances",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.chd.lu/fr",
+      "padrao_link": "/fr/seance/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "lu-gov",
+      "nome": "Gouvernement du Luxembourg - actualités",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://gouvernement.lu/en/actualites.html",
+      "padrao_link": "/en/actualites/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25,
+      "idioma": "en"
+    }
+  ]
+}

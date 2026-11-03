@@ -374,3 +374,9 @@ sprint-042 (cont.): gr-pm deu 403 na coleta: o primeiroministro.gr so aceita a i
 Regra: quando a sondagem indicar "identificacao simples", registrar "identificacao": "simples" na fonte.
 Pendente: bg-mfa sem data encontrada nas noticias (15 buscadas).
 FIM-sprint-042
+
+sprint-043: feat(europa) - BALTICOS, ISLANDIA, LUXEMBURGO e CHIPRE (fontes incertas testadas na hora).
+- Fontes com data na noticia so entram se a 1a noticia tiver data dos ultimos 60 dias; senao, lacuna.
+- LV: Saeima + LSM English (+ governo/MFA se recentes). LT: LRT English. EE: Riigikogu. IS: government.is
+  (defesa: sem forcas armadas, OTAN). LU: Camara (sessoes). CY: CNA se tiver data. Malta ADIADO (nada utilizavel).
+FIM-sprint-043

@@ -1,0 +1,53 @@
+{
+  "pais": {
+    "codigo": "LV",
+    "nome": "Letônia",
+    "idioma": "lv",
+    "fuso": "Europe/Riga",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "defesa": "O site do Ministério da Defesa (mod.gov.lv) não tem seção de notícias acessível (HTTP 404).",
+    "chancelaria": "O site do Ministério das Relações Exteriores (mfa.gov.lv) não expõe notícias recentes com data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "lv-saeima",
+      "nome": "Saeima - jaunumi",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.saeima.lv/lv/feeds/news.rss"
+    },
+    {
+      "id": "lv-lsm",
+      "nome": "LSM English (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://eng.lsm.lv/rss/",
+      "idioma": "en"
+    },
+    {
+      "id": "lv-mk",
+      "nome": "Cabinet of Ministers of Latvia",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.mk.gov.lv/en/articles",
+      "padrao_link": "/en/article/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25,
+      "idioma": "en"
+    }
+  ]
+}
