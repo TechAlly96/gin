@@ -126,7 +126,13 @@ def ler_data(valor, fuso):
             return datetime(int(ano), MESES_NUM[mes], int(dia), tzinfo=fuso)
         except ValueError:
             return None
-    m = re.search(r"(\d{2})/(\d{2})/(\d{4})(?:\D{1,20}?(\d{1,2})[h:](\d{2}))?", v)
+    m = re.search(r"\b(\d{4})\.\s?(\d{1,2})\.\s?(\d{1,2})\b", v)  # Hungria: 2026.11.02.
+    if m:
+        try:
+            return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), tzinfo=fuso)
+        except ValueError:
+            return None
+    m = re.search(r"(\d{1,2})\s?[/.]\s?(\d{1,2})\s?[/.]\s?(\d{4})(?:\D{1,20}?(\d{1,2})[h:](\d{2}))?", v)
     if m:
         d, mo, a, h, mi = m.groups()
         try:
@@ -235,7 +241,7 @@ def ler_lista_govbr(conteudo, base, padrao):
     return itens
 
 
-DATA_NUMERICA = re.compile(r"\b\d{2}/\d{2}/\d{4}\b")
+DATA_NUMERICA = re.compile(r"\b\d{1,2}\s?[/.]\s?\d{1,2}\s?[/.]\s?\d{4}\b|\b\d{4}\.\s?\d{1,2}\.\s?\d{1,2}\b")
 
 
 DATA_URL = [re.compile(r"/(20\d{2})(\d{2})(\d{2})/"),          # Xinhua: /20261103/
