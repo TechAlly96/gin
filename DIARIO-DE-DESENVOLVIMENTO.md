@@ -249,3 +249,14 @@ sprint-029: feat(china) - CHINA, 9o pais (fontes oficiais em ingles; Asia/Shangh
   APN /AAAA-MM/DD/), validada, so quando o texto do link nao traz data (5/5 testes); DATA PELO ROTULO
   "Time： 2026-11-02 20:06:20" (dois-pontos de largura total; evita datas soltas de outro conteudo).
 FIM-sprint-029
+
+sprint-030: feat(el-salvador) - EL SALVADOR, 10o pais (espanhol; America/El_Salvador) + CERTIFICADOS.
+- governo: Presidencia (feed; publica pouco no site: ultima 16/10, alerta de fonte quieta correto);
+  parlamento: Asamblea Legislativa (pagina /node/ + data na noticia); agencia: Diario El Salvador
+  (jornal estatal, feed). Lacunas: chancelaria (rree.gob.sv com Cloudflare 403, celular e GitHub) e
+  defesa (faes.gob.sv nao existe mais no DNS).
+- leitores.py: CONTEXTO SSL com intermediarios em coletor/certificados/ (verificacao COMPLETA mantida).
+  A Asamblea nao envia o intermediario Sectigo OV R36; baixado do endereco oficial (AIA) e verificado
+  com openssl contra a raiz Sectigo R46 (OK). Termux nao tem /tmp: usar $TMPDIR.
+- Ferramentas descobrir/mapear fazem downloads proprios (sem o contexto SSL); testar pelo coletor.
+FIM-sprint-030

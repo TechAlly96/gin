@@ -52,6 +52,24 @@ def limpar(texto, limite=None):
     return t
 
 
+import ssl
+from pathlib import Path as _Path
+
+CERTIFICADOS = _Path(__file__).resolve().parent / "certificados"
+
+
+def _contexto_ssl():
+    """Verificacao completa de certificados; acrescenta intermediarios que alguns servidores
+    oficiais esquecem de enviar (ex.: Asamblea Legislativa SV). Nunca desliga a verificacao."""
+    ctx = ssl.create_default_context()
+    for pem in sorted(CERTIFICADOS.glob("*.pem")):
+        ctx.load_verify_locations(cafile=str(pem))
+    return ctx
+
+
+CONTEXTO_SSL = _contexto_ssl()
+
+
 def baixar(url, tentativas=3, ua=None):
     host = urllib.parse.urlsplit(url).netloc
     espera = PAUSA_MESMO_SITE - (time.monotonic() - _ultimo_acesso.get(host, -1e9))
@@ -61,7 +79,7 @@ def baixar(url, tentativas=3, ua=None):
     erro = ""
     for n in range(1, tentativas + 1):
         try:
-            with urllib.request.urlopen(req, timeout=30) as r:
+            with urllib.request.urlopen(req, context=CONTEXTO_SSL, timeout=30) as r:
                 dados = r.read(LIMITE_BYTES)
                 if dados[:2] == b"\x1f\x8b" or (r.headers.get("Content-Encoding") or "").lower() == "gzip":
                     dados = gzip.decompress(dados)  # servidores que compactam sem ser pedido (ex.: BMVg)
