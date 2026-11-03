@@ -19,7 +19,7 @@ permissions:
 jobs:
   explorar:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     steps:
       - name: Baixar codigo
         uses: actions/checkout@v5
