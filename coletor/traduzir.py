@@ -159,6 +159,8 @@ def traduzir_pais(codigo):
         print(f"{codigo}: sem historico local")
         return 0
     itens = json.loads((pasta / "todos.json").read_text(encoding="utf-8"))
+    cfg = json.loads((RAIZ / "fontes" / f"{codigo}.json").read_text(encoding="utf-8"))
+    idioma_da_fonte = {f["id"]: f.get("idioma", origem) for f in cfg["fontes"]}  # paises multilingues
     pendentes = [i for i in itens if i.get("traducao_v") != VERSAO_TRADUCAO][:MAX_POR_EXECUCAO]
     if not pendentes:
         print(f"{codigo}: nada novo a traduzir")
@@ -166,12 +168,17 @@ def traduzir_pais(codigo):
     t0, falhas = time.monotonic(), 0
     for i in pendentes:
         try:
-            i["titulo_pt"] = traduzir(suavizar_maiusculas(i["titulo"]), origem)
+            lingua = idioma_da_fonte.get(i["fonte"], origem)
+            if lingua == "pt":
+                i["titulo_pt"], i["resumo_pt"] = i["titulo"], i.get("resumo") or ""
+                i["traducao_v"] = VERSAO_TRADUCAO
+                continue
+            i["titulo_pt"] = traduzir(suavizar_maiusculas(i["titulo"]), lingua)
             resumo = ate_frase_completa(limpar_fala(i.get("resumo") or ""))
             if TRANSCRICAO.search(resumo):
                 i["resumo_pt"] = "Transcrição completa disponível na fonte oficial."
             elif resumo:
-                i["resumo_pt"] = traduzir(resumo, origem)
+                i["resumo_pt"] = traduzir(resumo, lingua)
             else:
                 i.pop("resumo_pt", None)
             i["traducao_v"] = VERSAO_TRADUCAO
