@@ -334,3 +334,11 @@ sprint-038: feat(america-central) - GUATEMALA (AGN) e PANAMA; 5 paises ADIADOS.
   abolido em 1948), Nicaragua (403/DNS), Belize (sem resposta), Mexico (gob.mx por JavaScript; Senado 403).
 - Estrategia: seguir para a EUROPA (feeds oficiais mais regulares); casos dificeis em fase posterior.
 FIM-sprint-038
+
+sprint-039: feat(europa) - PORTUGAL, ESPANHA, ITALIA, PAISES BAIXOS e BELGICA (1a leva europeia).
+- PT sem traducao (portugues original): governo + RTP (pais, politica). ES: Moncloa (7 feeds oficiais) +
+  RTVE (data no endereco). IT: governo (feed) + RAI (feed). NL: Tweede Kamer + NOS; rijksoverheid.nl
+  testado na hora (feeds.government.nl e feeds.rijksoverheid.nl foram desativados). BE: diplomatie (fr),
+  mil.be (nl) e RTBF (fr), com traducao pelo idioma de cada fonte.
+- Lacunas com motivo (403, anti-robo perfdrive, sem noticias legiveis, conexao recusada). EFE: HTTP 429.
+FIM-sprint-039

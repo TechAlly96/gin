@@ -1,0 +1,40 @@
+{
+  "pais": {
+    "codigo": "IT",
+    "nome": "Itália",
+    "idioma": "it",
+    "fuso": "Europe/Rome",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (esteri.it) redireciona coletores para uma verificação anti-robô (perfdrive).",
+    "defesa": "O site do Ministério da Defesa (difesa.it) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis).",
+    "parlamento": "Os sites da Câmara (camera.it) e do Senado (senato.it) entregam páginas vazias ou sem notícias legíveis a coletores."
+  },
+  "fontes": [
+    {
+      "id": "it-governo",
+      "nome": "Governo Italiano - Presidenza del Consiglio",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.governo.it/rss.xml"
+    },
+    {
+      "id": "it-rai",
+      "nome": "RaiNews (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.rainews.it/rss/tutti"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "pais": {
+    "codigo": "NL",
+    "nome": "Países Baixos",
+    "idioma": "nl",
+    "fuso": "Europe/Amsterdam",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "Os feeds do governo neerlandês foram desativados (feeds.government.nl e feeds.rijksoverheid.nl não existem no DNS) e a página de notícias não ficou legível por coletor.",
+    "chancelaria": "Os feeds do governo neerlandês foram desativados (feeds.government.nl e feeds.rijksoverheid.nl não existem no DNS) e a página de notícias não ficou legível por coletor.",
+    "defesa": "Os feeds do governo neerlandês foram desativados (feeds.government.nl e feeds.rijksoverheid.nl não existem no DNS) e a página de notícias não ficou legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "nl-tweedekamer",
+      "nome": "Tweede Kamer der Staten-Generaal",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.tweedekamer.nl/rss.xml"
+    },
+    {
+      "id": "nl-nos",
+      "nome": "NOS (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://feeds.nos.nl/nosnieuwsalgemeen"
+    }
+  ]
+}

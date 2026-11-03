@@ -1,0 +1,60 @@
+{
+  "pais": {
+    "codigo": "BE",
+    "nome": "Bélgica",
+    "idioma": "fr",
+    "fuso": "Europe/Brussels",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site do primeiro-ministro (premier.be) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis).",
+    "parlamento": "O site da Câmara (lachambre.be) lista páginas sem data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "be-diplomatie",
+      "nome": "SPF Affaires étrangères",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://diplomatie.belgium.be/fr",
+      "padrao_link": "/fr/actualites/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "be-defensie",
+      "nome": "Defensie / La Défense (mil.be)",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.mil.be/nl/",
+      "padrao_link": "/nl/news/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25,
+      "idioma": "nl"
+    },
+    {
+      "id": "be-rtbf",
+      "nome": "RTBF (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://www.rtbf.be/",
+      "padrao_link": "/article/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}
