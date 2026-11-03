@@ -1,0 +1,66 @@
+{
+  "pais": {
+    "codigo": "BG",
+    "nome": "Bulgária",
+    "idioma": "bg",
+    "fuso": "Europe/Sofia",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "defesa": "O site do Ministério da Defesa (mod.bg) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis)."
+  },
+  "fontes": [
+    {
+      "id": "bg-gov",
+      "nome": "Министерски съвет - пресцентър",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.gov.bg/",
+      "padrao_link": "/bg/prestsentar/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "bg-mfa",
+      "nome": "Министерство на външните работи - актуално",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.mfa.bg/",
+      "padrao_link": "/bg/aktualno/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "bg-parliament",
+      "nome": "Народно събрание - новини",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.parliament.bg/feed/news"
+    },
+    {
+      "id": "bg-bta",
+      "nome": "БТА - Българска телеграфна агенция (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://www.bta.bg/",
+      "padrao_link": "/bg/news/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

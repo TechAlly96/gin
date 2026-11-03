@@ -1,0 +1,62 @@
+{
+  "pais": {
+    "codigo": "CZ",
+    "nome": "Tchéquia",
+    "idioma": "cs",
+    "fuso": "Europe/Prague",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "parlamento": "O site da Câmara dos Deputados (psp.cz) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis)."
+  },
+  "fontes": [
+    {
+      "id": "cz-vlada",
+      "nome": "Vláda České republiky - média centrum",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://vlada.gov.cz/",
+      "padrao_link": "/cz/media-centrum/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "cz-mzv",
+      "nome": "Ministerstvo zahraničních věcí",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://mzv.gov.cz/jnp/",
+      "padrao_link": "/jnp/cz/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "cz-mo",
+      "nome": "Ministerstvo obrany",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.mo.gov.cz/rss-mo.xml"
+    },
+    {
+      "id": "cz-ct24",
+      "nome": "ČT24 - Česká televize (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://ct24.ceskatelevize.cz/rss"
+    }
+  ]
+}

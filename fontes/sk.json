@@ -1,0 +1,47 @@
+{
+  "pais": {
+    "codigo": "SK",
+    "nome": "Eslováquia",
+    "idioma": "sk",
+    "fuso": "Europe/Bratislava",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (mzv.sk) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "parlamento": "O site do Conselho Nacional (nrsr.sk) redireciona coletores para uma verificação anti-robô (challenge)."
+  },
+  "fontes": [
+    {
+      "id": "sk-vlada",
+      "nome": "Úrad vlády Slovenskej republiky",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.vlada.gov.sk/rss/"
+    },
+    {
+      "id": "sk-mosr",
+      "nome": "Ministerstvo obrany SR",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.mosr.sk/rss"
+    },
+    {
+      "id": "sk-stvr",
+      "nome": "STVR - Slovenská televízia a rozhlas (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://spravy.stvr.sk/feed/"
+    }
+  ]
+}

@@ -359,3 +359,12 @@ sprint-041 (cont.): pacotes Argos 1.9 de da/fi usam bpe.model (subword-nmt + Mos
 ("could not parse ModelProto"). traduzir.py ganhou dois separadores (_TokSP e _TokBPE, este como o
 BPETokenizer do Argos); ambiente do tradutor com sacremoses e subword-nmt (MIT, Python puro).
 FIM-sprint-041
+
+sprint-042: feat(europa-leste) - TCHEQUIA, ESLOVAQUIA, GRECIA, BULGARIA e ROMENIA + DATAS COM PONTOS.
+- leitores.py: datas numericas com pontos (02.11.2026, "2. 11. 2026", 2026.11.02.); 6/6 testes, sem regressao.
+  Destravou governo e MZV tchecos, governo, MVR e BTA bulgaros.
+- CZ: Vlada, MZV, MO (feed), CT24. SK: Vlada (feed), MOSR (feed), STVR (100 itens). GR: PM (feed), ERT.
+  BG: governo, MVR, Parlamento (feed), BTA. RO: Agerpres (politica e comunicados; data no endereco).
+- ADIADOS: Polonia (gov.pl redireciona, Sejm 403, PAP sem feed, Polskie Radio so podcasts) e Hungria
+  (kormany.hu por JavaScript, feed da Defesa sem data legivel, hirado.hu responde HTTP 606).
+FIM-sprint-042

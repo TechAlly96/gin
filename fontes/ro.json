@@ -1,0 +1,45 @@
+{
+  "pais": {
+    "codigo": "RO",
+    "nome": "Romênia",
+    "idioma": "ro",
+    "fuso": "Europe/Bucharest",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site do Governo (gov.ro) não responde (tempo esgotado ou rede inalcançável), a partir do GitHub.",
+    "chancelaria": "O site do Ministério das Relações Exteriores (mae.ro) não responde (tempo esgotado ou rede inalcançável), a partir do GitHub.",
+    "defesa": "O site do Ministério da Defesa (mapn.ro) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis).",
+    "parlamento": "O site da Câmara dos Deputados (cdep.ro) não responde (tempo esgotado ou rede inalcançável), a partir do GitHub."
+  },
+  "fontes": [
+    {
+      "id": "ro-agerpres-politica",
+      "nome": "AGERPRES - política (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://agerpres.ro/",
+      "padrao_link": "/politic",
+      "min_titulo": 25
+    },
+    {
+      "id": "ro-agerpres-comunicados",
+      "nome": "AGERPRES - comunicados oficiais (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://agerpres.ro/",
+      "padrao_link": "/comunicate/",
+      "min_titulo": 25
+    }
+  ]
+}

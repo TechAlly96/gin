@@ -1,0 +1,40 @@
+{
+  "pais": {
+    "codigo": "GR",
+    "nome": "Grécia",
+    "idioma": "el",
+    "fuso": "Europe/Athens",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (mfa.gr) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis).",
+    "defesa": "O site do Ministério da Defesa (mod.mil.gr) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis).",
+    "parlamento": "O site do Parlamento (hellenicparliament.gr) lista comunicados, mas as notícias não abrem para coletores."
+  },
+  "fontes": [
+    {
+      "id": "gr-pm",
+      "nome": "Prime Minister of Greece",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.primeminister.gr/feed"
+    },
+    {
+      "id": "gr-ert",
+      "nome": "ERT News (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.ertnews.gr/feed/"
+    }
+  ]
+}
