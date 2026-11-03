@@ -232,3 +232,11 @@ sprint-027: feat(palestina) - PALESTINA, 8o pais (fontes em ingles; Asia/Hebron)
   mfae.gov.ps sem resposta/DNS), defesa (AP sem forcas armadas), parlamento (CLP dissolvido em 2018).
   Testado do celular e do GitHub. A WAFA publica na integra as declaracoes oficiais.
 FIM-sprint-027
+
+sprint-028: fix(app) - PAISES ESCONDIDOS na tela (relato do usuario: so apareciam BR, AR e US).
+- Os 8 paises estavam no app, mas a fileira de botoes rolava para o lado (overflow-x:auto) com a barra
+  de rolagem escondida (scrollbar-width:none): alem de "Estados Unidos", tudo ficava fora da tela, sem
+  indicio visual. Dados nao eram a causa (no-cache + service worker rede primeiro).
+- .chips agora quebra em linhas (flex-wrap: wrap): todos os paises e filtros visiveis. CACHE_APP v4.
+- Licao: conferir o app NA TELA ao incluir cada pais, nao so o paises.json publicado.
+FIM-sprint-028

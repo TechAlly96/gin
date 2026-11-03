@@ -5,7 +5,7 @@ body { margin:0; background:var(--fundo); color:var(--texto); font:16px/1.5 syst
 .marca { display:flex; align-items:baseline; gap:8px; margin-bottom:6px; }
 .marca strong { font-size:20px; letter-spacing:2px; color:var(--destaque); }
 .marca span { color:var(--suave); font-size:13px; }
-.chips { display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; scrollbar-width:none; }
+.chips { display:flex; flex-wrap:wrap; gap:6px; padding-bottom:6px; }
 .chips button { flex:none; background:var(--cartao); color:var(--texto); border:1px solid var(--borda); border-radius:999px; padding:5px 12px; font-size:14px; }
 .chips button[aria-pressed="true"] { background:var(--destaque); border-color:var(--destaque); color:#fff; }
 main { max-width:760px; margin:0 auto; padding:12px 16px 40px; }
