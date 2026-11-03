@@ -1,0 +1,81 @@
+{
+  "pais": {
+    "codigo": "CN",
+    "nome": "China",
+    "idioma": "en",
+    "idioma_audio": "pt",
+    "fuso": "Asia/Shanghai",
+    "fuso_horas": 8
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "fontes": [
+    {
+      "id": "cn-gov",
+      "nome": "The State Council of the People's Republic of China",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://english.www.gov.cn/news/",
+      "padrao_link": "/news/20",
+      "min_titulo": 25
+    },
+    {
+      "id": "cn-fmprc",
+      "nome": "Ministry of Foreign Affairs - Top News",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.fmprc.gov.cn/eng/xw/zyxw/",
+      "padrao_link": "/eng/xw/zyxw/20",
+      "min_titulo": 25
+    },
+    {
+      "id": "cn-fmprc-ministro",
+      "nome": "Ministry of Foreign Affairs - Minister's Activities",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.fmprc.gov.cn/eng/wjbzhd/",
+      "padrao_link": "/eng/wjbzhd/20",
+      "min_titulo": 25
+    },
+    {
+      "id": "cn-mod",
+      "nome": "Ministry of National Defense",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "http://eng.mod.gov.cn/",
+      "padrao_link": "/2025xb/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "cn-npc",
+      "nome": "National People's Congress",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "http://www.npc.gov.cn/englishnpc/",
+      "padrao_link": "/20",
+      "min_titulo": 25
+    },
+    {
+      "id": "cn-xinhua",
+      "nome": "Xinhua News Agency",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://english.news.cn/",
+      "padrao_link": "/202",
+      "min_titulo": 25
+    }
+  ]
+}

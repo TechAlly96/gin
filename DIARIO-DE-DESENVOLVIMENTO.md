@@ -240,3 +240,12 @@ sprint-028: fix(app) - PAISES ESCONDIDOS na tela (relato do usuario: so aparecia
 - .chips agora quebra em linhas (flex-wrap: wrap): todos os paises e filtros visiveis. CACHE_APP v4.
 - Licao: conferir o app NA TELA ao incluir cada pais, nao so o paises.json publicado.
 FIM-sprint-028
+
+sprint-029: feat(china) - CHINA, 9o pais (fontes oficiais em ingles; Asia/Shanghai).
+- governo: Conselho de Estado; chancelaria: MFA (notícias principais + atividades do ministro); defesa:
+  Ministerio da Defesa Nacional; parlamento: APN (so por http://: o https recusa a criptografia do
+  Python; acessivel so pelo GitHub); agencia: Xinhua. Todos os orgaos sao do Estado/Partido.
+- leitores.py: DATA NO ENDERECO (Xinhua /AAAAMMDD/, gov.cn /AAAAMM/DD/, fmprc tAAAAMMDD_, /AAAA/MM/DD/,
+  APN /AAAA-MM/DD/), validada, so quando o texto do link nao traz data (5/5 testes); DATA PELO ROTULO
+  "Time： 2026-11-02 20:06:20" (dois-pontos de largura total; evita datas soltas de outro conteudo).
+FIM-sprint-029

@@ -219,6 +219,25 @@ def ler_lista_govbr(conteudo, base, padrao):
 DATA_NUMERICA = re.compile(r"\b\d{2}/\d{2}/\d{4}\b")
 
 
+DATA_URL = [re.compile(r"/(20\d{2})(\d{2})(\d{2})/"),          # Xinhua: /20261103/
+            re.compile(r"/(20\d{2})(\d{2})/(\d{2})/"),         # gov.cn: /202611/02/
+            re.compile(r"[/_]t(20\d{2})(\d{2})(\d{2})[_.]"),    # fmprc: /t20261030_123.html
+            re.compile(r"/(20\d{2})/(\d{1,2})/(\d{1,2})/"),     # comum: /2026/11/02/
+            re.compile(r"/(20\d{2})-(\d{2})/(\d{2})/")]          # APN: /2026-11/02/
+
+
+def data_no_endereco(link):
+    """Data de publicacao embutida no endereco (dd/mm/aaaa), validada; '' se nao houver."""
+    caminho = urllib.parse.urlsplit(link).path
+    for rx in DATA_URL:
+        m = rx.search(caminho)
+        if m:
+            a, mes, d = (int(x) for x in m.groups())
+            if 1 <= mes <= 12 and 1 <= d <= 31:
+                return f"{d:02d}/{mes:02d}/{a}"
+    return ""
+
+
 def ler_links(conteudo, base, padrao, min_titulo=25):
     """Leitor generico para paginas sem feed.
     - aceita links cujo endereco JA RESOLVIDO contem PADRAO;
@@ -249,6 +268,8 @@ def ler_links(conteudo, base, padrao, min_titulo=25):
             continue
         md = DATA_TEXTO.search(texto)
         data = md.group(0) if md else ""
+        if not data:
+            data = data_no_endereco(link)
         resumo = limpar(DATA_TEXTO.sub(" ", texto.replace(limpar(cab.group(2)), " "))) if cab else ""
         if not data:
             limite = candidatos[i + 1][0].start() if i + 1 < len(candidatos) else m.end() + 800
@@ -276,6 +297,10 @@ DATA_EUA = re.compile(r"\b(?:" + MESES_ALT + r")\.?\s+\d{1,2},?\s+\d{4}", re.I)
 DATELINE = re.compile(r"\b[A-Z][A-Z .\-]{2,40},\s+((?:" + MESES_ALT + r")\.?\s+\d{1,2},?\s+\d{4}|\d{1,2}\s+(?:"
                       + MESES_ALT + r")\.?\s+\d{4})\s*\(", re.I)
 
+# data pelo rotulo de creditos: "Time： 2026-11-02 20:06:20" (dois-pontos comum ou de largura total)
+DATA_ROTULO = re.compile(r"(?:Release Time|Publish(?:ed)?(?: Date| Time)?|Time|Date|发布时间|时间)\s*[:：]\s*"
+                         r"(20\d{2}-\d{2}-\d{2}(?:[ T]\d{2}:\d{2}(?::\d{2})?)?)", re.I)
+
 
 def data_do_artigo(link):
     """Abre a noticia e devolve a data de publicacao: primeiro os metadados padronizados
@@ -287,7 +312,7 @@ def data_do_artigo(link):
         if m:
             return m.group(1)
     texto = limpar(html)
-    m = DATELINE.search(texto)
+    m = DATA_ROTULO.search(texto) or DATELINE.search(texto)
     if m:
         return m.group(1)
     m = DATA_TEXTO.search(texto) or DATA_EXTENSO.search(texto) or DATA_EUA.search(texto) or DATA_NUMERICA.search(texto)
