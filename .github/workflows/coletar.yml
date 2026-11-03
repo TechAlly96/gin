@@ -61,11 +61,11 @@ jobs:
           ARGOS_MODELOS: ${{ github.workspace }}/argos-modelos
         run: |
           mkdir -p argos-modelos && rm -f argos-modelos/NOVO
-          if ! /tmp/argos/bin/python -c "import ctranslate2, sentencepiece" 2>/dev/null; then
+          if ! /tmp/argos/bin/python -c "import ctranslate2, sentencepiece, sacremoses, subword_nmt" 2>/dev/null; then
             touch argos-modelos/NOVO
             rm -rf /tmp/argos
             python3 -m venv /tmp/argos
-            /tmp/argos/bin/pip install --quiet ctranslate2 sentencepiece
+            /tmp/argos/bin/pip install --quiet ctranslate2 sentencepiece sacremoses subword-nmt
           fi
           ls fontes/*.json | xargs -n1 basename | sed 's/[.]json$//' | xargs -P 2 -I{} sh -c '/tmp/argos/bin/python -u coletor/traduzir.py {} || echo "::warning::Traducao de {} falhou"'
 

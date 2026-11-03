@@ -82,24 +82,52 @@ def pasta_do_par(origem, destino):
         return alvo
 
 
+class _TokSP:
+    """Pacotes com SentencePiece (a maioria)."""
+    def __init__(self, caminho):
+        import sentencepiece
+        self.sp = sentencepiece.SentencePieceProcessor(model_file=str(caminho))
+
+    def codificar(self, frase):
+        return self.sp.encode(frase, out_type=str)
+
+    def decodificar(self, tokens):
+        return "".join(tokens).replace("\u2581", " ").strip()
+
+
+class _TokBPE:
+    """Pacotes Argos 1.9 (ex.: da, fi): Moses + BPE (subword-nmt), como o BPETokenizer do Argos."""
+    def __init__(self, caminho, origem, destino):
+        from sacremoses import MosesDetokenizer, MosesPunctNormalizer, MosesTokenizer
+        from subword_nmt.apply_bpe import BPE
+        self.norm, self.tok = MosesPunctNormalizer(lang=origem), MosesTokenizer(lang=origem)
+        self.detok = MosesDetokenizer(lang=destino)
+        with open(caminho, encoding="utf-8") as f:
+            self.bpe = BPE(f)
+
+    def codificar(self, frase):
+        return self.bpe.segment_tokens(self.tok.tokenize(self.norm.normalize(frase), escape=False))
+
+    def decodificar(self, tokens):
+        return self.detok.detokenize(" ".join(tokens).replace("@@ ", "").split(" ")).strip()
+
+
 def carregar(origem, destino):
     chave = (origem, destino)
     if chave not in _tradutores:
         import ctranslate2
-        import sentencepiece
         base = pasta_do_par(origem, destino)
         if base is None:
             _tradutores[chave] = None
         else:
             modelos = list(base.rglob("model.bin"))
-            tokenizadores = (list(base.rglob("sentencepiece.model")) + list(base.rglob("source.spm"))
-                             + list(base.rglob("*.spm")) + list(base.rglob("*.model")))
-            if not modelos or not tokenizadores:
+            sp = list(base.rglob("sentencepiece.model")) + list(base.rglob("source.spm"))
+            bpe = list(base.rglob("bpe.model"))
+            if not modelos or not (sp or bpe):
                 arquivos = sorted(x.relative_to(base).as_posix() for x in base.rglob("*") if x.is_file())[:20]
                 raise LookupError(f"pacote {origem}->{destino} sem modelo/tokenizador reconhecido: {arquivos}")
-            modelo, sp = modelos[0].parent, tokenizadores[0]
-            _tradutores[chave] = (ctranslate2.Translator(str(modelo), device="cpu"),
-                                  sentencepiece.SentencePieceProcessor(model_file=str(sp)))
+            tok = _TokSP(sp[0]) if sp else _TokBPE(bpe[0], origem, destino)
+            _tradutores[chave] = (ctranslate2.Translator(str(modelos[0].parent), device="cpu"), tok)
     return _tradutores[chave]
 
 
@@ -107,11 +135,10 @@ def traduzir_par(texto, origem, destino):
     par = carregar(origem, destino)
     if par is None:
         raise LookupError(f"sem modelo {origem}->{destino}")
-    tradutor, sp = par
+    tradutor, tok = par
     frases = [f for f in FRASES.split(texto.strip()) if f]
-    resultado = tradutor.translate_batch([sp.encode(f, out_type=str) for f in frases],
-                                         beam_size=2, max_decoding_length=256)
-    textos = ["".join(r.hypotheses[0]).replace("\u2581", " ").strip() for r in resultado]
+    resultado = tradutor.translate_batch([tok.codificar(f) for f in frases], beam_size=2, max_decoding_length=256)
+    textos = [tok.decodificar(r.hypotheses[0]) for r in resultado]
     return re.sub(r"\s+", " ", " ".join(textos)).strip()
 
 

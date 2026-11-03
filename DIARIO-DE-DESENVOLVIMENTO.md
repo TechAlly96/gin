@@ -354,3 +354,8 @@ sprint-041: fix(traducao) - pacotes Argos de DINAMARQUES e FINLANDES com outro f
 - StopIteration ao carregar (41 falhas: da 30, fi 11): o tokenizador nao se chama sentencepiece.model.
 - traduzir.py aceita source.spm, *.spm e *.model; se faltar algo, o erro lista os arquivos do pacote.
 FIM-sprint-041
+
+sprint-041 (cont.): pacotes Argos 1.9 de da/fi usam bpe.model (subword-nmt + Moses), nao SentencePiece
+("could not parse ModelProto"). traduzir.py ganhou dois separadores (_TokSP e _TokBPE, este como o
+BPETokenizer do Argos); ambiente do tradutor com sacremoses e subword-nmt (MIT, Python puro).
+FIM-sprint-041
