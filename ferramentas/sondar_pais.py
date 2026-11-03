@@ -74,7 +74,9 @@ def sondar(url):
         partes = urllib.parse.urlsplit(link)
         titulo = re.sub(r"\s+", " ", limpar(texto)).strip()
         if partes.netloc == host and len(titulo) >= 25:
-            chave = "/".join(partes.path.split("/")[:3]) + "/"
+            segs = partes.path.split("/")
+            # endereco plano (/agencia/noticia-titulo-123.aspx): agrupa pelo prefixo do nome do arquivo
+            chave = "/".join(segs[:2]) + "/" + re.split(r"[-_]", segs[2])[0] if len(segs) == 3 else "/".join(segs[:3]) + "/"
             if link not in [l for l, _ in pastas[chave]]:
                 pastas[chave].append((link, titulo))
     for chave, links in sorted(pastas.items(), key=lambda kv: -len(kv[1]))[:4]:
