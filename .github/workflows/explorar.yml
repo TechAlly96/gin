@@ -8,7 +8,7 @@ on:
         required: true
         default: mapear
         type: choice
-        options: [mapear, descobrir, coletar]
+        options: [mapear, descobrir, coletar, sondar]
       urls:
         description: "Enderecos separados por espaco"
         required: true
@@ -19,7 +19,7 @@ permissions:
 jobs:
   explorar:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - name: Baixar codigo
         uses: actions/checkout@v5
@@ -29,7 +29,9 @@ jobs:
           URLS: ${{ inputs.urls }}
         run: |
           for u in $URLS; do
-            if [ "$FERRAMENTA" = "coletar" ]; then
+            if [ "$FERRAMENTA" = "sondar" ]; then
+              python3 -u ferramentas/sondar_pais.py "$u"
+            elif [ "$FERRAMENTA" = "coletar" ]; then
               python3 -u coletor/coletar.py "$u"
             elif [ "$FERRAMENTA" = "mapear" ]; then
               python3 -u ferramentas/mapear_links.py "$u"
