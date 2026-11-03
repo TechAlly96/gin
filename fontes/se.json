@@ -1,0 +1,55 @@
+{
+  "pais": {
+    "codigo": "SE",
+    "nome": "Suécia",
+    "idioma": "sv",
+    "fuso": "Europe/Stockholm",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "Não há site próprio do Ministério das Relações Exteriores; o portal regeringen.se reúne os comunicados de todos os ministérios.",
+    "defesa": "O site das Forças Armadas (forsvarsmakten.se) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis)."
+  },
+  "fontes": [
+    {
+      "id": "se-regeringen",
+      "nome": "Regeringskansliet - pressmeddelanden",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.regeringen.se/",
+      "padrao_link": "/pressmeddelanden/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "se-riksdagen",
+      "nome": "Sveriges riksdag - aktuellt",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.riksdagen.se/sv/",
+      "padrao_link": "/sv/aktuellt/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "se-svt",
+      "nome": "SVT Nyheter (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.svt.se/rss.xml"
+    }
+  ]
+}

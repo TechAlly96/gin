@@ -1,0 +1,60 @@
+{
+  "pais": {
+    "codigo": "CH",
+    "nome": "Suíça",
+    "idioma": "en",
+    "fuso": "Europe/Zurich",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Departamento Federal de Relações Exteriores (eda.admin.ch) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis); os comunicados do Conselho Federal saem no admin.ch.",
+    "defesa": "O site do Departamento de Defesa (VBS) não foi acessível; os comunicados do Conselho Federal, inclusive de defesa, saem no admin.ch.",
+    "parlamento": "O site do Parlamento (parlament.ch) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis)."
+  },
+  "fontes": [
+    {
+      "id": "ch-admin",
+      "nome": "The Federal Council (admin.ch) - media releases",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.admin.ch/en/newnsb",
+      "padrao_link": "/en/newnsb/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "ch-swissinfo-politica",
+      "nome": "SWI swissinfo.ch (SRG, pública) - Swiss politics",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://www.swissinfo.ch/eng/",
+      "padrao_link": "/eng/swiss-politics/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "ch-swissinfo-exterior",
+      "nome": "SWI swissinfo.ch (SRG, pública) - Foreign affairs",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://www.swissinfo.ch/eng/",
+      "padrao_link": "/eng/foreign-affairs/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

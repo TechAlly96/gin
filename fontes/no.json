@@ -1,0 +1,55 @@
+{
+  "pais": {
+    "codigo": "NO",
+    "nome": "Noruega",
+    "idioma": "nb",
+    "fuso": "Europe/Oslo",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O portal do governo (regjeringen.no) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "chancelaria": "O Ministério das Relações Exteriores publica no regjeringen.no, que recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub."
+  },
+  "fontes": [
+    {
+      "id": "no-forsvaret",
+      "nome": "Forsvaret - aktuelt",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.forsvaret.no/",
+      "padrao_link": "/aktuelt-og-presse/aktuelt/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "no-stortinget",
+      "nome": "Stortinget - hva skjer",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.stortinget.no/",
+      "padrao_link": "/no/Hva-skjer-pa-Stortinget/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "no-nrk",
+      "nome": "NRK (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.nrk.no/toppsaker.rss"
+    }
+  ]
+}

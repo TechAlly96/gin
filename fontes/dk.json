@@ -1,0 +1,55 @@
+{
+  "pais": {
+    "codigo": "DK",
+    "nome": "Dinamarca",
+    "idioma": "da",
+    "fuso": "Europe/Copenhagen",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (um.dk) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis).",
+    "parlamento": "O site do Parlamento (ft.dk) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub."
+  },
+  "fontes": [
+    {
+      "id": "dk-stm",
+      "nome": "Statsministeriet",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://stm.dk/",
+      "padrao_link": "/statsministeriet/publikationer/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "dk-fmn",
+      "nome": "Forsvarsministeriet - nyheder",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.fmn.dk/",
+      "padrao_link": "/da/nyheder/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "dk-dr",
+      "nome": "DR Nyheder (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.dr.dk/nyheder/service/feeds/allenyheder"
+    }
+  ]
+}

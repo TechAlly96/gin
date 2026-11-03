@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "FI",
+    "nome": "Finlândia",
+    "idioma": "fi",
+    "fuso": "Europe/Helsinki",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O portal do governo (valtioneuvosto.fi) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "chancelaria": "O site do Ministério das Relações Exteriores (um.fi) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "defesa": "O site do Ministério da Defesa (defmin.fi) recusa acesso automatizado (HTTP 403), a partir do celular e do GitHub.",
+    "parlamento": "O site do Parlamento (eduskunta.fi) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis)."
+  },
+  "fontes": [
+    {
+      "id": "fi-yle",
+      "nome": "Yle Uutiset (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://yle.fi/rss/uutiset/paauutiset"
+    }
+  ]
+}

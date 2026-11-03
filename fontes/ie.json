@@ -1,0 +1,40 @@
+{
+  "pais": {
+    "codigo": "IE",
+    "nome": "Irlanda",
+    "idioma": "en",
+    "fuso": "Europe/Dublin",
+    "fuso_horas": 0,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O portal gov.ie mistura na página inicial conteúdos antigos (de 2019) com notícias, sem listagem confiável por data.",
+    "chancelaria": "O site do Departamento de Relações Exteriores (ireland.ie) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis).",
+    "defesa": "O site das Forças de Defesa (military.ie) não tem seção de notícias acessível (HTTP 404)."
+  },
+  "fontes": [
+    {
+      "id": "ie-oireachtas",
+      "nome": "Houses of the Oireachtas - Press releases",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.oireachtas.ie/en/rss/press-releases.xml"
+    },
+    {
+      "id": "ie-rte",
+      "nome": "RTÉ News (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.rte.ie/feeds/rss/?index=/news/"
+    }
+  ]
+}

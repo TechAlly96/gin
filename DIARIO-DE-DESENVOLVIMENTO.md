@@ -342,3 +342,10 @@ sprint-039: feat(europa) - PORTUGAL, ESPANHA, ITALIA, PAISES BAIXOS e BELGICA (1
   mil.be (nl) e RTBF (fr), com traducao pelo idioma de cada fonte.
 - Lacunas com motivo (403, anti-robo perfdrive, sem noticias legiveis, conexao recusada). EFE: HTTP 429.
 FIM-sprint-039
+
+sprint-040: feat(europa) - IRLANDA, SUICA, AUSTRIA, DINAMARCA, SUECIA, NORUEGA e FINLANDIA.
+- Emissoras publicas em todos (RTE, Swissinfo/SRG, ORF, DR, SVT, NRK, Yle), feeds ou paginas com data.
+- IE: Oireachtas (feed). CH: admin.ch e Swissinfo em ingles (pais quadrilingue). AT: Bundeskanzleramt.
+  DK: Statsministeriet + Forsvarsministeriet. SE: Regeringen + Riksdagen. NO: Forsvaret + Stortinget.
+  FI: so Yle (valtioneuvosto, um.fi e defmin.fi com 403). Idiomas novos: da, sv, nb, fi.
+FIM-sprint-040

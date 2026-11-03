@@ -1,0 +1,44 @@
+{
+  "pais": {
+    "codigo": "AT",
+    "nome": "Áustria",
+    "idioma": "de",
+    "fuso": "Europe/Vienna",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (bmeia.gv.at) mostra páginas temáticas, sem notícias datadas legíveis por coletor.",
+    "defesa": "O site das Forças Armadas (bundesheer.at) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis).",
+    "parlamento": "O site do Parlamento (parlament.gv.at) não expõe notícias legíveis por coletor (sem feed e sem notícias com data detectáveis)."
+  },
+  "fontes": [
+    {
+      "id": "at-bka",
+      "nome": "Bundeskanzleramt - Nachrichten der Bundesregierung",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.bundeskanzleramt.gv.at/",
+      "padrao_link": "/bundeskanzleramt/nachrichten-der-bundesregierung/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "at-orf",
+      "nome": "ORF News (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://rss.orf.at/news.xml"
+    }
+  ]
+}
