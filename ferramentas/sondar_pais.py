@@ -56,7 +56,7 @@ def sondar(url):
         return
     pagina = conteudo.decode("utf-8", "replace")
     print(f"  abre: {len(pagina)} caracteres (identificacao {ident}) -> {final}")
-    candidatos = [urllib.parse.urljoin(final, h) for tag in ALTERNATE.findall(pagina) for h in HREF.findall(tag)]
+    candidatos = [final] + [urllib.parse.urljoin(final, h) for tag in ALTERNATE.findall(pagina) for h in HREF.findall(tag)]
     base = f"{urllib.parse.urlsplit(final).scheme}://{urllib.parse.urlsplit(final).netloc}/"
     candidatos += [urllib.parse.urljoin(base, s) for s in SUFIXOS]
     vistos = set()
