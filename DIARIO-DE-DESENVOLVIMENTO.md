@@ -419,3 +419,10 @@ sprint-048: fix(leitores) - feeds com XML defeituoso (TASS: "undefined entity"; 
   &mdash;...), escapa & solto e remove caracteres de controle, e tenta de novo. Testado com TASS e MID reais.
 - Coleta: 48,7 min -> 6,8 min (ffmpeg estatico em cache). Site: 96 MB (audio 84,6 MB em 58 boletins; json 9,3).
 FIM-sprint-048
+
+sprint-048 (cont.): mid.ru/rss devolve pagina de bloqueio do firewall ("Request Rejected"), nao XML;
+na sondagem pelo GitHub respondeu (bloqueio intermitente). ru-mid -> lacuna chancelaria.
+- _xml_tolerante identifica pagina HTML no lugar do feed e informa o titulo (diagnostico de bloqueios).
+- Licao: no comando anterior o teste reprovou mas o envio ocorreu (linha seguinte nao encadeada com &&).
+  Regra: teste e envio sempre encadeados com &&.
+FIM-sprint-048

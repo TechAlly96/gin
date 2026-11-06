@@ -153,6 +153,11 @@ def _texto(el, *nomes):
 def _xml_tolerante(conteudo):
     """XML estrito; se falhar, corrige defeitos comuns de feeds reais e tenta de novo
     (entidades de HTML como &nbsp;, & solto, caracteres de controle proibidos no XML)."""
+    cabeca = (conteudo[:400].decode("utf-8", "ignore") if isinstance(conteudo, bytes) else conteudo[:400]).lower()
+    if "<html" in cabeca and "<rss" not in cabeca and "<feed" not in cabeca and "<rdf" not in cabeca:
+        texto = conteudo.decode("utf-8", "ignore") if isinstance(conteudo, bytes) else conteudo
+        titulo = re.search(r"<title[^>]*>(.*?)</title>", texto, re.S | re.I)
+        raise RuntimeError(f"o site devolveu uma pagina HTML em vez do feed ({titulo.group(1).strip()[:60] if titulo else 'sem titulo'})")
     try:
         return ET.fromstring(conteudo)
     except ET.ParseError:

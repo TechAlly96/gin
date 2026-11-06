@@ -16,7 +16,8 @@
   ],
   "lacunas": {
     "defesa": "O site do Ministério da Defesa não foi acessível a coletores.",
-    "parlamento": "O site da Duma (duma.gov.ru) não responde (tempo esgotado)."
+    "parlamento": "O site da Duma (duma.gov.ru) não responde (tempo esgotado).",
+    "chancelaria": "O firewall do site do Ministério das Relações Exteriores (mid.ru) rejeita acessos automatizados (página \"Request Rejected\"), de forma intermitente."
   },
   "fontes": [
     {
@@ -26,15 +27,6 @@
       "natureza": "oficial",
       "tipo": "feed",
       "url": "http://en.kremlin.ru/events/president/news/feed"
-    },
-    {
-      "id": "ru-mid",
-      "nome": "Министерство иностранных дел России",
-      "categoria": "chancelaria",
-      "natureza": "oficial",
-      "tipo": "feed",
-      "url": "https://mid.ru/rss",
-      "idioma": "ru"
     },
     {
       "id": "ru-tass",
