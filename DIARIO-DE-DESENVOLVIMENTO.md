@@ -431,3 +431,9 @@ sprint-049: fix(china) - Xinhua com 0 itens: a pagina inicial english.news.cn pa
 por JavaScript (CN incompleto). Agora: english.news.cn/world/ (ingles, data no endereco /AAAAMMDD/) e
 www.news.cn/politics/ (chines, idioma zh, politica interna). Feed RSS antigo parado em 2017.
 FIM-sprint-049
+
+sprint-050: feat(asia) - JAPAO, COREIA, INDIA, INDONESIA, VIETNA, TAILANDIA, MALASIA e SINGAPURA (os que tiverem fonte).
+- Teste na hora cobre feeds (>=3 itens e algum dos ultimos 60 dias) e paginas; pais sem fonte e adiado sozinho.
+- Fontes em ingles: Kantei (ATENCAO: endereco "/105/" = gabinete atual; muda com novo gabinete), Setkab,
+  Antara, VietnamPlus, Bernama, MFA Singapura. Malasia: PMO em malaio (ms). Filipinas ADIADA (tudo 403).
+FIM-sprint-050

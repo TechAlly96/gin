@@ -1,0 +1,37 @@
+{
+  "pais": {
+    "codigo": "TH",
+    "nome": "Tailândia",
+    "idioma": "en",
+    "fuso": "Asia/Bangkok",
+    "fuso_horas": 7,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site do Governo (thaigov.go.th) recusa acesso automatizado (HTTP 403).",
+    "agencia": "A seção em inglês do Departamento de Relações Públicas (thainews.prd.go.th) não foi encontrada (HTTP 404).",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "th-mfa",
+      "nome": "Ministry of Foreign Affairs of Thailand",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.mfa.go.th/en/",
+      "padrao_link": "/en/content/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

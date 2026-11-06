@@ -1,0 +1,49 @@
+{
+  "pais": {
+    "codigo": "MY",
+    "nome": "Malásia",
+    "idioma": "ms",
+    "fuso": "Asia/Kuala_Lumpur",
+    "fuso_horas": 8,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (kln.gov.my) apresenta certificado de segurança não verificável.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "my-pmo",
+      "nome": "Pejabat Perdana Menteri - ucapan terkini",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.pmo.gov.my/ms/",
+      "padrao_link": "/ms/ucapanterkini/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "my-bernama",
+      "nome": "BERNAMA (agência estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://www.bernama.com/en/",
+      "padrao_link": "/en/news.php",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25,
+      "idioma": "en"
+    }
+  ]
+}

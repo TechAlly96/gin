@@ -1,0 +1,40 @@
+{
+  "pais": {
+    "codigo": "ID",
+    "nome": "Indonésia",
+    "idioma": "en",
+    "fuso": "Asia/Jakarta",
+    "fuso_horas": 7,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (kemlu.go.id) não expõe notícias recentes com data legível por coletor.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "id-setkab",
+      "nome": "Cabinet Secretariat of the Republic of Indonesia",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://setkab.go.id/feed/"
+    },
+    {
+      "id": "id-antara",
+      "nome": "ANTARA News (agência estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://en.antaranews.com/rss/news.xml"
+    }
+  ]
+}

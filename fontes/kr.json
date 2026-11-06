@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "KR",
+    "nome": "Coreia do Sul",
+    "idioma": "en",
+    "fuso": "Asia/Seoul",
+    "fuso_horas": 9,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O portal do governo (korea.net) redireciona coletores (HTTP 302).",
+    "chancelaria": "O site do Ministério das Relações Exteriores (mofa.go.kr) redireciona coletores (HTTP 307).",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "kr-yonhap",
+      "nome": "Yonhap News Agency (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://en.yna.co.kr/RSS/news.xml"
+    }
+  ]
+}

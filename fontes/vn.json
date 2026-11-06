@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "VN",
+    "nome": "Vietnã",
+    "idioma": "en",
+    "fuso": "Asia/Ho_Chi_Minh",
+    "fuso_horas": 7,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O feed do portal do governo (baochinhphu.vn) está parado desde junho de 2026.",
+    "chancelaria": "A seção em inglês do Ministério das Relações Exteriores (mofa.gov.vn) não foi encontrada (HTTP 404).",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "vn-vietnamplus",
+      "nome": "VietnamPlus - Vietnam News Agency (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://en.vietnamplus.vn/rss/home.rss"
+    }
+  ]
+}
