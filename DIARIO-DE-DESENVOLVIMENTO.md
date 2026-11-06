@@ -413,3 +413,9 @@ sprint-047 (cont.): voz em 0,2 min (era 35,3). Publicacao cancelada apos 10 min 
 (sem concorrencia; tempo-limite padrao da deploy-pages). Site: 114,8 -> 119,9 -> 132 MB em 3 coletas.
 deploy-pages com timeout de 20 min; passo "Medir o tamanho do site" (audio x json) antes do envio.
 FIM-sprint-047
+
+sprint-048: fix(leitores) - feeds com XML defeituoso (TASS: "undefined entity"; MID: "invalid token").
+- _xml_tolerante: XML estrito primeiro (caminho de sempre); so se falhar, converte entidades HTML (&nbsp;
+  &mdash;...), escapa & solto e remove caracteres de controle, e tenta de novo. Testado com TASS e MID reais.
+- Coleta: 48,7 min -> 6,8 min (ffmpeg estatico em cache). Site: 96 MB (audio 84,6 MB em 58 boletins; json 9,3).
+FIM-sprint-048

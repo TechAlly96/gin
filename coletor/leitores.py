@@ -150,9 +150,30 @@ def _texto(el, *nomes):
     return ""
 
 
+def _xml_tolerante(conteudo):
+    """XML estrito; se falhar, corrige defeitos comuns de feeds reais e tenta de novo
+    (entidades de HTML como &nbsp;, & solto, caracteres de controle proibidos no XML)."""
+    try:
+        return ET.fromstring(conteudo)
+    except ET.ParseError:
+        import html.entities
+        texto = conteudo.decode("utf-8", errors="replace") if isinstance(conteudo, bytes) else conteudo
+        texto = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", texto)
+        def entidade(m):
+            nome = m.group(1)
+            if nome in ("amp", "lt", "gt", "quot", "apos"):
+                return m.group(0)
+            cp = html.entities.name2codepoint.get(nome)
+            return f"&#{cp};" if cp else f"&amp;{nome};"
+        texto = re.sub(r"&([A-Za-z][A-Za-z0-9]*);", entidade, texto)
+        texto = re.sub(r"&(?!#\d+;|#x[0-9A-Fa-f]+;|[A-Za-z][A-Za-z0-9]*;)", "&amp;", texto)
+        texto = re.sub(r"^<\?xml[^>]*\?>", "", texto.lstrip())
+        return ET.fromstring(texto)
+
+
 def ler_feed(conteudo):
     conteudo = conteudo.lstrip(b"\xef\xbb\xbf \t\r\n")
-    raiz = ET.fromstring(conteudo)
+    raiz = _xml_tolerante(conteudo)
     itens = []
     for it in list(raiz.iter("item")) + list(raiz.iter(f"{RSS1}item")):
         itens.append({
