@@ -180,10 +180,18 @@ jobs:
     timeout-minutes: 10
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url || steps.deploy2.outputs.page_url }}
     steps:
       - name: Publicar no GitHub Pages
         id: deploy
+        continue-on-error: true  # a acao tem teto fixo de 10 min; se o Pages demorar, tenta de novo abaixo
         uses: actions/deploy-pages@v4
-        with:
-          timeout: 1200000  # 20 min; o padrao de 10 min cancelou a publicacao em 06/11
+
+      - name: Aguardar o Pages antes da segunda tentativa
+        if: always() && steps.deploy.outcome != 'success'
+        run: sleep 90
+
+      - name: Publicar no GitHub Pages (segunda tentativa)
+        id: deploy2
+        if: always() && steps.deploy.outcome != 'success'
+        uses: actions/deploy-pages@v4

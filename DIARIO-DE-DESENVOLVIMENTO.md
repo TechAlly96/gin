@@ -437,3 +437,11 @@ sprint-050: feat(asia) - JAPAO, COREIA, INDIA, INDONESIA, VIETNA, TAILANDIA, MAL
 - Fontes em ingles: Kantei (ATENCAO: endereco "/105/" = gabinete atual; muda com novo gabinete), Setkab,
   Antara, VietnamPlus, Bernama, MFA Singapura. Malasia: PMO em malaio (ms). Filipinas ADIADA (tudo 403).
 FIM-sprint-050
+
+sprint-051: fix(workflow) - publicacao cancelada de novo aos 10 min: a deploy-pages tem TETO FIXO de 10 min
+(confirmado no log: valor acima vira o maximo; o timeout de 20 min da sprint-047 nao tinha efeito).
+- 1a tentativa com continue-on-error; se nao tiver sucesso (failure OU cancelled), espera 90 s e tenta de novo.
+- environment url usa a tentativa que der certo. Dados ficam no ramo dados: publicacao perdida nao perde noticias.
+- Pendente: croata e servio sem modelo no Argos (160 falhas sr, 80 hr): Balcas sem traducao desde 03/11.
+- Pendente: India adiada (feed do PIB com 20 itens sem data reconhecida).
+FIM-sprint-051
