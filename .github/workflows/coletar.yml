@@ -162,6 +162,13 @@ jobs:
           find _site -type f | sort
           du -sh _site
 
+      - name: Medir o tamanho do site
+        run: |
+          du -sh _site | sed 's/^/  total do site: /'
+          find _site -type f | wc -l | sed 's/^/  arquivos: /'
+          find _site -name '*.ogg' -printf '%s\n' | awk '{s+=$1; n++} END {printf "  audio: %d arquivos, %.1f MB\n", n, s/1048576}'
+          find _site -name '*.json' -printf '%s\n' | awk '{s+=$1; n++} END {printf "  json: %d arquivos, %.1f MB\n", n, s/1048576}'
+
       - name: Enviar site para o Pages
         uses: actions/upload-pages-artifact@v4
         with:
@@ -178,3 +185,5 @@ jobs:
       - name: Publicar no GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 1200000  # 20 min; o padrao de 10 min cancelou a publicacao em 06/11

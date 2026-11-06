@@ -408,3 +408,8 @@ sprint-047: perf(workflow) - coleta a 48,7 de 50 min: "Preparar voz" levava 35,3
 - ffmpeg estatico do GitHub (BtbN/FFmpeg-Builds) + cache de /tmp/ffmpeg-estatico e /tmp/piper (baixados 1 vez);
   reserva: apt com --no-install-recommends. Medicao: coleta 3,9 min, traducao 1,6 min, boletins 6,8 min.
 FIM-sprint-047
+
+sprint-047 (cont.): voz em 0,2 min (era 35,3). Publicacao cancelada apos 10 min em "syncing_files"
+(sem concorrencia; tempo-limite padrao da deploy-pages). Site: 114,8 -> 119,9 -> 132 MB em 3 coletas.
+deploy-pages com timeout de 20 min; passo "Medir o tamanho do site" (audio x json) antes do envio.
+FIM-sprint-047
