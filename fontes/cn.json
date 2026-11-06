@@ -69,13 +69,24 @@
     },
     {
       "id": "cn-xinhua",
-      "nome": "Xinhua News Agency",
+      "nome": "Xinhua News Agency - World",
       "categoria": "agencia",
       "natureza": "estatal",
       "tipo": "html-links",
-      "url": "https://english.news.cn/",
+      "url": "https://english.news.cn/world/index.htm",
       "padrao_link": "/202",
       "min_titulo": 25
+    },
+    {
+      "id": "cn-xinhua-politica",
+      "nome": "新华网 - 时政 (Xinhua, política)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://www.news.cn/politics/",
+      "padrao_link": "/politics/202",
+      "min_titulo": 8,
+      "idioma": "zh"
     }
   ]
 }

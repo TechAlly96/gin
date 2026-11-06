@@ -426,3 +426,8 @@ na sondagem pelo GitHub respondeu (bloqueio intermitente). ru-mid -> lacuna chan
 - Licao: no comando anterior o teste reprovou mas o envio ocorreu (linha seguinte nao encadeada com &&).
   Regra: teste e envio sempre encadeados com &&.
 FIM-sprint-048
+
+sprint-049: fix(china) - Xinhua com 0 itens: a pagina inicial english.news.cn passou a carregar as manchetes
+por JavaScript (CN incompleto). Agora: english.news.cn/world/ (ingles, data no endereco /AAAAMMDD/) e
+www.news.cn/politics/ (chines, idioma zh, politica interna). Feed RSS antigo parado em 2017.
+FIM-sprint-049
