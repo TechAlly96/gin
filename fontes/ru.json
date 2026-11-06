@@ -1,0 +1,60 @@
+{
+  "pais": {
+    "codigo": "RU",
+    "nome": "Rússia",
+    "idioma": "en",
+    "fuso": "Europe/Moscow",
+    "fuso_horas": 3,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "defesa": "O site do Ministério da Defesa não foi acessível a coletores.",
+    "parlamento": "O site da Duma (duma.gov.ru) não responde (tempo esgotado)."
+  },
+  "fontes": [
+    {
+      "id": "ru-kremlin",
+      "nome": "President of Russia (Kremlin) - news",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "http://en.kremlin.ru/events/president/news/feed"
+    },
+    {
+      "id": "ru-mid",
+      "nome": "Министерство иностранных дел России",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://mid.ru/rss",
+      "idioma": "ru"
+    },
+    {
+      "id": "ru-tass",
+      "nome": "TASS (agência estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://tass.com/rss/v2.xml"
+    },
+    {
+      "id": "ru-government",
+      "nome": "Government of Russia - news",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "http://government.ru/en/",
+      "padrao_link": "/en/news/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

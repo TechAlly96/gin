@@ -1,0 +1,52 @@
+{
+  "pais": {
+    "codigo": "TR",
+    "nome": "Turquia",
+    "idioma": "en",
+    "fuso": "Europe/Istanbul",
+    "fuso_horas": 3,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site da Presidência (tccb.gov.tr) não responde (tempo esgotado).",
+    "defesa": "O site do Ministério da Defesa (msb.gov.tr) redireciona coletores (HTTP 302)."
+  },
+  "fontes": [
+    {
+      "id": "tr-mfa",
+      "nome": "Ministry of Foreign Affairs of Türkiye",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.mfa.gov.tr/en.rss.mfa?ad9093da-8e71-4678-a1b6-05f297baadc4"
+    },
+    {
+      "id": "tr-aa",
+      "nome": "Anadolu Agency (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.aa.com.tr/en/rss/default?cat=guncel"
+    },
+    {
+      "id": "tr-tbmm",
+      "nome": "Türkiye Büyük Millet Meclisi",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://tbmm.gov.tr/",
+      "padrao_link": "/denetim/meclis",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25,
+      "idioma": "tr"
+    }
+  ]
+}

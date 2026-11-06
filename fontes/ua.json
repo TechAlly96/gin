@@ -1,0 +1,48 @@
+{
+  "pais": {
+    "codigo": "UA",
+    "nome": "Ucrânia",
+    "idioma": "en",
+    "fuso": "Europe/Kyiv",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (mfa.gov.ua) recusa acesso automatizado (HTTP 403).",
+    "defesa": "A seção em inglês do Ministério da Defesa (mil.gov.ua) não foi encontrada (HTTP 404).",
+    "agencia": "O site da Ukrinform (agência estatal) não expõe notícias recentes com data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "ua-kmu",
+      "nome": "Cabinet of Ministers of Ukraine - news",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.kmu.gov.ua/en",
+      "padrao_link": "/en/news/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "ua-rada",
+      "nome": "Verkhovna Rada of Ukraine - news",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.rada.gov.ua/en",
+      "padrao_link": "/en/news/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

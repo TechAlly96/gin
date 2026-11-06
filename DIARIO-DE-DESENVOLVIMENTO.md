@@ -395,3 +395,9 @@ sprint-045: manutencao(06/11/2026) - 3 dias depois: 50 paises, 2 incompletos (GB
 - US: feeds de pauta do Congresso vazios em recesso pos-eleicao (03/11); mantidos, voltam nas sessoes.
 - Alertas de 8 a 39 dias: fontes que publicam pouco no proprio site (informacao correta, nao defeito).
 FIM-sprint-045
+
+sprint-046: feat(leste-caucaso) - UCRANIA, RUSSIA, BELARUS, MOLDAVIA, TURQUIA, ARMENIA e AZERBAIJAO.
+- Fontes oficiais em ingles quando existem (KMU, Rada, Kremlin, TASS, BelTA, MFA turco, Anadolu, PM armenio).
+  MID russo com idioma ru. Fontes incertas testadas na hora (60 dias). Georgia ADIADA (tudo 403/sem resposta).
+- Os dois lados da guerra (Russia e Ucrania) e de Armenia/Azerbaijao, com as mesmas regras de fonte oficial.
+FIM-sprint-046

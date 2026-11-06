@@ -1,0 +1,48 @@
+{
+  "pais": {
+    "codigo": "BY",
+    "nome": "Belarus",
+    "idioma": "en",
+    "fuso": "Europe/Minsk",
+    "fuso_horas": 3,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "defesa": "O site do Ministério da Defesa não foi acessível a coletores.",
+    "parlamento": "O site da Assembleia Nacional não foi acessível a coletores.",
+    "chancelaria": "O site do Ministério das Relações Exteriores (mfa.gov.by) não expõe notícias recentes com data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "by-president",
+      "nome": "President of the Republic of Belarus - events",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://president.gov.by/en",
+      "padrao_link": "/en/events/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    },
+    {
+      "id": "by-belta",
+      "nome": "BelTA - política (agência estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://eng.belta.by/",
+      "padrao_link": "/politics/view/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}
