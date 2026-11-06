@@ -40,22 +40,6 @@
       "url": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=ministry-of-defence"
     },
     {
-      "id": "gb-commons-library",
-      "nome": "House of Commons Library",
-      "categoria": "parlamento",
-      "natureza": "oficial",
-      "tipo": "feed",
-      "url": "https://commonslibrary.parliament.uk/feed"
-    },
-    {
-      "id": "gb-lords-library",
-      "nome": "House of Lords Library",
-      "categoria": "parlamento",
-      "natureza": "oficial",
-      "tipo": "feed",
-      "url": "https://lordslibrary.parliament.uk/feed"
-    },
-    {
       "id": "gb-bbc-politics",
       "nome": "BBC News - Politics",
       "categoria": "agencia",
@@ -70,6 +54,14 @@
       "natureza": "estatal",
       "tipo": "feed",
       "url": "https://feeds.bbci.co.uk/news/uk/rss.xml"
+    },
+    {
+      "id": "gb-post",
+      "nome": "Parliamentary Office of Science and Technology (POST)",
+      "categoria": "parlamento",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://post.parliament.uk/feed/"
     }
   ]
 }

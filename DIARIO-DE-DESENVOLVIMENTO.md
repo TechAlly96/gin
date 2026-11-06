@@ -386,3 +386,12 @@ sprint-044: feat(balcas) - CROACIA, ESLOVENIA, SERVIA, BOSNIA, MONTENEGRO, KOSOV
 - Fontes incertas testadas na hora (data dos ultimos 60 dias). Albania ADIADA (ATA 403; governo e
   parlamento sem noticias legiveis). Kosovo incluido (governo proprio; reconhecimento internacional parcial).
 FIM-sprint-044
+
+sprint-045: manutencao(06/11/2026) - 3 dias depois: 50 paises, 2 incompletos (GB e CL), 20 alertas.
+- GB: o Parlamento passou a bloquear coletores em todos os dominios (bibliotecas, comissoes, Hansard: 403).
+  Bibliotecas trocadas pelo POST (post.parliament.uk/feed, oficial, publica com menos frequencia).
+- CL: prensa.presidencia.cl migrou para presidencia.gob.cl (pagina vazia, JavaScript) -> lacuna governo.
+- NO: forsvaret.no sem noticias recentes legiveis (a fonte so via noticias antigas: "401 dias") -> lacuna defesa.
+- US: feeds de pauta do Congresso vazios em recesso pos-eleicao (03/11); mantidos, voltam nas sessoes.
+- Alertas de 8 a 39 dias: fontes que publicam pouco no proprio site (informacao correta, nao defeito).
+FIM-sprint-045
