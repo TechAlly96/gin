@@ -84,6 +84,14 @@ jobs:
           path: /tmp/piper
           key: piper-venv-v1-${{ runner.os }}-${{ runner.arch }}
 
+      - name: Cache das ferramentas de voz (ffmpeg estatico + Piper)
+        uses: actions/cache@v4
+        with:
+          path: |
+            /tmp/ffmpeg-estatico
+            /tmp/piper
+          key: voz-ferramentas-v1
+
       - name: Preparar voz (Piper em ambiente isolado + ffmpeg)
         id: voz
         continue-on-error: true
@@ -93,7 +101,19 @@ jobs:
             python3 -m venv /tmp/piper
             /tmp/piper/bin/pip install --quiet piper-tts
           fi
-          command -v ffmpeg || (sudo apt-get update -q && sudo apt-get install -y -q ffmpeg)
+          # ffmpeg estatico do GitHub (BtbN/FFmpeg-Builds), guardado em cache; o apt chegou a levar 35 min (33,9 kB/s)
+          if ! command -v ffmpeg >/dev/null; then
+            if [ ! -x /tmp/ffmpeg-estatico/ffmpeg ]; then
+              mkdir -p /tmp/ffmpeg-estatico
+              curl -sSL --retry 4 --max-time 300 https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz \
+                | tar -xJ --strip-components=2 -C /tmp/ffmpeg-estatico --wildcards '*/bin/ffmpeg' || rm -rf /tmp/ffmpeg-estatico
+            fi
+            if [ -x /tmp/ffmpeg-estatico/ffmpeg ]; then
+              echo /tmp/ffmpeg-estatico >> "$GITHUB_PATH"
+            else
+              sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends ffmpeg
+            fi
+          fi
 
       - name: Cache dos modelos de voz
         uses: actions/cache@v4

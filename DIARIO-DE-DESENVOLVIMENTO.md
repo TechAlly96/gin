@@ -401,3 +401,10 @@ sprint-046: feat(leste-caucaso) - UCRANIA, RUSSIA, BELARUS, MOLDAVIA, TURQUIA, A
   MID russo com idioma ru. Fontes incertas testadas na hora (60 dias). Georgia ADIADA (tudo 403/sem resposta).
 - Os dois lados da guerra (Russia e Ucrania) e de Armenia/Azerbaijao, com as mesmas regras de fonte oficial.
 FIM-sprint-046
+
+sprint-047: perf(workflow) - coleta a 48,7 de 50 min: "Preparar voz" levava 35,3 min.
+- Causa: o runner nao tem ffmpeg; o apt baixava 71 MB a cada hora (dependencias de video, drivers Intel,
+  pocketsphinx...) e o espelho Azure estava a 33,9 kB/s (pocketsphinx sozinho travou 10,7 min).
+- ffmpeg estatico do GitHub (BtbN/FFmpeg-Builds) + cache de /tmp/ffmpeg-estatico e /tmp/piper (baixados 1 vez);
+  reserva: apt com --no-install-recommends. Medicao: coleta 3,9 min, traducao 1,6 min, boletins 6,8 min.
+FIM-sprint-047
