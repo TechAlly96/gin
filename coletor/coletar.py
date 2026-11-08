@@ -200,7 +200,7 @@ def main(codigo):
         if fonte.get("_leitor_usado", fonte["tipo"]) != fonte["tipo"]:
             aviso = f"leitor de reserva {fonte['_leitor_usado']} em uso (layout mudou?)"
             alerta = f"{alerta}; {aviso}" if alerta else aviso
-        st.update(ok=True, ultimo_ok=agora.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        st.update(ok=True, ultimo_ok=agora.strftime("%Y-%m-%dT%H:%M:%SZ") if validos else st.get("ultimo_ok"),  # vazia nao conta como sucesso
                   lidos=total_lidos, buscadas=buscados, adiadas=adiados, validos=validos, novos=novos,
                   mais_recente=recente, dias_sem_publicar=dias, alerta=alerta)
         status.append(st)
@@ -229,7 +229,7 @@ def main(codigo):
     for cat in cfg["categorias_obrigatorias"]:
         fontes_ok = [s for s in status if s["categoria"] == cat and s["ok"] and s["validos"]]
         datas = [i["publicado"] for i in itens if i["categoria"] == cat and i["precisao"] in ("hora", "dia")]
-        temporarias = [st for st in status if st["categoria"] == cat and not st["ok"] and st.get("ultimo_ok")
+        temporarias = [st for st in status if st["categoria"] == cat and (not st["ok"] or not st.get("validos")) and st.get("ultimo_ok")
                        and (agora - de_iso(st["ultimo_ok"])).total_seconds() < TOLERANCIA_HORAS * 3600]
         cobertura[cat] = {"fontes_ok": len(fontes_ok), "ultima": max(datas) if datas else None}
         if temporarias and not fontes_ok:

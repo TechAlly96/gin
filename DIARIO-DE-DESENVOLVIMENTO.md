@@ -512,3 +512,10 @@ com feed (AIM, SAnews, SABC, NAN, KBC, Daily News). Idioma da AIM detectado pelo
 - ADIADOS: Angola (ANGOP HTTP 503, tentar de novo; governo sem noticias legiveis), Uganda (HTTP 526),
   Senegal (APS 403), Argelia (APS sem data legivel), Tunisia (TAP com certificado invalido).
 FIM-sprint-059
+
+sprint-060: fix(coletor) - fonte que RESPONDE VAZIA (validos 0) era marcada ok e atualizava ultimo_ok, sem cobrir
+a categoria e sem entrar na tolerancia de 48 h (o Catar oscila: 7 itens numa coleta, 0 na seguinte).
+- ultimo_ok so e atualizado quando a fonte traz itens validos.
+- falha temporaria: fonte com erro OU vazia, que trouxe itens nas ultimas 48 h. Sem efeito quando outra fonte
+  da categoria cobre; fontes que nunca funcionaram nao ganham tolerancia.
+FIM-sprint-060
