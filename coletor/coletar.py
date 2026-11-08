@@ -200,7 +200,8 @@ def main(codigo):
         if fonte.get("_leitor_usado", fonte["tipo"]) != fonte["tipo"]:
             aviso = f"leitor de reserva {fonte['_leitor_usado']} em uso (layout mudou?)"
             alerta = f"{alerta}; {aviso}" if alerta else aviso
-        st.update(ok=True, ultimo_ok=agora.strftime("%Y-%m-%dT%H:%M:%SZ") if validos else st.get("ultimo_ok"),  # vazia nao conta como sucesso
+        st.update(ok=True, ultimo_ok=agora.strftime("%Y-%m-%dT%H:%M:%SZ") if validos else (anterior.get(fonte["id"], {}).get("ultimo_ok")
+                  or max((i["coletado"] for i in historico.values() if i["fonte"] == fonte["id"]), default=None)),  # vazia: mantem o ultimo sucesso real
                   lidos=total_lidos, buscadas=buscados, adiadas=adiados, validos=validos, novos=novos,
                   mais_recente=recente, dias_sem_publicar=dias, alerta=alerta)
         status.append(st)

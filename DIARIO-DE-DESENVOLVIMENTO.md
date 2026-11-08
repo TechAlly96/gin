@@ -519,3 +519,8 @@ a categoria e sem entrar na tolerancia de 48 h (o Catar oscila: 7 itens numa col
 - falha temporaria: fonte com erro OU vazia, que trouxe itens nas ultimas 48 h. Sem efeito quando outra fonte
   da categoria cobre; fontes que nunca funcionaram nao ganham tolerancia.
 FIM-sprint-060
+
+sprint-060 (cont.): ERRO MEU na sprint-060: fonte vazia mantinha st.get("ultimo_ok"), mas o valor anterior so e
+carregado no caminho de erro; no de sucesso virou None e apagou o ultimo sucesso do Catar. Agora: indice anterior
+ou, se faltar, a coleta mais recente em que a fonte trouxe itens (campo coletado do historico) - autocorretivo.
+FIM-sprint-060
