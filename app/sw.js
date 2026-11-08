@@ -1,7 +1,7 @@
 "use strict";
 // GIN - service worker: rede primeiro (nunca mostra versao velha quando ha internet),
 // copia guardada de tudo o que foi aberto (funciona offline com as ultimas noticias baixadas).
-const CACHE_APP = "gin-app-v5";
+const CACHE_APP = "gin-app-v6";
 const CACHE_AUDIO = "gin-audio-v1";
 const CACHE_DADOS = "gin-dados-v1";
 const CASCA = ["./", "./index.html", "./app.js", "./estilo.css", "./manifest.json",

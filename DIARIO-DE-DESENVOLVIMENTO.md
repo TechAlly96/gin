@@ -455,3 +455,9 @@ sprint-052: feat(app) - GLOBO 3D. globe.gl 2.46.2 (MIT, inclui three.js) + NASA 
 - Centro do pais por media esferica do contorno principal (vale para quem cruza a linha de data).
 - CSP: img-src e worker-src com blob: (three.js). Service worker gin-app-v5 com globo.js.
 FIM-sprint-052
+
+sprint-053: feat(app) - SELETOR DE PAIS COM BUSCA. Com 64 paises, os botoes no cabecalho fixo cobriam a tela
+inteira (e escondiam o globo e as noticias). Cabecalho em 1 linha: GIN + botao com o pais atual ("Brasil ▾");
+categorias numa linha com rolagem lateral. <dialog> nativo com busca sem acento e paises em ordem alfabetica;
+mesmo id="paises" (codigo de ativo e de toque inalterado). Service worker gin-app-v6.
+FIM-sprint-053

@@ -5,7 +5,7 @@ body { margin:0; background:var(--fundo); color:var(--texto); font:16px/1.5 syst
 .marca { display:flex; align-items:baseline; gap:8px; margin-bottom:6px; }
 .marca strong { font-size:20px; letter-spacing:2px; color:var(--destaque); }
 .marca span { color:var(--suave); font-size:13px; }
-.chips { display:flex; flex-wrap:wrap; gap:6px; padding-bottom:6px; }
+.chips { display:flex; gap:6px; padding-bottom:6px; overflow-x:auto; scrollbar-width:thin; }
 .chips button { flex:none; background:var(--cartao); color:var(--texto); border:1px solid var(--borda); border-radius:999px; padding:5px 12px; font-size:14px; }
 .chips button[aria-pressed="true"] { background:var(--destaque); border-color:var(--destaque); color:#fff; }
 main { max-width:760px; margin:0 auto; padding:12px 16px 40px; }
@@ -47,3 +47,17 @@ body.com-player main { padding-bottom:150px; }
 /* globo 3D (globo.js) */
 .globo { width: 100%; height: min(80vw, 380px); margin: 0 auto 10px; cursor: grab; }
 .globo[hidden] { display: none; }
+
+/* seletor de pais com busca (substitui os botoes no cabecalho: com 64+ paises cobriam a tela) */
+.seletor { margin-left:auto; background:var(--destaque); color:#fff; border:0; border-radius:999px; padding:6px 14px;
+  font-size:15px; font-weight:600; max-width:55%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dlg-paises { width:min(92vw, 520px); max-height:80vh; overflow:auto; padding:0; background:#0b1220; color:var(--texto);
+  border:1px solid var(--borda); border-radius:14px; }
+.dlg-paises::backdrop { background:rgba(0,0,0,.6); }
+.dlg-topo { position:sticky; top:0; display:flex; gap:8px; padding:12px; background:#0b1220; border-bottom:1px solid var(--borda); }
+.dlg-topo input { flex:1; font-size:16px; padding:8px 12px; border-radius:10px; border:1px solid var(--borda); background:var(--cartao); color:var(--texto); }
+.dlg-topo button { background:none; border:0; color:var(--texto); font-size:20px; padding:0 6px; }
+.lista-paises { display:flex; flex-direction:column; padding:4px 12px 12px; }
+.lista-paises button { text-align:left; background:none; color:var(--texto); border:0; border-bottom:1px solid var(--borda); padding:12px 4px; font-size:16px; }
+.lista-paises button[aria-pressed="true"] { color:var(--destaque); font-weight:700; }
+.lista-paises button[hidden] { display:none; }

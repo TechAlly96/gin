@@ -165,6 +165,8 @@ async function abrirPais(codigo) {
   $("feed").replaceChildren();
   $("sentinela").textContent = "Carregando...";
   for (const b of $("paises").children) b.setAttribute("aria-pressed", String(b.dataset.pais === codigo));
+  $("btn-pais").textContent = (nomesPaises[codigo] || codigo.toUpperCase()) + " ▾";
+  if ($("dlg-paises").open) $("dlg-paises").close();
   for (const b of $("categorias").children) b.setAttribute("aria-pressed", String(b.dataset.cat === "todas"));
   try {
     const indice = await obterJSON(codigo + "/indice.json");
@@ -191,13 +193,23 @@ async function iniciar() {
     $("sentinela").textContent = "";
     return;
   }
-  for (const [codigo, p] of Object.entries(paises)) {
+  for (const [codigo, p] of Object.entries(paises).sort((a, b) => a[1].nome.localeCompare(b[1].nome, "pt"))) {
     nomesPaises[codigo.toLowerCase()] = p.nome;
     const b = el("button", null, p.nome + (p.completo ? "" : " *"));
     b.type = "button"; b.dataset.pais = codigo.toLowerCase();
     b.addEventListener("click", () => { location.hash = codigo.toLowerCase(); });
     $("paises").append(b);
   }
+  const dlg = $("dlg-paises"), busca = $("busca-pais");
+  const semAcento = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  busca.addEventListener("input", () => {
+    const q = semAcento(busca.value.trim());
+    for (const b of $("paises").children) b.hidden = Boolean(q) && !semAcento(b.textContent).includes(q);
+  });
+  $("btn-pais").addEventListener("click", () => { busca.value = ""; busca.dispatchEvent(new Event("input")); dlg.showModal(); });
+  $("fechar-paises").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", (ev) => { if (ev.target === dlg) dlg.close(); });
+  for (const b of $("paises").children) b.addEventListener("click", () => dlg.close());
   const inicial = location.hash.slice(1) || Object.keys(paises)[0].toLowerCase();
   window.addEventListener("hashchange", () => abrirPais(location.hash.slice(1)));
   new IntersectionObserver((e) => { if (e[0].isIntersecting) carregarProxima(); }, { rootMargin: "600px" }).observe($("sentinela"));

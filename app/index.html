@@ -15,10 +15,17 @@
 </head>
 <body>
 <header class="topo">
-  <div class="marca"><strong>GIN</strong><span>fontes oficiais</span></div>
-  <nav id="paises" class="chips" aria-label="Países"></nav>
+  <div class="marca"><strong>GIN</strong><span>fontes oficiais</span>
+    <button type="button" id="btn-pais" class="seletor" aria-haspopup="dialog">Carregando... ▾</button></div>
   <nav id="categorias" class="chips" aria-label="Categorias"></nav>
 </header>
+<dialog id="dlg-paises" class="dlg-paises" aria-label="Escolher país">
+  <div class="dlg-topo">
+    <input id="busca-pais" type="search" placeholder="Buscar país..." autocomplete="off" aria-label="Buscar país">
+    <button type="button" id="fechar-paises" aria-label="Fechar">✕</button>
+  </div>
+  <nav id="paises" class="lista-paises" aria-label="Países"></nav>
+</dialog>
 <main>
   <div id="globo" class="globo" aria-label="Globo dos países cobertos"></div>
   <div class="ouvir">
