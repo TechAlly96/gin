@@ -33,7 +33,7 @@ jobs:
                     "Председник Србије састао се са министром спољних послова.",
                     "Ministar vanjskih poslova posjetio je Sarajevo.",
                     "Skupština Crne Gore usvojila je budžet za sljedeću godinu."]:
-              r = t.translate_batch([sp.encode(f, out_type=str)])[0].hypotheses[0]
+              r = t.translate_batch([sp.encode(f, out_type=str) + ["</s>"]])[0].hypotheses[0]  # Marian exige </s>
               print("TESTE |", f, "->", "".join(r).replace("\u2581", " ").strip())
           PY
       - name: Publicar como arquivo de release do repositorio
