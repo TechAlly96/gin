@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "IR",
+    "nome": "Irã",
+    "idioma": "en",
+    "fuso": "Asia/Tehran",
+    "fuso_horas": 3.5,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (en.mfa.ir) redireciona coletores (HTTP 307).",
+    "governo": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "ir-irna",
+      "nome": "IRNA - Islamic Republic News Agency (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://en.irna.ir/rss"
+    }
+  ]
+}

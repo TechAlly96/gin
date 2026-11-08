@@ -484,3 +484,11 @@ data_do_artigo(link, ua=None) e o coletor repassa IDENTIDADES[fonte.identificaca
 - INDIA: Press Information Bureau (feed em hindi; o parametro Lang e ignorado), identificacao simples, data
   buscada na noticia. Lacunas: MEA 403; defesa pelo PIB; parlamento e All India Radio sem noticias legiveis.
 FIM-sprint-056
+
+sprint-057: feat(oriente-medio) - IRA (IRNA), SIRIA (SANA), OMA (MFA, feed), CATAR (MOFA, data no endereco)
+e JORDANIA (Petra/governo, se recentes). Regiao mais fechada ate agora.
+- ADIADOS: Arabia Saudita (SPA 403, MOFA inalcancavel), Emirados (WAM por JavaScript, gabinete 403), Kuwait
+  (KUNA sem resposta de novo), Bahrein (BNA e MOFA HTTP 405), Libano (NNA 403), Iraque (INA e PMO 403),
+  Egito (SIS com certificado invalido, Presidencia e MFA 403).
+- Siria: SANA segue como agencia estatal sob o governo de transicao (feed parado em set/2026; paginas em dia).
+FIM-sprint-057

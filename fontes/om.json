@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "OM",
+    "nome": "Omã",
+    "idioma": "en",
+    "fuso": "Asia/Muscat",
+    "fuso_horas": 4,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "agencia": "O site da agência estatal ONA (omannews.gov.om) apresenta certificado de segurança não verificável.",
+    "governo": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "om-mfa",
+      "nome": "Ministry of Foreign Affairs of Oman",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.fm.gov.om/en/feed/"
+    }
+  ]
+}

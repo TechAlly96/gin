@@ -1,0 +1,37 @@
+{
+  "pais": {
+    "codigo": "JO",
+    "nome": "Jordânia",
+    "idioma": "ar",
+    "fuso": "Asia/Amman",
+    "fuso_horas": 3,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "agencia": "O site da agência estatal Petra (petra.gov.jo) não expõe notícias recentes com data legível por coletor.",
+    "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "jo-pm",
+      "nome": "رئاسة الوزراء الأردنية",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://pm.gov.jo/Default/Ar",
+      "padrao_link": "/AR/NewsDetails/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 20
+    }
+  ]
+}

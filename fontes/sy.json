@@ -1,0 +1,37 @@
+{
+  "pais": {
+    "codigo": "SY",
+    "nome": "Síria",
+    "idioma": "en",
+    "fuso": "Asia/Damascus",
+    "fuso_horas": 3,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "As notícias do governo de transição saem pela SANA (agência estatal); não há outro site oficial acessível a coletores.",
+    "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "sy-sana",
+      "nome": "SANA - Syrian Arab News Agency (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://sana.sy/en/",
+      "padrao_link": "/en/syria/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 20
+    }
+  ]
+}
