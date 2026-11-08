@@ -1,0 +1,46 @@
+name: Converter modelo de traducao (OPUS-MT -> CTranslate2)
+on:
+  workflow_dispatch:
+    inputs:
+      modelo:
+        description: "modelo Helsinki-NLP (ex.: opus-mt-sla-en)"
+        default: "opus-mt-sla-en"
+permissions:
+  contents: write
+jobs:
+  converter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Converter o modelo oficial (int8)
+        run: |
+          python3 -m venv /tmp/conv
+          /tmp/conv/bin/pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch
+          /tmp/conv/bin/pip install --quiet ctranslate2 "transformers<4.47" sentencepiece sacremoses
+          M="${{ inputs.modelo }}"
+          /tmp/conv/bin/ct2-transformers-converter --model "Helsinki-NLP/$M" --output_dir "$M-ct2" --quantization int8 --copy_files source.spm target.spm
+          du -sh "$M-ct2"; ls "$M-ct2"
+      - name: Testar a traducao
+        run: |
+          M="${{ inputs.modelo }}"
+          /tmp/conv/bin/python - "$M-ct2" << 'PY'
+          import sys, ctranslate2, sentencepiece
+          d = sys.argv[1]
+          t = ctranslate2.Translator(d, device="cpu")
+          sp = sentencepiece.SentencePieceProcessor(model_file=d + "/source.spm")
+          for f in ["Vlada je danas usvojila novi zakon o obrani.",
+                    "Председник Србије састао се са министром спољних послова.",
+                    "Ministar vanjskih poslova posjetio je Sarajevo.",
+                    "Skupština Crne Gore usvojila je budžet za sljedeću godinu."]:
+              r = t.translate_batch([sp.encode(f, out_type=str)])[0].hypotheses[0]
+              print("TESTE |", f, "->", "".join(r).replace("\u2581", " ").strip())
+          PY
+      - name: Publicar como arquivo de release do repositorio
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          M="${{ inputs.modelo }}"
+          tar czf "$M-ct2.tar.gz" "$M-ct2"
+          gh release view modelos-traducao >/dev/null 2>&1 || gh release create modelos-traducao --title "Modelos de traducao convertidos" --notes "OPUS-MT (Helsinki-NLP; licenca do modelo original) convertidos para CTranslate2 int8 pelo workflow converter-modelo.yml."
+          gh release upload modelos-traducao "$M-ct2.tar.gz" --clobber
