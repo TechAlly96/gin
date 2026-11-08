@@ -499,3 +499,9 @@ com barras ("2026/11/07 | 22:00:17", Petra), junto com 2026.11.02. (3) Catar: pa
 com data no endereco (/details/2026/11/07/); o site as vezes entrega a pagina sem noticias (intermitente).
 Petra (agencia estatal da Jordania) incluida.
 FIM-sprint-057
+
+sprint-058: feat(oceania) - NOVA ZELANDIA (Beehive + RNZ + NZDF se recente), AUSTRALIA (ABC) e FIJI (governo + FBC).
+- Australia: governo, MFA, Defesa e Parlamento com 403/sem resposta; so a ABC (publica).
+- ADIADOS: Papua-Nova Guine (dominio do PM inexistente; NBC sem noticias), Samoa (feed parado em mai/2026),
+  Tonga (403), Vanuatu (sem noticias legiveis), Ilhas Salomao (HTTP 307).
+FIM-sprint-058

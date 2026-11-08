@@ -1,0 +1,51 @@
+{
+  "pais": {
+    "codigo": "NZ",
+    "nome": "Nova Zelândia",
+    "idioma": "en",
+    "fuso": "Pacific/Auckland",
+    "fuso_horas": 12,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (mfat.govt.nz) não publica notícias datadas legíveis; os comunicados do ministro saem pelo portal Beehive (fonte de governo).",
+    "parlamento": "O site do Parlamento (parliament.nz) não expõe notícias recentes com data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "nz-beehive",
+      "nome": "Beehive - New Zealand Government releases",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.beehive.govt.nz/rss.xml"
+    },
+    {
+      "id": "nz-rnz",
+      "nome": "RNZ - Radio New Zealand (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.rnz.co.nz/rss/national.xml"
+    },
+    {
+      "id": "nz-nzdf",
+      "nome": "New Zealand Defence Force - news",
+      "categoria": "defesa",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.nzdf.mil.nz/nzdf/",
+      "padrao_link": "/media-centre/news/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 20
+    }
+  ]
+}

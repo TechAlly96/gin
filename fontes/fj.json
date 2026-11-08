@@ -1,0 +1,40 @@
+{
+  "pais": {
+    "codigo": "FJ",
+    "nome": "Fiji",
+    "idioma": "en",
+    "fuso": "Pacific/Fiji",
+    "fuso_horas": 12,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "As notícias do Ministério das Relações Exteriores saem pelo portal do governo (fiji.gov.fj).",
+    "defesa": "Fiji tem as Forças Militares da República de Fiji, sem site de notícias acessível; os comunicados saem pelo portal do governo.",
+    "parlamento": "Não foi encontrada fonte do Parlamento acessível a coletores."
+  },
+  "fontes": [
+    {
+      "id": "fj-gov",
+      "nome": "Fijian Government",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.fiji.gov.fj/feed/"
+    },
+    {
+      "id": "fj-fbc",
+      "nome": "FBC News - Fiji Broadcasting Corporation (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.fbcnews.com.fj/feed/"
+    }
+  ]
+}

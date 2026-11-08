@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "AU",
+    "nome": "Austrália",
+    "idioma": "en",
+    "fuso": "Australia/Sydney",
+    "fuso_horas": 10,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O site do Primeiro-Ministro (pm.gov.au) recusa acesso automatizado (HTTP 403).",
+    "chancelaria": "O site do Ministério das Relações Exteriores (foreignminister.gov.au) não responde (tempo esgotado).",
+    "defesa": "O site do Departamento de Defesa (defence.gov.au) não responde (tempo esgotado).",
+    "parlamento": "O site do Parlamento (aph.gov.au) recusa acesso automatizado (HTTP 403)."
+  },
+  "fontes": [
+    {
+      "id": "au-abc",
+      "nome": "ABC News - Australian Broadcasting Corporation (pública)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.abc.net.au/news/feed/51120/rss.xml"
+    }
+  ]
+}
