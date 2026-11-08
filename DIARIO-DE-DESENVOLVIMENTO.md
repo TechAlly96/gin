@@ -461,3 +461,8 @@ inteira (e escondiam o globo e as noticias). Cabecalho em 1 linha: GIN + botao c
 categorias numa linha com rolagem lateral. <dialog> nativo com busca sem acento e paises em ordem alfabetica;
 mesmo id="paises" (codigo de ativo e de toque inalterado). Service worker gin-app-v6.
 FIM-sprint-053
+
+sprint-054: fix(globo) - o pais aberto por padrao (sem escolha) nao ficava em ambar: o globo so focava ao vir
+de hash. abrirPais agora avisa o globo (cobre abertura, seletor, toque no globo e Ouvir tudo). GLOBO APROVADO
+pelo usuario ("Sensacional") em 08/11/2026. Service worker gin-app-v7.
+FIM-sprint-054

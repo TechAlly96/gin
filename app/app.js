@@ -166,6 +166,7 @@ async function abrirPais(codigo) {
   $("sentinela").textContent = "Carregando...";
   for (const b of $("paises").children) b.setAttribute("aria-pressed", String(b.dataset.pais === codigo));
   $("btn-pais").textContent = (nomesPaises[codigo] || codigo.toUpperCase()) + " ▾";
+  if (window.GINGlobo) window.GINGlobo.focar(codigo);
   if ($("dlg-paises").open) $("dlg-paises").close();
   for (const b of $("categorias").children) b.setAttribute("aria-pressed", String(b.dataset.cat === "todas"));
   try {
