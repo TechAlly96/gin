@@ -17,7 +17,7 @@ jobs:
         run: |
           python3 -m venv /tmp/conv
           /tmp/conv/bin/pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch
-          /tmp/conv/bin/pip install --quiet ctranslate2 "transformers<4.47" sentencepiece sacremoses
+          /tmp/conv/bin/pip install --quiet ctranslate2 "transformers>=4.56,<5" sentencepiece sacremoses
           M="${{ inputs.modelo }}"
           /tmp/conv/bin/ct2-transformers-converter --model "Helsinki-NLP/$M" --output_dir "$M-ct2" --quantization int8 --copy_files source.spm target.spm
           du -sh "$M-ct2"; ls "$M-ct2"
