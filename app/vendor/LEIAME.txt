@@ -1,0 +1,4 @@
+Arquivos de terceiros hospedados junto do app (a politica de seguranca so permite o proprio site):
+- globe.gl.min.js: globe.gl 2.46.2 (inclui three.js), licenca MIT - https://github.com/vasturiano/globe.gl
+- terra-blue-marble.jpg: NASA Blue Marble (dominio publico), via exemplo do three-globe
+- paises-110m.geojson: Natural Earth 1:110m, paises (dominio publico) - https://www.naturalearthdata.com

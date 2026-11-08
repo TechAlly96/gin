@@ -445,3 +445,13 @@ sprint-051: fix(workflow) - publicacao cancelada de novo aos 10 min: a deploy-pa
 - Pendente: croata e servio sem modelo no Argos (160 falhas sr, 80 hr): Balcas sem traducao desde 03/11.
 - Pendente: India adiada (feed do PIB com 20 itens sem data reconhecida).
 FIM-sprint-051
+
+sprint-052: feat(app) - GLOBO 3D. globe.gl 2.46.2 (MIT, inclui three.js) + NASA Blue Marble + Natural Earth
+1:110m, hospedados em app/vendor (a CSP so permite 'self'; funciona offline; sem dependencia externa).
+- app/globo.js independente: paises cobertos em azul, atual em ambar; toque abre o pais (location.hash);
+  voa ate o pais do boletim (1 linha em tocarPais); gira sozinho e retoma 45 s apos a ultima mudanca;
+  pausa fora da tela/em segundo plano; sem WebGL ou com erro, a area some e o app segue igual.
+- Natural Earth marca FR e NO com ISO_A2 = -99: tabela de excecoes por ADM0_A3. Singapura vira marcador.
+- Centro do pais por media esferica do contorno principal (vale para quem cruza a linha de data).
+- CSP: img-src e worker-src com blob: (three.js). Service worker gin-app-v5 com globo.js.
+FIM-sprint-052

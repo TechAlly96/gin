@@ -1,11 +1,11 @@
 "use strict";
 // GIN - service worker: rede primeiro (nunca mostra versao velha quando ha internet),
 // copia guardada de tudo o que foi aberto (funciona offline com as ultimas noticias baixadas).
-const CACHE_APP = "gin-app-v4";
+const CACHE_APP = "gin-app-v5";
 const CACHE_AUDIO = "gin-audio-v1";
 const CACHE_DADOS = "gin-dados-v1";
 const CASCA = ["./", "./index.html", "./app.js", "./estilo.css", "./manifest.json",
-  "./icone-192.png", "./icone-512.png", "./icone-maskable-512.png"];
+  "./icone-192.png", "./icone-512.png", "./icone-maskable-512.png", "./globo.js"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE_APP).then((c) => c.addAll(CASCA)).then(() => self.skipWaiting()));

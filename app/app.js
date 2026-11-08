@@ -245,6 +245,7 @@ async function estaOffline(url) {
 async function tocarPais(codigo, fila) {
   try {
     const b = await obterJSON(codigo + "/boletim.json");
+    if (window.GINGlobo) window.GINGlobo.focar(codigo);
     Object.assign(player, { boletim: b, pais: codigo, nome: nomesPaises[codigo] || codigo.toUpperCase(), fila: fila || [], cap: -1 });
     const a = audio();
     a.src = DADOS + codigo + "/" + b.arquivo;

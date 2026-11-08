@@ -43,3 +43,7 @@ body.com-player main { padding-bottom:150px; }
 .cartao.tocando { border-color:var(--destaque); box-shadow:0 0 0 2px var(--destaque); }
 .traducao { font-size:11px; text-transform:uppercase; letter-spacing:.5px; border-radius:4px; padding:2px 6px; background:#14302a; color:#7fd1a8; }
 .ver-original { background:none; border:none; color:var(--destaque); font-size:13px; padding:0 0 8px; }
+
+/* globo 3D (globo.js) */
+.globo { width: 100%; height: min(80vw, 380px); margin: 0 auto 10px; cursor: grab; }
+.globo[hidden] { display: none; }
