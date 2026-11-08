@@ -82,6 +82,44 @@ def pasta_do_par(origem, destino):
         return alvo
 
 
+# Pares sem pacote Argos: modelos OPUS-MT (Helsinki-NLP), convertidos para CTranslate2 int8 pelo
+# workflow converter-modelo.yml e guardados na release "modelos-traducao" do proprio repositorio.
+OPUS = {"hr": "opus-mt-sla-en", "sr": "opus-mt-sla-en", "bs": "opus-mt-sla-en", "mk": "opus-mt-sla-en"}
+URL_OPUS = "https://github.com/TechAlly96/gin/releases/download/modelos-traducao/{}-ct2.tar.gz"
+
+
+def pasta_opus(origem, destino):
+    if destino != "en" or origem not in OPUS:
+        return None
+    import fcntl, tarfile, time, urllib.request
+    nome = OPUS[origem]
+    base = MODELOS / f"{nome}-ct2"
+    if (base / "model.bin").exists():
+        return base
+    MODELOS.mkdir(parents=True, exist_ok=True)
+    with open(MODELOS / f".{nome}.trava", "w") as trava:
+        fcntl.flock(trava, fcntl.LOCK_EX)
+        if not (base / "model.bin").exists():
+            arquivo = MODELOS / f"{nome}-ct2.tar.gz"
+            for tentativa in range(4):
+                try:
+                    urllib.request.urlretrieve(URL_OPUS.format(nome), arquivo)
+                    break
+                except Exception:
+                    if tentativa == 3:
+                        raise
+                    time.sleep(10 * (tentativa + 1))
+            with tarfile.open(arquivo) as t:
+                try:
+                    t.extractall(MODELOS, filter="data")
+                except TypeError:
+                    t.extractall(MODELOS)
+            arquivo.unlink()
+            (MODELOS / "NOVO").touch()
+            print(f"  modelo OPUS-MT baixado: {nome}")
+    return base
+
+
 class _TokSP:
     """Pacotes com SentencePiece (a maioria)."""
     def __init__(self, caminho):
@@ -93,6 +131,12 @@ class _TokSP:
 
     def decodificar(self, tokens):
         return "".join(tokens).replace("\u2581", " ").strip()
+
+
+class _TokOpus(_TokSP):
+    """Modelos OPUS-MT (Marian): SentencePiece + marcador de fim de frase </s> (sem ele, o modelo repete)."""
+    def codificar(self, frase):
+        return self.sp.encode(frase, out_type=str) + ["</s>"]
 
 
 class _TokBPE:
@@ -117,6 +161,10 @@ def carregar(origem, destino):
     if chave not in _tradutores:
         import ctranslate2
         base = pasta_do_par(origem, destino)
+        opus = False
+        if base is None:
+            base = pasta_opus(origem, destino)
+            opus = base is not None
         if base is None:
             _tradutores[chave] = None
         else:
@@ -126,7 +174,7 @@ def carregar(origem, destino):
             if not modelos or not (sp or bpe):
                 arquivos = sorted(x.relative_to(base).as_posix() for x in base.rglob("*") if x.is_file())[:20]
                 raise LookupError(f"pacote {origem}->{destino} sem modelo/tokenizador reconhecido: {arquivos}")
-            tok = _TokSP(sp[0]) if sp else _TokBPE(bpe[0], origem, destino)
+            tok = _TokOpus(sp[0]) if opus else (_TokSP(sp[0]) if sp else _TokBPE(bpe[0], origem, destino))
             _tradutores[chave] = (ctranslate2.Translator(str(modelos[0].parent), device="cpu"), tok)
     return _tradutores[chave]
 

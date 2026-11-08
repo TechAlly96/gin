@@ -466,3 +466,13 @@ sprint-054: fix(globo) - o pais aberto por padrao (sem escolha) nao ficava em am
 de hash. abrirPais agora avisa o globo (cobre abertura, seletor, toque no globo e Ouvir tudo). GLOBO APROVADO
 pelo usuario ("Sensacional") em 08/11/2026. Service worker gin-app-v7.
 FIM-sprint-054
+
+sprint-055: feat(traducao) - CROATA, SERVIO, BOSNIO e MACEDONIO pelo OPUS-MT (Helsinki-NLP, opus-mt-sla-en).
+- Argos nao tem hr/sr (240 falhas por coleta; Balcas sem traducao desde 03/11).
+- Workflow converter-modelo.yml (uso unico): modelo oficial -> CTranslate2 int8 (76 MB; 63 MB compactado),
+  publicado na release "modelos-traducao" do repositorio. Conversor atual exige transformers >=4.56 (dtype).
+- Marian exige o marcador </s> no fim da frase: sem ele, repeticoes ("Foreign Foreign Minister..."). Com ele,
+  4/4 traducoes corretas (croata, servio cirilico, bosnio, montenegrino).
+- traduzir.py: pasta_opus (so quando nao ha pacote Argos; download com 4 tentativas, trava e marca NOVO para
+  salvar o cache) e _TokOpus (acrescenta </s>). Caminho: hr/sr -> en (OPUS-MT) -> pt (Argos).
+FIM-sprint-055
