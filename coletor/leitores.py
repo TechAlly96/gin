@@ -38,6 +38,8 @@ for _lista in ("enero febrero marzo abril mayo junio julio agosto septiembre oct
 MESES_NUM.update({"setiembre": 9, "marco": 3, "fevrier": 2, "aout": 8, "decembre": 12, "marz": 3})
 MESES_NUM.update({m: i for i, m in enumerate("janeiro fevereiro março abril maio junho julho agosto setembro outubro novembro dezembro".split(), 1)})
 MESES_NUM["setiembre"] = 9
+MESES_NUM.update({m: i for i, m in enumerate("jan feb mar apr may jun jul aug sep oct nov dec".split(), 1)})  # abreviacoes inglesas (ex.: PIB "07 NOV 2026")
+MESES_NUM["sept"] = 9
 DATA_TEXTO = re.compile(r"(?:(?:lunes|martes|mi[eé]rcoles|jueves|viernes|s[aá]bado|domingo)\s*,?\s+)?\d{1,2} de (?:"
                         + "|".join(MESES_NUM) + r") de \d{4}", re.I)
 
@@ -367,11 +369,11 @@ def primeira_data_valida(texto):
     return min(achados)[1] if achados else ""
 
 
-def data_do_artigo(link):
+def data_do_artigo(link, ua=None):
     """Abre a noticia e devolve a data de publicacao: primeiro os metadados padronizados
     (article:published_time, datePublished, <time datetime>, com hora); senao a 1a data do texto
     (por extenso em es/pt/fr/en/de ou dd/mm/aaaa), ou ''. Usado em fontes com data_no_artigo=true."""
-    html = baixar(link)[0].decode("utf-8", "replace")
+    html = baixar(link, ua=ua)[0].decode("utf-8", "replace")
     for rx in META_DATA:
         m = rx.search(html)
         if m:

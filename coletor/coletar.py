@@ -12,7 +12,7 @@ import urllib.parse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from leitores import data_do_artigo, ler_data, ler_fonte, limpar
+from leitores import IDENTIDADES, data_do_artigo, ler_data, ler_fonte, limpar
 
 RAIZ = Path(__file__).resolve().parent.parent
 POR_PAGINA = 50
@@ -168,7 +168,7 @@ def main(codigo):
                     adiados += 1
                     continue
                 try:
-                    b["data"] = data_do_artigo(link)
+                    b["data"] = data_do_artigo(link, ua=IDENTIDADES[fonte.get("identificacao", "padrao")])
                 except Exception:
                     adiados += 1
                     continue

@@ -1,0 +1,36 @@
+{
+  "pais": {
+    "codigo": "IN",
+    "nome": "Índia",
+    "idioma": "hi",
+    "fuso": "Asia/Kolkata",
+    "fuso_horas": 5.5,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O site do Ministério das Relações Exteriores (mea.gov.in) recusa acesso automatizado (HTTP 403).",
+    "defesa": "O Ministério da Defesa não tem site acessível a coletores; seus comunicados saem pelo Press Information Bureau (fonte de governo).",
+    "parlamento": "Não foi encontrada fonte do Parlamento acessível a coletores.",
+    "agencia": "O site da All India Radio (newsonair.gov.in) não expõe notícias recentes com data legível por coletor."
+  },
+  "fontes": [
+    {
+      "id": "in-pib",
+      "nome": "Press Information Bureau - Governo da Índia (hindi)",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",
+      "identificacao": "simples",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15
+    }
+  ]
+}

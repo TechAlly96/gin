@@ -476,3 +476,11 @@ sprint-055: feat(traducao) - CROATA, SERVIO, BOSNIO e MACEDONIO pelo OPUS-MT (He
 - traduzir.py: pasta_opus (so quando nao ha pacote Argos; download com 4 tentativas, trava e marca NOVO para
   salvar o cache) e _TokOpus (acrescenta </s>). Caminho: hr/sr -> en (OPUS-MT) -> pt (Argos).
 FIM-sprint-055
+
+sprint-056: fix(coletor) - a busca de data dentro da noticia ignorava a identificacao da fonte (sempre "padrao").
+data_do_artigo(link, ua=None) e o coletor repassa IDENTIDADES[fonte.identificacao]. Sem o parametro, igual a antes.
+- leitores.py: meses abreviados em ingles (jan..dec, sept); a pagina do PIB traz "07 NOV 2026 7:24PM by PIB Delhi"
+  (rotulo em hindi). ler_data ja usava minusculas. 7/7 formatos (novos e antigos) + PIB real.
+- INDIA: Press Information Bureau (feed em hindi; o parametro Lang e ignorado), identificacao simples, data
+  buscada na noticia. Lacunas: MEA 403; defesa pelo PIB; parlamento e All India Radio sem noticias legiveis.
+FIM-sprint-056
