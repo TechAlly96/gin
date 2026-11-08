@@ -1,0 +1,40 @@
+{
+  "pais": {
+    "codigo": "NG",
+    "nome": "Nigéria",
+    "idioma": "en",
+    "fuso": "Africa/Lagos",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "ng-statehouse",
+      "nome": "State House Nigeria",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://statehouse.gov.ng/feed/"
+    },
+    {
+      "id": "ng-nan",
+      "nome": "NAN - News Agency of Nigeria (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://nannews.ng/feed/"
+    }
+  ]
+}

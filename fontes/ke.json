@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "KE",
+    "nome": "Quênia",
+    "idioma": "en",
+    "fuso": "Africa/Nairobi",
+    "fuso_horas": 3,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "O feed da Presidência (president.go.ke) está parado desde agosto de 2026; a agência KNA tem certificado não verificável.",
+    "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "ke-kbc",
+      "nome": "KBC - Kenya Broadcasting Corporation (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://www.kbc.co.ke/feed/"
+    }
+  ]
+}

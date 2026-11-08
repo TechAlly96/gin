@@ -1,0 +1,37 @@
+{
+  "pais": {
+    "codigo": "RW",
+    "nome": "Ruanda",
+    "idioma": "en",
+    "fuso": "Africa/Kigali",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "agencia": "O feed da emissora pública RBA (rba.co.rw) está parado desde 2010.",
+    "governo": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "rw-minaffet",
+      "nome": "Ministry of Foreign Affairs of Rwanda",
+      "categoria": "chancelaria",
+      "natureza": "oficial",
+      "tipo": "html-links",
+      "url": "https://www.minaffet.gov.rw/",
+      "padrao_link": "/updates/news-details/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

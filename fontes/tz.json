@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "TZ",
+    "nome": "Tanzânia",
+    "idioma": "en",
+    "fuso": "Africa/Dar_es_Salaam",
+    "fuso_horas": 3,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "governo": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "tz-dailynews",
+      "nome": "Daily News - Tanzania Standard Newspapers (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://dailynews.co.tz/feed/"
+    }
+  ]
+}

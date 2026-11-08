@@ -1,0 +1,41 @@
+{
+  "pais": {
+    "codigo": "MZ",
+    "nome": "Moçambique",
+    "idioma": "pt",
+    "fuso": "Africa/Maputo",
+    "fuso_horas": 2,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "mz-governo",
+      "nome": "Portal do Governo de Moçambique",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://portaldogoverno.gov.mz/feed/"
+    },
+    {
+      "id": "mz-aim",
+      "nome": "AIM - Agência de Informação de Moçambique (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "feed",
+      "url": "https://aimnews.org/feed/",
+      "idioma": "pt"
+    }
+  ]
+}

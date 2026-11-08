@@ -1,0 +1,37 @@
+{
+  "pais": {
+    "codigo": "ET",
+    "nome": "Etiópia",
+    "idioma": "en",
+    "fuso": "Africa/Addis_Ababa",
+    "fuso_horas": 3,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "O domínio do Ministério das Relações Exteriores (mofa.gov.et) não existe no DNS.",
+    "governo": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "et-ena",
+      "nome": "ENA - Ethiopian News Agency (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://www.ena.et/web/eng/",
+      "padrao_link": "/web/eng/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

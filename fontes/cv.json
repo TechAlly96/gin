@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "CV",
+    "nome": "Cabo Verde",
+    "idioma": "pt",
+    "fuso": "Atlantic/Cape_Verde",
+    "fuso_horas": -1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "agencia": "O site da agência Inforpress (inforpress.cv) não expõe notícias recentes com data legível por coletor.",
+    "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "cv-governo",
+      "nome": "Governo de Cabo Verde",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://www.governo.cv/feed/"
+    }
+  ]
+}

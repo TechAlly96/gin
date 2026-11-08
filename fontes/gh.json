@@ -1,0 +1,44 @@
+{
+  "pais": {
+    "codigo": "GH",
+    "nome": "Gana",
+    "idioma": "en",
+    "fuso": "Africa/Accra",
+    "fuso_horas": 0,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "gh-presidency",
+      "nome": "The Presidency, Republic of Ghana",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://presidency.gov.gh/feed/"
+    },
+    {
+      "id": "gh-gna",
+      "nome": "GNA - Ghana News Agency (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://gna.org.gh/",
+      "padrao_link": "/2026/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 25
+    }
+  ]
+}

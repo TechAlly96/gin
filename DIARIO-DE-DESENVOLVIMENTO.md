@@ -505,3 +505,10 @@ sprint-058: feat(oceania) - NOVA ZELANDIA (Beehive + RNZ + NZDF se recente), AUS
 - ADIADOS: Papua-Nova Guine (dominio do PM inexistente; NBC sem noticias), Samoa (feed parado em mai/2026),
   Tonga (403), Vanuatu (sem noticias legiveis), Ilhas Salomao (HTTP 307).
 FIM-sprint-058
+
+sprint-059: feat(africa) - 1a leva: MOCAMBIQUE e CABO VERDE (portugues, sem traducao), AFRICA DO SUL, NIGERIA,
+GANA, QUENIA, TANZANIA, ETIOPIA, RUANDA e MARROCOS (os que passaram no teste). Agencias e emissoras estatais
+com feed (AIM, SAnews, SABC, NAN, KBC, Daily News). Idioma da AIM detectado pelos titulos.
+- ADIADOS: Angola (ANGOP HTTP 503, tentar de novo; governo sem noticias legiveis), Uganda (HTTP 526),
+  Senegal (APS 403), Argelia (APS sem data legivel), Tunisia (TAP com certificado invalido).
+FIM-sprint-059

@@ -1,0 +1,33 @@
+{
+  "pais": {
+    "codigo": "MA",
+    "nome": "Marrocos",
+    "idioma": "ar",
+    "fuso": "Africa/Casablanca",
+    "fuso_horas": 1,
+    "idioma_audio": "pt"
+  },
+  "categorias_obrigatorias": [
+    "governo",
+    "chancelaria",
+    "defesa",
+    "parlamento",
+    "agencia"
+  ],
+  "lacunas": {
+    "agencia": "O site da agência estatal MAP (mapexpress.ma) recusa acesso automatizado (HTTP 403).",
+    "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
+    "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
+  },
+  "fontes": [
+    {
+      "id": "ma-portal",
+      "nome": "Portail national du Royaume du Maroc (maroc.ma)",
+      "categoria": "governo",
+      "natureza": "oficial",
+      "tipo": "feed",
+      "url": "https://maroc.ma/ar/rss.xml"
+    }
+  ]
+}
