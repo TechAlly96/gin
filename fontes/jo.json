@@ -15,7 +15,6 @@
     "agencia"
   ],
   "lacunas": {
-    "agencia": "O site da agência estatal Petra (petra.gov.jo) não expõe notícias recentes com data legível por coletor.",
     "chancelaria": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
     "defesa": "Não foi encontrada fonte oficial acessível a coletores nesta categoria.",
     "parlamento": "Não foi encontrada fonte oficial acessível a coletores nesta categoria."
@@ -29,6 +28,18 @@
       "tipo": "html-links",
       "url": "https://pm.gov.jo/Default/Ar",
       "padrao_link": "/AR/NewsDetails/",
+      "data_no_artigo": true,
+      "max_artigos_por_execucao": 15,
+      "min_titulo": 20
+    },
+    {
+      "id": "jo-petra",
+      "nome": "وكالة الأنباء الأردنية - بترا (estatal)",
+      "categoria": "agencia",
+      "natureza": "estatal",
+      "tipo": "html-links",
+      "url": "https://petra.gov.jo/ar",
+      "padrao_link": "/ar/news/",
       "data_no_artigo": true,
       "max_artigos_por_execucao": 15,
       "min_titulo": 20

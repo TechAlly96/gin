@@ -74,6 +74,7 @@ CONTEXTO_SSL = _contexto_ssl()
 
 
 def baixar(url, tentativas=3, ua=None):
+    url = urllib.parse.quote(url, safe=":/?#[]@!$&'()*+,;=%~")  # IRI -> URI (links em arabe, cirilico, acentos)
     host = urllib.parse.urlsplit(url).netloc
     espera = PAUSA_MESMO_SITE - (time.monotonic() - _ultimo_acesso.get(host, -1e9))
     if espera > 0:
@@ -128,7 +129,7 @@ def ler_data(valor, fuso):
             return datetime(int(ano), MESES_NUM[mes], int(dia), tzinfo=fuso)
         except ValueError:
             return None
-    m = re.search(r"\b(\d{4})\.\s?(\d{1,2})\.\s?(\d{1,2})\b", v)  # Hungria: 2026.11.02.
+    m = re.search(r"\b(\d{4})\s?[./]\s?(\d{1,2})\s?[./]\s?(\d{1,2})\b", v)  # 2026.11.02. (Hungria), 2026/11/07 (Petra)
     if m:
         try:
             return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), tzinfo=fuso)
@@ -269,7 +270,7 @@ def ler_lista_govbr(conteudo, base, padrao):
     return itens
 
 
-DATA_NUMERICA = re.compile(r"\b\d{1,2}\s?[/.]\s?\d{1,2}\s?[/.]\s?\d{4}\b|\b\d{4}\.\s?\d{1,2}\.\s?\d{1,2}\b")
+DATA_NUMERICA = re.compile(r"\b\d{1,2}\s?[/.]\s?\d{1,2}\s?[/.]\s?\d{4}\b|\b\d{4}\s?[./]\s?\d{1,2}\s?[./]\s?\d{1,2}\b")
 
 
 DATA_URL = [re.compile(r"/(20\d{2})(\d{2})(\d{2})/"),          # Xinhua: /20261103/

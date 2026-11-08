@@ -492,3 +492,10 @@ e JORDANIA (Petra/governo, se recentes). Regiao mais fechada ate agora.
   Egito (SIS com certificado invalido, Presidencia e MFA 403).
 - Siria: SANA segue como agencia estatal sob o governo de transicao (feed parado em set/2026; paginas em dia).
 FIM-sprint-057
+
+sprint-057 (cont.): fix(leitores) - (1) baixar converte enderecos nao ASCII (IRI -> URI por porcentagem;
+links da Petra em arabe davam UnicodeEncodeError; vale para cirilico/chines/acentos). (2) datas ano/mes/dia
+com barras ("2026/11/07 | 22:00:17", Petra), junto com 2026.11.02. (3) Catar: padrao /latest-news/details/
+com data no endereco (/details/2026/11/07/); o site as vezes entrega a pagina sem noticias (intermitente).
+Petra (agencia estatal da Jordania) incluida.
+FIM-sprint-057
