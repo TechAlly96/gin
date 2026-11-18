@@ -1,4 +1,6 @@
 "use strict";
+// So apaga caches com o prefixo "gin-": o site github.io e compartilhado com os outros apps
+// (Enem, Concurso, Ingles, GIN) e os audios baixados de um nunca podem ser apagados por outro.
 // GIN - service worker: rede primeiro (nunca mostra versao velha quando ha internet),
 // copia guardada de tudo o que foi aberto (funciona offline com as ultimas noticias baixadas).
 const CACHE_APP = "gin-app-v7";
@@ -13,7 +15,7 @@ self.addEventListener("install", (e) => {
 
 self.addEventListener("activate", (e) => {
   e.waitUntil(caches.keys()
-    .then((chaves) => Promise.all(chaves.filter((k) => k !== CACHE_APP && k !== CACHE_DADOS && k !== CACHE_AUDIO).map((k) => caches.delete(k))))
+    .then((chaves) => Promise.all(chaves.filter((k) => k.startsWith("gin-") && k !== CACHE_APP && k !== CACHE_DADOS && k !== CACHE_AUDIO).map((k) => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
 
